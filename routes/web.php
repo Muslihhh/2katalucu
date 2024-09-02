@@ -23,6 +23,10 @@ Route::get('/posts', function () {
     
 });
 
+Route::get('Hallo mus', function () {
+    
+});
+
 Route::get('/posts/{post:slug}', function(post $post){
   
    
