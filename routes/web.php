@@ -23,7 +23,7 @@ Route::get('/posts', function () {
     
 });
 
-Route::get('Hallo mus', function () {
+Route::get('Hallo juga', function () {
     
 });
 
