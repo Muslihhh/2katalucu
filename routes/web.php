@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\MarketController;
 use App\Models\Post;
+use App\Http\Controllers\Auth\RegisterController;
 
 use App\Models\Tipe;
 use App\Models\User;
@@ -26,6 +27,15 @@ Route::get('/posts', function () {
 Route::get('/login', function () {
     return view('login',); 
 });
+
+Route::get('/registrasi', function () {
+    return view('registrasi',); 
+});
+
+
+Route::get('register', [RegisterController::class, 'showRegistrationForm'])->name('register');
+Route::post('register', [RegisterController::class, 'register']);
+
 
 Route::get('/posts/{post:slug}', function(post $post){
   
