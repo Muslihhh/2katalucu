@@ -4,6 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Models\Post;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -22,6 +23,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'role',
     ];
 
     /**
@@ -49,4 +51,29 @@ class User extends Authenticatable
     public function posts():HasMany{
         return $this->hasMany(Post::class, 'author_id');
     }
+    
+    public function run()
+    {
+        User::create([
+            'name' => 'Admin',
+            'email' => 'admin@example.com',
+            'password' => Hash::make('password'),
+            'role' => 'admin',
+        ]);
+
+        User::create([
+            'name' => 'User',
+            'email' => 'user@example.com',
+            'password' => Hash::make('password'),
+            'role' => 'user',
+        ]);
+
+        User::create([
+            'name' => 'Toko',
+            'email' => 'toko@example.com',
+            'password' => Hash::make('password'),
+            'role' => 'toko',
+        ]);
+    }
+    
 }
