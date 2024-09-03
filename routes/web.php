@@ -33,8 +33,8 @@ Route::get('/registrasi', function () {
 });
 
 
-Route::get('register', [RegisterController::class, 'showRegistrationForm'])->name('register');
-Route::post('register', [RegisterController::class, 'register']);
+Route::get('registrasi', [RegisterController::class, 'showRegistrationForm'])->name('registrasi');
+Route::post('registrasi', [RegisterController::class, 'registrasi']);
 
 
 // Route::get('/posts/{post:slug}', function(post $post){
