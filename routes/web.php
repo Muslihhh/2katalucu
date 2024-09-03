@@ -23,8 +23,8 @@ Route::get('/posts', function () {
     
 });
 
-Route::get('Hallo juga', function () {
-    
+Route::get('/login', function () {
+    return view('login',); 
 });
 
 Route::get('/posts/{post:slug}', function(post $post){
