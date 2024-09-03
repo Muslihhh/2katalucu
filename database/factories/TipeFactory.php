@@ -1,25 +1,25 @@
 <?php
 
-namespace Database\Factories;
+// namespace Database\Factories;
 
-use Illuminate\Support\Str;
-use Illuminate\Database\Eloquent\Factories\Factory;
+// use Illuminate\Support\Str;
+// use Illuminate\Database\Eloquent\Factories\Factory;
 
-/**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Tipe>
- */
-class TipeFactory extends Factory
-{
-    /**
-     * Define the model's default state.
-     *
-     * @return array<string, mixed>
-     */
-    public function definition(): array
-    {
-        return [
-            'nametipe'=>fake()->word(),
-            'slug'=>Str::slug(fake()->unique()->word()),
-        ];
-    }
-}
+// /**
+//  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Tipe>
+//  */
+// class TipeFactory extends Factory
+// {
+//     /**
+//      * Define the model's default state.
+//      *
+//      * @return array<string, mixed>
+//      */
+//     public function definition(): array
+//     {
+//         return [
+//             'nametipe'=>fake()->word(),
+//             'slug'=>Str::slug(fake()->unique()->word()),
+//         ];
+//     }
+// }
