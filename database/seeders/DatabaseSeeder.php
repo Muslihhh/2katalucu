@@ -23,29 +23,6 @@ class DatabaseSeeder extends Seeder
         //     Tipe::factory(5)->create(),
             User::factory(10)->create();
         // ])->create();
-   
-
-
-        User::create([
-            'name' => 'Admin',
-            'email' => 'admin@example.com',
-            'password' => Hash::make('password'),
-            'role' => 'admin',
-        ]);
-
-        User::create([
-            'name' => 'User',
-            'email' => 'user@example.com',
-            'password' => Hash::make('password'),
-            'role' => 'user',
-        ]);
-
-        User::create([
-            'name' => 'Toko',
-            'email' => 'toko@example.com',
-            'password' => Hash::make('password'),
-            'role' => 'toko',
-        ]);
-
+    
     }
 }
