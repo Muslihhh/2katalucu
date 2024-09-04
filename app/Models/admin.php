@@ -9,5 +9,5 @@ class admin extends Model
 {
     use HasFactory;
 
-    protected $table = 'marketplace';
+    protected $table = 'market';
 }
