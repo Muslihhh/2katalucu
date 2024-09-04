@@ -3,7 +3,7 @@
 use App\Http\Controllers\MarketController;
 use App\Models\Post;
 use App\Http\Controllers\Auth\RegisterController;
-
+use App\Http\Controllers\Auth\LoginController;
 use App\Models\Tipe;
 use App\Models\User;
 use Illuminate\Support\Arr;
@@ -24,9 +24,10 @@ Route::get('/produk', function () {
     
 // });
 
-Route::get('/login', function () {
-    return view('login',); 
-});
+
+
+Route::get('login', [LoginController::class, 'showLoginForm'])->name('login');
+Route::post('login', [LoginController::class, 'login']);
 
 // Route::get('/registrasi', function () {
 //     return view('registrasi',); 
