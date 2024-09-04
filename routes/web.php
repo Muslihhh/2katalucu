@@ -29,6 +29,7 @@ Route::get('/produk', function () {
 Route::get('login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::post('login', [LoginController::class, 'login']);
 
+
 Route::get('registrasi', [RegisterController::class, 'showRegistrationForm'])->name('registrasi');
 Route::post('registrasi', [RegisterController::class, 'registrasi']);
 
