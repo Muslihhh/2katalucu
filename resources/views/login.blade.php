@@ -12,7 +12,7 @@
                     <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
                         Masuk ke akun anda
                     </h1>
-                    <form class="space-y-4 md:space-y-6" action="{{ route('login') }}" method="POST">
+                    <form class="space-y-4 md:space-y-6" name="login" action="{{ route('login') }}" method="POST">
                         @csrf
                         <div>
                             <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email</label>
