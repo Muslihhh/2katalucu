@@ -29,6 +29,6 @@ class RegisterController extends Controller
             'role' => 'user',  // Pastikan ada field 'role' di database
         ]);
 
-        return redirect()->route('home')->with('success', 'Registration successful');
+        return redirect()->route('login')->with('success', 'Registration successful');
     }
 }
