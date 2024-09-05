@@ -32,7 +32,7 @@ Route::post('/login', [LoginController::class, 'login']);
 
 Route::get('/registrasi', [RegisterController::class, 'showRegistrationForm'])->name('registrasi');
 Route::post('/registrasi', [RegisterController::class, 'registrasi']);
-
+Route::post('logout', 'Auth\LoginController@logout')->name('logout');
 
 // Route::get('/posts/{post:slug}', function(post $post){
   

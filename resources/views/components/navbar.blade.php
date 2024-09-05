@@ -237,7 +237,12 @@
         </div>
     </div>
     <div class=" text-gray-200 hover:underline">
-        <a href="http://">Masuk</a>
+        @auth
+    <a href="{{ route('logout') }}">Keluar</a>
+@else
+    <a href="{{ route('login') }}">Masuk</a>
+@endauth
+
     </div>
     </div>
     
