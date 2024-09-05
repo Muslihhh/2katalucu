@@ -8,13 +8,13 @@
           <div class=" md:block">
             <div class="ml-10 flex items-baseline space-x-4">
                 <x-nav-link href="/" :active="request()-> is('/')">Home</x-nav-link>
-                <x-nav-link href="/posts" :active="request()-> is('posts')">Blog</x-nav-link>
+                
                 
               <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
             </div>
           </div>
         </div>
-        <div class=" w-1/2 ">
+        <div class=" lg:w-1/2 sm:w-auto ">
             <form class="w-auto" action="">
                 <label class="relative block w-auto">
                   <span class="absolute inset-y-0 left-0 flex items-center pl-2">
@@ -237,11 +237,11 @@
         </div>
     </div>
     <div class=" text-gray-200 hover:underline">
-        @auth
+        {{-- @auth
     <a href="{{ route('login') }}">Masuk</a>
 @else
     <a href="{{ route('logout') }}">Keluar</a>
-@endauth
+@endauth --}}
 
     </div>
     </div>
