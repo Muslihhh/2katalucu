@@ -236,7 +236,7 @@
           </div>
         </div>
     </div>
-    <div>
+    <div class=" text-gray-200 hover:underline font-semibold">
         @if (Auth::check())
     <!-- Jika user sudah login -->
     <form method="POST" action="{{ route('logout') }}">
