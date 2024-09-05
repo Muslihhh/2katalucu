@@ -27,7 +27,7 @@ class LoginController extends Controller
 
         if (Auth::attempt($credentials)) {
             // Login berhasil, redirect ke halaman beranda atau dashboard
-            Auth::logout();
+            
             return redirect()->intended('home');
         }
 

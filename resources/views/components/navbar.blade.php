@@ -238,9 +238,9 @@
     </div>
     <div class=" text-gray-200 hover:underline">
         @auth
-    <a href="{{ route('logout') }}">Keluar</a>
-@else
     <a href="{{ route('login') }}">Masuk</a>
+@else
+    <a href="{{ route('logout') }}">Keluar</a>
 @endauth
 
     </div>
