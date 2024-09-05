@@ -1,13 +1,14 @@
 <?php
 
-use App\Http\Controllers\MarketController;
 use App\Models\Post;
-use App\Http\Controllers\Auth\RegisterController;
-use App\Http\Controllers\Auth\LoginController;
 use App\Models\Tipe;
 use App\Models\User;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\MarketController;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\RegisterController;
 
 
 
@@ -28,6 +29,11 @@ Route::get('/produk', function () {
 
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [LoginController::class, 'login']);
+
+Route::post('/logout', function () {
+    Auth::logout();
+    return redirect('/home');
+})->name('logout');
 
 
 Route::get('/registrasi', [RegisterController::class, 'showRegistrationForm'])->name('registrasi');
