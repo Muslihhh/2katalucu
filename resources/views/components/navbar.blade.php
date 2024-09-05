@@ -1,4 +1,4 @@
-<nav x-data="{ isOpen: false }" class="bg-purple-800 sticky top-0 z-50">
+<nav x-data="{ isOpen: false }" class="bg-purple-800 sticky top-0 z-50 py-4">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <div class="flex h-16 items-center justify-between">
         <div class="flex items-center">
@@ -9,17 +9,20 @@
             <div class="ml-10 flex items-baseline space-x-4">
                 <x-nav-link href="/" :active="request()-> is('/')">Home</x-nav-link>
                 <x-nav-link href="/posts" :active="request()-> is('posts')">Blog</x-nav-link>
-                <form class="w-max" action="">
-                  <label class="relative block w-max">
-                    <span class="absolute inset-y-0 left-0 flex items-center pl-2">
-                    </span>
-                    <input class="placeholder:italic placeholder:text-slate-400 block bg-white w-full border border-slate-300 rounded-md py-2 pl-2 pr-3 shadow-sm focus:outline-none sm:text-sm" placeholder="Search for product..." type="text" name="search"/>
-                    <button type="submit" class="fa fa-search absolute inset-y-0 right-0 flex items-center px-4 bg-gradient-to-r bg-purple-800 text-white rounded-r-md hover:bg-purple-500 focus:outline-none focus:ring-2"> </button>
-                  </label>
-                </form>
+                
               <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
             </div>
           </div>
+        </div>
+        <div class=" w-1/2 ">
+            <form class="w-auto" action="">
+                <label class="relative block w-auto">
+                  <span class="absolute inset-y-0 left-0 flex items-center pl-2">
+                  </span>
+                  <input class="placeholder:italic placeholder:text-slate-400 block bg-white w-full border border-slate-300 rounded-md py-2 pl-2 pr-3 shadow-sm focus:outline-none sm:text-sm" placeholder="Search for product..." type="text" name="search"/>
+                  <button type="submit" class="fa fa-search absolute inset-y-0 right-0 flex items-center px-4 bg-gradient-to-r bg-purple-800 text-white rounded-r-md hover:bg-purple-500 focus:outline-none focus:ring-2"> </button>
+                </label>
+              </form>
         </div>
         <div>
           <button id="filterDropdownButton" data-dropdown-toggle="filterDropdown" class="w-full md:w-auto flex items-center justify-center py-2 px-4 text-sm font-medium text-gray-200 focus:outline-none bg-transparant rounded-lg hover:bg-purple-800 hover:text-gray-100 focus:z-10  " type="button">
@@ -30,7 +33,7 @@
             <svg class="-mr-1 ml-1.5 w-5 h-5" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                 <path clip-rule="evenodd" fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" />
             </svg>
-        </button>
+         </button>
         <div id="filterDropdown" class="z-10 hidden px-3 pt-1 bg-white rounded-lg shadow w-80 dark:bg-gray-700 right-0">
             <div class="flex items-center justify-between pt-2">
                 <h6 class="text-sm font-medium text-black dark:text-white">Filters</h6>
@@ -232,7 +235,10 @@
               </div>
           </div>
         </div>
-      </div>
+    </div>
+    <div class=" text-gray-200 hover:underline">
+        <a href="http://">Masuk</a>
+    </div>
     </div>
     
     <!-- Mobile menu, show/hide based on menu state. --> 
