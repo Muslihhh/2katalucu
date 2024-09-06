@@ -20,9 +20,9 @@
             </div>
             <div class="flex gap-5 h-1/2 items-end ">
                 <button class=" fa fa-shopping-cart w-1/2 h-14 transition duration-150 ease-in-out hover:scale-110 bg-green-500 hover:bg-green-600 text-white font-bold py-3 rounded-md"> Add to Cart</button>
-                <a href="{{ route('sendWhatsAppLink') }}" class="btn btn-primary">
-                  Send WhatsApp Verification Code
-                <button class=" fa fa-whatsapp w-1/2 h-14 transition duration-150 ease-in-out hover:scale-110 bg-green-500 hover:bg-green-600 text-white font-bold py-3 rounded-md"> Order</button>
+                <a href="{{ route('sendWhatsAppLink') }}" class="btn btn-primary ">
+                   
+                <button class=" fa fa-whatsapp  h-14 transition duration-150 ease-in-out hover:scale-110 bg-green-500 hover:bg-green-600 text-white font-bold py-3 rounded-md w-auto px-20"> Order</button>
               </a>
             </div>
         </div>
