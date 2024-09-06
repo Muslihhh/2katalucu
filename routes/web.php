@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MarketController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\VerificationController;
 
 
 
@@ -54,5 +55,8 @@ Route::get('/author/{user:name}', function (User $user) {
 //     return view('posts', ['title' => ' Article '.$tipe->nametipe,
 //         'posts' => $tipe->posts]);
 // });
+
+Route::get('/send-whatsapp', [VerificationController::class, 'sendWhatsAppLink'])->name('sendWhatsAppLink');
+
 Route::get('/admin', [MarketController::class, 'index']);
 Route::post('/admin', [MarketController::class, 'store']);
