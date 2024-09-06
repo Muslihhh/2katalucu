@@ -1,7 +1,7 @@
 <x-layout>
     <x-slot:title>{{ $title }}</x-slot:title>
 
-    {{-- <div class="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
+    <div class="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
       <div class="mx-auto max-w-screen-md sm:text-center">
           <form action="#">
             @if(request('tipe'))
@@ -71,5 +71,5 @@
     
       </div>  
     </div>
-    {{ $posts->links() }} --}}
+    {{ $posts->links() }}
   </x-layout>

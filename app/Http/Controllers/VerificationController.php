@@ -12,7 +12,7 @@ class VerificationController extends Controller
         $vcode = rand(100000, 999999);
 
         // Nomor WhatsApp tujuan
-        $whatsappNumber = '089667879476'; // Ganti dengan nomor yang diinginkan
+        $whatsappNumber = '6289690460054'; // Ganti dengan nomor yang diinginkan
         
         // Buat pesan yang ingin dikirim
         $message = "Your verification code is: $vcode";

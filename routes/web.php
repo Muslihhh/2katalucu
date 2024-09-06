@@ -10,9 +10,8 @@ use App\Http\Controllers\MarketController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\VerificationController;
-
-
-
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CheckoutController;
 
 Route::get('/home', function () {
     return view('home', ['title' => 'Home']);
@@ -57,6 +56,15 @@ Route::get('/author/{user:name}', function (User $user) {
 // });
 
 Route::get('/send-whatsapp', [VerificationController::class, 'sendWhatsAppLink'])->name('sendWhatsAppLink');
+
+Route::get('/categories', [CategoryController::class, 'index']);
+Route::get('/categories/{category}', [CategoryController::class, 'show']);
+
+
+Route::get('/checkout', [CheckoutController::class, 'showChekoutForm']);
+Route::post('/checkout', [CheckoutController::class, 'processCheckout']);
+
+
 
 Route::get('/admin', [MarketController::class, 'index']);
 Route::post('/admin', [MarketController::class, 'store']);
