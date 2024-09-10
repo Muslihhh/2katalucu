@@ -57,18 +57,13 @@ class ProductController extends Controller
     
     public function show($id)
     {
-        // Mencari produk berdasarkan ID
-        $product = Product::find($id);
-    
-        if (!$product) {
-            return redirect()->route('home')->with('error', 'Produk tidak ditemukan.');
-        }
-    
-        return view('produk', [
-            'title' => $product->name,  // Mengirim nama produk sebagai judul halaman
-            'product' => $product        // Mengirim data produk ke view
+        $product = Product::findOrFail($id);
+        return view('product.show', [
+            'title' => 'Detail Produk',
+            'product' => $product
         ]);
     }
+    
     
 }
 
