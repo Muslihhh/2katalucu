@@ -24,6 +24,10 @@
                    
                 <button class=" fa fa-whatsapp  h-14 transition duration-150 ease-in-out hover:scale-110 bg-green-500 hover:bg-green-600 text-white font-bold py-3 rounded-md w-auto px-20"> Order</button>
               </a>
+              <a href="{{ route('products.create') }}">
+              <button
+              class=" fa fa-whatsapp  h-14 transition duration-150 ease-in-out hover:scale-110 bg-green-500 hover:bg-green-600 text-white font-bold py-3 rounded-md w-auto px-20">tambah</button>
+            </a>
             </div>
         </div>
       </div>

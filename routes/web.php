@@ -12,6 +12,7 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\VerificationController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\Auth\ProductController; // Pastikan namespace sesuai
 
 Route::get('/home', function () {
     return view('home', ['title' => 'Home']);
@@ -59,6 +60,15 @@ Route::get('/send-whatsapp', [VerificationController::class, 'sendWhatsAppLink']
 
 Route::get('/categories', [CategoryController::class, 'index']);
 Route::get('/categories/{category}', [CategoryController::class, 'show']);
+
+
+
+// Menampilkan form untuk menambah produk
+Route::get('produk', [ProductController::class, 'create'])->name('products.create');
+
+// Menyimpan data produk yang di-post dari form
+Route::post('produk', [ProductController::class, 'store'])->name('products.store');
+
 
 
 Route::get('/checkout', [CheckoutController::class, 'showChekoutForm']);
