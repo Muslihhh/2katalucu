@@ -3,6 +3,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\Product;
+use App\Models\Category;  // Pastikan Category model di-import
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -10,12 +11,17 @@ class ProductController extends Controller
     // Menampilkan form untuk menambah produk
     public function create()
     {
-        return view('isiproduk');
+        $categories = Category::all();  // Ambil semua kategori dari database
+        return view('produk', compact('products','categories'));  // Kirim variabel $categories ke view
+        
+        
     }
+    
 
     // Menyimpan data produk ke database
     public function store(Request $request)
     {
+        
         $request->validate([
             'name' => 'required|string|max:255',
             'price' => 'required|numeric',
@@ -38,7 +44,31 @@ class ProductController extends Controller
 
         $product->save();
 
-        return redirect()->route('products.create')->with('success', 'Produk berhasil ditambahkan');
+        return redirect()->route('home')->with('success', 'Produk berhasil ditambahkan');
     }
+    public function index()
+    {
+        $products = Product::all();  // Ambil semua produk dari database
+        return view('home', [
+            'title' => 'Home',  // Pastikan title didefinisikan di sini
+            'products' => $products
+        ]);  // Kirim variabel title dan products ke view
+    }
+    
+    public function show($id)
+    {
+        // Mencari produk berdasarkan ID
+        $product = Product::find($id);
+    
+        if (!$product) {
+            return redirect()->route('home')->with('error', 'Produk tidak ditemukan.');
+        }
+    
+        return view('produk', [
+            'title' => $product->name,  // Mengirim nama produk sebagai judul halaman
+            'product' => $product        // Mengirim data produk ke view
+        ]);
+    }
+    
 }
 
