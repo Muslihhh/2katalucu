@@ -1,16 +1,17 @@
 <?php
 
-use App\Http\Controllers\MarketController;
 use App\Models\Post;
-use App\Http\Controllers\Auth\RegisterController;
-use App\Http\Controllers\Auth\LoginController;
 use App\Models\Tipe;
 use App\Models\User;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-
-
-
+use App\Http\Controllers\MarketController;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\VerificationController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CheckoutController;
 
 Route::get('/home', function () {
     return view('home', ['title' => 'Home']);
@@ -28,6 +29,11 @@ Route::get('/produk', function () {
 
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [LoginController::class, 'login']);
+
+Route::post('/logout', function () {
+    Auth::logout();
+    return redirect('/home');
+})->name('logout');
 
 
 Route::get('/registrasi', [RegisterController::class, 'showRegistrationForm'])->name('registrasi');
@@ -48,5 +54,17 @@ Route::get('/author/{user:name}', function (User $user) {
 //     return view('posts', ['title' => ' Article '.$tipe->nametipe,
 //         'posts' => $tipe->posts]);
 // });
+
+Route::get('/send-whatsapp', [VerificationController::class, 'sendWhatsAppLink'])->name('sendWhatsAppLink');
+
+Route::get('/categories', [CategoryController::class, 'index']);
+Route::get('/categories/{category}', [CategoryController::class, 'show']);
+
+
+Route::get('/checkout', [CheckoutController::class, 'showChekoutForm']);
+Route::post('/checkout', [CheckoutController::class, 'processCheckout']);
+
+
+
 Route::get('/admin', [MarketController::class, 'index']);
 Route::post('/admin', [MarketController::class, 'store']);

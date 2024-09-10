@@ -236,14 +236,28 @@
           </div>
         </div>
     </div>
-    <div class=" text-gray-200 hover:underline">
+    <div class=" text-gray-200 hover:underline font-semibold">
+        @if (Auth::check())
+    <!-- Jika user sudah login -->
+    <form method="POST" action="{{ route('logout') }}">
+        @csrf
+        <button type="submit" class="btn btn-danger">Logout</button>
+    </form>
+@else
+    <!-- Jika user belum login -->
+    <a href="{{ route('login') }}" class="btn btn-primary">Login</a>
+@endif
+
+    </div>
+    
+    {{-- <div class=" text-gray-200 hover:underline">
         {{-- @auth
     <a href="{{ route('login') }}">Masuk</a>
 @else
     <a href="{{ route('logout') }}">Keluar</a>
-@endauth --}}
+@endauth 
 
-    </div>
+    </div> --}}
     </div>
     
     <!-- Mobile menu, show/hide based on menu state. --> 
