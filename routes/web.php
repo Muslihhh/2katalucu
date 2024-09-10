@@ -69,7 +69,7 @@ Route::post('/isiproduk', [ProductController::class, 'store'])->name('products.s
 
 Route::get('/home', [ProductController::class, 'index'])->name('home');
 
-Route::get('/product', [ProductController::class, 'show'])->name('products.show');
+Route::get('/product/{id}', [ProductController::class, 'show'])->name('products.show');
 
 
 Route::get('/checkout', [CheckoutController::class, 'showChekoutForm']);

@@ -57,10 +57,10 @@ class ProductController extends Controller
     
     public function show($id)
     {
-        $product = Product::findOrFail($id);
-        return view('product.show', [
-            'title' => 'Detail Produk',
-            'product' => $product
+        $product = Product::findOrFail($id);  // Mengambil produk berdasarkan ID
+        return view('product.show', [       // Pastikan nama view sesuai dengan file blade
+            'title' => $product->name,    // Mengirim title berdasarkan nama produk
+            'product' => $product         // Mengirim data produk ke view
         ]);
     }
     

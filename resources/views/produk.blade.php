@@ -2,8 +2,11 @@
   <x-slot:title>{{ $title }}</x-slot:title>
   <div class="bg-white w-full border shadow-2xl rounded-md p-5 flex gap-5">
       <div class="w-1/2">
-          {{-- Pastikan gambar produk tersedia --}}
-          <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}">
+        @foreach ($products as $product)
+        <a href="{{ route('products.show', $product->id) }}">
+            <img src="{{ asset('storage/images/' . $product->image) }}" alt="{{ $product->name }}">
+            <h3>{{ $product->name }}</h3>
+  
       </div>
       <div class="w-1/2">
           <div class="h-1/2">
@@ -40,5 +43,7 @@
               </a>
           </div>
       </div>
+      </a>
+      @endforeach
   </div>
 </x-layout>
