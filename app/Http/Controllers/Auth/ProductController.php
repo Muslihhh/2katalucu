@@ -12,7 +12,7 @@ class ProductController extends Controller
     public function create()
     {
         $categories = Category::all();  // Ambil semua kategori dari database
-        return view('produk', compact('products','categories'));  // Kirim variabel $categories ke view
+        return view('isiproduk', compact('categories'));  // Kirim variabel $categories ke view
         
         
     }
@@ -58,9 +58,9 @@ class ProductController extends Controller
     public function show($id)
     {
         $product = Product::findOrFail($id);  // Mengambil produk berdasarkan ID
-        return view('product.show', [       // Pastikan nama view sesuai dengan file blade
+        return view('produk', [       // Pastikan nama view sesuai dengan file blade
             'title' => $product->name,    // Mengirim title berdasarkan nama produk
-            'product' => $product         // Mengirim data produk ke view
+            'product' => $product      // Mengirim data produk ke view
         ]);
     }
     

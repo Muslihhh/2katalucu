@@ -1,4 +1,4 @@
-@extends('layouts.app')
+{{-- @extends('layouts.app')
 
 @section('content')
 <h1>Products in {{ $category->name }}</h1>
@@ -7,4 +7,4 @@
         <li>{{ $product->name }} - ${{ $product->price }}</li>
     @endforeach
 </ul>
-@endsection
+@endsection --}}
