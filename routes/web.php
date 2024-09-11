@@ -12,6 +12,7 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\VerificationController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\Auth\ProductController; // Pastikan namespace sesuai
 
 Route::get('/home', function () {
     return view('home', ['title' => 'Home']);
@@ -24,8 +25,6 @@ Route::get('/produk', function () {
 //     return view('posts', ['title' => 'Blog', 'posts'=>post::filter(request(['search', 'tipe', 'author']))->latest()->paginate(15)->withQueryString()]);
     
 // });
-
-
 
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [LoginController::class, 'login']);
@@ -59,6 +58,18 @@ Route::get('/send-whatsapp', [VerificationController::class, 'sendWhatsAppLink']
 
 Route::get('/categories', [CategoryController::class, 'index']);
 Route::get('/categories/{category}', [CategoryController::class, 'show']);
+
+
+
+// Menampilkan form untuk menambah produk
+Route::get('/isiproduk', [ProductController::class, 'create'])->name('products.create');
+
+// Menyimpan data produk yang di-post dari form
+Route::post('/isiproduk', [ProductController::class, 'store'])->name('products.store');
+
+Route::get('/home', [ProductController::class, 'index'])->name('home');
+
+Route::get('/product/{id}', [ProductController::class, 'show'])->name('products.show');
 
 
 Route::get('/checkout', [CheckoutController::class, 'showChekoutForm']);
