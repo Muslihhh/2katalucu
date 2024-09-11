@@ -3,18 +3,13 @@
       <div class="flex h-16 items-center justify-between">
         <div class="flex items-center">
           <div class="flex-shrink-0">
-            <img class="h-8 w-8" src="DJ.png" alt="Your Company">
-          </div>
-          <div class=" md:block">
-            <div class="ml-10 flex items-baseline space-x-4">
-                <x-nav-link href="/home" :active="request()-> is('/home')">Home</x-nav-link>
-                
-                
-              <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-            </div>
+          <a href="/home" class="flex content-center gap-2">
+            <img class="w-9 h-9" src="DJ.png" alt="Your Company">
+            <h1 class=" self-end lg:block sm: hidden lg:text-2xl font-medium text-gray-900">Store</h1>
+          </a>
           </div>
         </div>
-        <div class=" lg:w-1/2 sm:w-auto ">
+        <div class=" lg:w-1/2 sm:w-1/2 ">
             <form class="w-auto" action="">
                 <label class="relative block w-auto">
                   <span class="absolute inset-y-0 left-0 flex items-center pl-2">

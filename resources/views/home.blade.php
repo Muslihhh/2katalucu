@@ -5,9 +5,9 @@
 
 <x-categori></x-categori>
 <div class="bg-white ">
-  <div class="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
-
-    <div class="grid grid-cols-2 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
+  <h2 class="pl-6 pt-5 text-2xl font-semibold">Disarankan</h2>
+  <div class="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-10 lg:max-w-7xl lg:px-8">
+    <div class="grid grid-cols-2 gap-x-6 gap-y-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
       <a href="/produk" class="group relative block overflow-hidden shadow-md">
         <button
           class="absolute end-4 hover:scale-105 top-4 z-10 rounded-full bg-white p-1.5 text-gray-900 transition hover:text-gray-900/75"
