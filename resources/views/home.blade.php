@@ -1,6 +1,4 @@
 <x-layout>
-  <x-slot:title>{{ $title }}</x-slot:title>
-
   <x-slider></x-slider>
   <x-categori></x-categori>
   <div class="bg-white">

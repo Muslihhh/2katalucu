@@ -1,8 +1,7 @@
 <x-layout>
-    <x-slot:title>{{ $title }}</x-slot:title>
       <div class="bg-white lg:flex sm:content-center w-full border rounded-md p-5 gap-5">
         <div class="lg:w-1/2 sm:w-full">
-          <img class="w-full rounded-md" src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}" alt="">
+          <img class="w-full rounded-md" src="{{ asset('storage/public/images/' . $product->image) }}" alt="{{ $product->name }}" alt="">
         </div>
         <div class="lg:w-1/2 sm:w-full">
             <div class="h-1/2">
@@ -15,8 +14,8 @@
                 <i class="fa fa-star-o"></i>
                 <h3 class=" underline-offset-4 underline">Detail</h3>
                 <p>Stok : {{ $product->stock ?? 'N/A' }}</p>
-                <p>Kategori : {{ $product->category->name ?? 'N/A' }}</p> 
-                <p>Deskripsi : {{ $product->description }}</p>
+                <a href="http://"><p class="">Kategori : {{ $product->category->name ?? 'N/A' }}</p> </a>
+                <p class=" over">Deskripsi : {{ $product->description }}</p>
             </div>
             <div class="flex gap-5 h-1/2 items-end ">
               <a href="http://" class="w-1/2">
@@ -41,6 +40,5 @@
             <i>(Rating)</i>
               <p class="text-base text-gray-500 dark:text-gray-400">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consequuntur beatae nostrum provident ab nisi aliquam nesciunt quaerat? Eveniet distinctio alias consequatur, similique, voluptatibus vel repellendus eius aliquid culpa dignissimos deleniti?</p>
           </div>
-      </div>
       </div>
 </x-layout>
