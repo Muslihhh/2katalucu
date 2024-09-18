@@ -231,6 +231,19 @@
           </div>
         </div>
     </div>
+    <div class="flex items-center space-x-4">
+        @auth
+            <!-- Tampilkan tombol admin jika user adalah admin -->
+            @php
+                $isAdmin = app('App\Http\Controllers\Auth\ProductController')->index2();
+            @endphp
+
+            @if ($isAdmin)
+                <a href="{{ route('admin') }}" class="text-white px-3 py-2 rounded-md text-sm font-medium">Admin</a>
+            @endif  
+        @endauth
+    </div>
+
     <div class=" text-gray-200 hover:underline font-semibold">
         @if (Auth::check())
     <!-- Jika user sudah login -->
