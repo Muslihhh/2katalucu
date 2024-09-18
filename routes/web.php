@@ -17,10 +17,7 @@ use App\Http\Controllers\Auth\ProductController; // Pastikan namespace sesuai
 Route::get('/home', function () {
     return view('home', ['title' => 'Home']);
 });
-Route::get('/admin', [MarketController::class, 'index']);
-Route::get('/produk', function () {
-    return view('produk', ['title' => 'Produk']);
-});
+
 // Route::get('/posts', function () {
 //     return view('posts', ['title' => 'Blog', 'posts'=>post::filter(request(['search', 'tipe', 'author']))->latest()->paginate(15)->withQueryString()]);
     
@@ -62,10 +59,11 @@ Route::get('/categories/{category}', [CategoryController::class, 'show']);
 
 
 // Menampilkan form untuk menambah produk
-Route::get('/isiproduk', [ProductController::class, 'create'])->name('products.create');
+Route::get('/admin', [ProductController::class, 'create'])->name('products.create');
+Route::get('/admin', [ProductController::class, 'index2'])->name('admin');
 
 // Menyimpan data produk yang di-post dari form
-Route::post('/isiproduk', [ProductController::class, 'store'])->name('products.store');
+Route::post('/admin', [ProductController::class, 'store'])->name('products.store');
 
 Route::get('/home', [ProductController::class, 'index'])->name('home');
 
@@ -75,7 +73,8 @@ Route::get('/product/{id}', [ProductController::class, 'show'])->name('products.
 Route::get('/checkout', [CheckoutController::class, 'showChekoutForm']);
 Route::post('/checkout', [CheckoutController::class, 'processCheckout']);
 
+Route::delete('/products/{id}', [ProductController::class, 'destroy'])->name('products.destroy');
 
 
-Route::get('/admin', [MarketController::class, 'index']);
-Route::post('/admin', [MarketController::class, 'store']);
+
+

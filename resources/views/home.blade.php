@@ -1,8 +1,5 @@
 <x-layout>
-<<<<<<< HEAD
-=======
   <x-slot:title>{{ $title }}</x-slot:title>
->>>>>>> 2bec99bdaeae368a66f7f032e7e87af2b873de78
   <x-slider></x-slider>
   <x-categori></x-categori>
   <div class="bg-white">

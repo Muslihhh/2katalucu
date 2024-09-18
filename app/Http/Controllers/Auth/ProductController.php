@@ -12,7 +12,7 @@ class ProductController extends Controller
     public function create()
     {
         $categories = Category::all();  // Ambil semua kategori dari database
-        return view('isiproduk', compact('categories'));  // Kirim variabel $categories ke view
+        return view('admin', compact('categories'));  // Kirim variabel $categories ke view
         
         
     }
@@ -49,7 +49,7 @@ class ProductController extends Controller
         // Simpan produk ke database
         $product->save();
     
-        return redirect()->route('home')->with('success', 'Produk berhasil ditambahkan');
+        return redirect()->route('admin')->with('success', 'Produk berhasil ditambahkan');
     }
         public function index()
     {
@@ -58,6 +58,16 @@ class ProductController extends Controller
             'title' => 'Home',  // Pastikan title didefinisikan di sini
             'products' => $products
         ]);  // Kirim variabel title dan products ke view
+    }
+    public function index2() {
+        $data = Product::orderBy('name', 'asc')->get();  // Get all products from the database
+        $categories = Category::all();  // Get all categories from the database
+    
+        return view('admin', [
+            'title' => 'admin',  // Ensure title is defined here
+            'data' => $data,  // Pass the products to the view
+            'categories' => $categories  // Pass the categories to the view
+        ]);
     }
     
     
@@ -70,6 +80,14 @@ class ProductController extends Controller
         ]);
     }
     
+    public function destroy($id) {
+        $product = Product::findOrFail($id);
+        $product->delete();
     
+        return redirect()->route('admin')->with('success', 'Product deleted successfully');
+    }
+    
+
 }
 
+    
