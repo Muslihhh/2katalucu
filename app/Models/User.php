@@ -4,6 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Models\Post;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -47,7 +48,19 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+        
     }
+    public function checkAdmin()
+{
+    // Memastikan pengguna login
+    if (Auth::check()) {
+        // Cek apakah role pengguna adalah admin
+        return Auth::user()->role === 'admin';
+    }
+
+    // Jika pengguna tidak login atau bukan admin
+    return false;
+}
     // public function posts():HasMany{
     //     return $this->hasMany(Post::class, 'author_id');
     // }

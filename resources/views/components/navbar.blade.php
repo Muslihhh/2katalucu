@@ -3,34 +3,31 @@
       <div class="flex h-16 items-center justify-between">
         <div class="flex items-center">
           <div class="flex-shrink-0">
-            <img class="h-8 w-8" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500" alt="Your Company">
-          </div>
-          <div class=" md:block">
-            <div class="ml-10 flex items-baseline space-x-4">
-                <x-nav-link href="/home" :active="request()-> is('/home')">Home</x-nav-link>
-                
-                
-              <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-            </div>
+          <a href="/home" class="flex content-center gap-2">
+            <img class="w-9 h-9" src="DJ.png" alt="Your Company">
+            <h1 class=" self-end lg:block sm: hidden lg:text-2xl font-medium text-gray-900">Store</h1>
+          </a>
           </div>
         </div>
-        <div class=" lg:w-1/2 sm:w-auto ">
-            <form class="w-auto" action="">
+        <div class="lg:w-1/2 sm:w-1/2">
+            <form class="w-auto" action="{{ route('home') }}" method="GET">
                 <label class="relative block w-auto">
-                  <span class="absolute inset-y-0 left-0 flex items-center pl-2">
-                  </span>
-                  <input class="placeholder:italic placeholder:text-slate-400 block bg-white w-full border border-slate-300 rounded-md py-2 pl-2 pr-3 shadow-sm focus:outline-none sm:text-sm" placeholder="Search for product..." type="text" name="search"/>
-                  <button type="submit" class="fa fa-search absolute inset-y-0 right-0 flex items-center px-4 bg-gradient-to-r bg-purple-800 text-white rounded-r-md hover:bg-purple-500 focus:outline-none focus:ring-2"> </button>
+                    <span class="absolute inset-y-0 left-0 flex items-center pl-2">
+                        <!-- Icon atau elemen lain bisa ditambahkan di sini -->
+                    </span>
+                    <input value="{{ request('search') }}" type="search" id="search" name="search" class="placeholder:italic placeholder:text-slate-400 block bg-white w-full border border-slate-300 rounded-md py-2 pl-2 pr-3 shadow-sm focus:outline-none sm:text-sm" placeholder="Search for product..."/>
+                    <button type="submit" class="fa fa-search absolute inset-y-0 right-0 flex items-center px-4 bg-gradient-to-r bg-purple-800 text-white rounded-r-md hover:bg-purple-500 focus:outline-none focus:ring-2"></button>
                 </label>
-              </form>
+            </form>
         </div>
+        
         <div>
-          <button id="filterDropdownButton" data-dropdown-toggle="filterDropdown" class="w-full md:w-auto flex items-center justify-center py-2 px-4 text-sm font-medium text-gray-200 focus:outline-none bg-transparant rounded-lg hover:bg-purple-800 hover:text-gray-100 focus:z-10  " type="button">
-            <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" class="h-4 w-4 mr-1.5 -ml-1 text-gray-100" viewbox="0 0 20 20" fill="currentColor">
+          <button id="filterDropdownButton" data-dropdown-toggle="filterDropdown" class=" w-full md:w-auto flex items-center justify-center py-2 px-2 text-sm font-medium text-gray-200 focus:outline-none bg-transparant rounded-lg hover:bg-purple-800 hover:text-gray-100 focus:z-10  " type="button">
+            <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" class="h-4 w-4  text-gray-100" viewbox="0 0 20 20" fill="currentColor">
                 <path fill-rule="evenodd" d="M3 3a1 1 0 011-1h12a1 1 0 011 1v3a1 1 0 01-.293.707L12 11.414V15a1 1 0 01-.293.707l-2 2A1 1 0 018 17v-5.586L3.293 6.707A1 1 0 013 6V3z" clip-rule="evenodd" />
             </svg>
-            Filter
-            <svg class="-mr-1 ml-1.5 w-5 h-5" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <h1 class=" lg:block sm: hidden">Filter</h1>
+            <svg class=" w-5 h-5" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                 <path clip-rule="evenodd" fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" />
             </svg>
          </button>
@@ -236,6 +233,19 @@
           </div>
         </div>
     </div>
+    <div class="flex items-center space-x-4">
+        @auth
+            <!-- Tampilkan tombol admin jika user adalah admin -->
+            @php
+                $isAdmin = app('App\Http\Controllers\Auth\ProductController')->index2();
+            @endphp
+
+            @if ($isAdmin)
+                <a href="{{ route('admin') }}" class="text-white px-3 py-2 rounded-md text-sm font-medium">Admin</a>
+            @endif  
+        @endauth
+    </div>
+
     <div class=" text-gray-200 hover:underline font-semibold">
         @if (Auth::check())
     <!-- Jika user sudah login -->
