@@ -66,6 +66,9 @@ Route::get('/admin', [ProductController::class, 'index2'])->name('admin');
 // Menyimpan data produk yang di-post dari form
 Route::post('/admin', [ProductController::class, 'store'])->name('products.store');
 
+
+
+
 Route::get('/home', [ProductController::class, 'index'])->name('home');
 
 Route::get('/product/{id}', [ProductController::class, 'show'])->name('products.show');

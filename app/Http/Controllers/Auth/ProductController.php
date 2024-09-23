@@ -1,10 +1,11 @@
 <?php
 namespace App\Http\Controllers\Auth;
 
-use App\Http\Controllers\Controller;
 use App\Models\Product;
-use App\Models\Category;  // Pastikan Category model di-import
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use App\Models\Category;  // Pastikan Category model di-import
 
 class ProductController extends Controller
 {
@@ -90,6 +91,17 @@ class ProductController extends Controller
         $product->delete();
     
         return redirect()->route('admin')->with('success', 'Product deleted successfully');
+    }
+
+    public function checkAdmin()
+    {
+        // Memastikan pengguna login
+        if (Auth::check()) {
+            // Cek apakah role pengguna adalah admin
+            return Auth::user()->role === 'admin';
+        }
+        // Jika pengguna tidak login atau bukan admin
+        return false;
     }
     
 
