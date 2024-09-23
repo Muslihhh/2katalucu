@@ -13,6 +13,7 @@ use App\Http\Controllers\VerificationController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\Auth\ProductController; // Pastikan namespace sesuai
+use App\Models\admin;
 
 Route::get('/home', function () {
     return view('home', ['title' => 'Home']);
@@ -73,8 +74,9 @@ Route::get('/product/{id}', [ProductController::class, 'show'])->name('products.
 Route::get('/checkout', [CheckoutController::class, 'showChekoutForm']);
 Route::post('/checkout', [CheckoutController::class, 'processCheckout']);
 
-Route::delete('/products/{id}', [ProductController::class, 'destroy'])->name('products.destroy');
+Route::delete('/product/{id}', [ProductController::class, 'destroy'])->name('products.destroy');
 
+Route::PUT('/admin/{id}', [ProductController::class, 'apdet'])->name('products.apdet');
 
 
 

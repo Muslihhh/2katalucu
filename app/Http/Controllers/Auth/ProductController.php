@@ -51,21 +51,26 @@ class ProductController extends Controller
     
         return redirect()->route('admin')->with('success', 'Produk berhasil ditambahkan');
     }
-        public function index()
+    public function index()
     {
-        $products = Product::all();  // Ambil semua produk dari database
+        if (request('search')) {
+            $products = Product::where('name', 'LIKE', '%'.request('search').'%')->get();
+        } else {
+            $products = Product::all();
+        }
+
         return view('home', [
-            'title' => 'Home',  // Pastikan title didefinisikan di sini
+            'title' => 'Home',
             'products' => $products
-        ]);  // Kirim variabel title dan products ke view
+        ]);
     }
     public function index2() {
-        $data = Product::orderBy('name', 'asc')->get();  // Get all products from the database
+        $products = Product::orderBy('name', 'asc')->get();  // Get all products from the database
         $categories = Category::all();  // Get all categories from the database
     
         return view('admin', [
             'title' => 'admin',  // Ensure title is defined here
-            'data' => $data,  // Pass the products to the view
+            'products' => $products,  // Pass the products to the view
             'categories' => $categories  // Pass the categories to the view
         ]);
     }
@@ -88,6 +93,40 @@ class ProductController extends Controller
     }
     
 
-}
+    public function apdet(Request $request, $id)
+    {
+    // Validasi input
+    $request->validate([
+        'name' => 'required|string|max:255',
+        'price' => 'required|numeric',
+        'description' => 'required|string',
+        'category_id' => 'required|exists:categories,id',
+        'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
 
+    // Temukan produk berdasarkan ID
+        $product = Product::findOrFail($id);
+        $product->name = $request->input('name');
+        $product->price = $request->input('price');
+        $product->description = $request->input('description');
+        $product->category_id = $request->input('category_id');
+
+    // Cek jika ada file gambar yang di-upload
+    if ($request->hasFile('image')) {
+        $image = $request->file('image');
+        $imagePath = $image->store('images', 'public'); // Simpan gambar di storage/app/public/images
+        
+        // Simpan path relatif terhadap storage di database
+        $product->image = $imagePath;
+        }
+
+    // Simpan perubahan produk ke database
+        $product->save();
+
+        return redirect()->route('admin')->with('success', 'Produk berhasil diperbarui');
+
+    }
+
+
+}
     

@@ -4,7 +4,7 @@
           <a class="" href="{{ route('products.show', $product->id) }}">
               <img class=" object-cover lg:w-full sm:w-full" src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}">
           </a>
-      </div>
+       </div>
         <div class="lg:w-1/2 sm:w-full">
             <div class="h-1/2">
                 <h1 class=" text-3xl font-bold border-b border-black ">Nama Produk</h1>
@@ -29,18 +29,19 @@
             </div>
         </div>
       </div>
-      <div class="mt-20  border-t pt-10 border-black">
-        <div class="grid border-b border-gray-400 bg-white p-8 items-center w-full text-sm text-gray-900 dark:text-white">
+    <div class="mt-20  border-t pt-10 border-black">
+      <div class="grid border-b border-gray-400 bg-white p-8 items-center w-full text-sm text-gray-900 dark:text-white">
           <div class=" flex">
           <img class="mr-4 w-10 h-10 rounded-full" src="https://flowbite.com/docs/images/people/profile-picture-2.jpg" alt="Jese Leos">
           <div class="content-start">
           <p class="text-xl font-bold text-gray-900 dark:text-white">Pembeli Baik Hati</p>
           <p class="text-gray-600"> 2 jam yang lalu</p>
           </div>
-        </div>
+          </div>
           <div>
             <i>(Rating)</i>
               <p class="text-base text-gray-500 dark:text-gray-400">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consequuntur beatae nostrum provident ab nisi aliquam nesciunt quaerat? Eveniet distinctio alias consequatur, similique, voluptatibus vel repellendus eius aliquid culpa dignissimos deleniti?</p>
           </div>
       </div>
+    </div>
 </x-layout>
