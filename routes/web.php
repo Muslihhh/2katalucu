@@ -54,7 +54,7 @@ Route::get('/author/{user:name}', function (User $user) {
 // Route Categories
 Route::get('/categories', [CategoryController::class, 'index']);
 
-Route::get('/categories/{id}', [CategoryController::class, 'show'])->name('categories.show');
+Route::get('/categories/{id}', [CategoryController::class, 'showcategory'])->name('categories.show');
 
 Route::get('/categories/{category}', [CategoryController::class, 'showcategory'])->name('categories.show');
 
