@@ -4,18 +4,25 @@
 use App\Models\Post;
 use App\Models\Tipe;
 use App\Models\User;
+use App\Models\admin;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\TokoController;
 use App\Http\Controllers\MarketController;
+<<<<<<< HEAD
+=======
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\VerificationController;
 use Illuminate\Http\Request;
+>>>>>>> a6b6c14eb6fbfdee8fa6f08352a168fea0134c97
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\VerificationController;
+use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\ProductController; // Pastikan namespace sesuai
-use App\Models\admin;
 
 
 // Route Home
@@ -111,9 +118,9 @@ Route::post('/admin', [ProductController::class, 'store'])->name('products.store
 
 
 
-Route::get('/home', [ProductController::class, 'index'])->name('home');
+Route::get('/home', [TokoController::class, 'index'])->name('home');
 
-Route::get('/product/{id}', [ProductController::class, 'show'])->name('products.show');
+Route::get('/product/{id}', [TokoController::class, 'show'])->name('products.show');
 
 
 Route::get('/checkout', [CheckoutController::class, 'showChekoutForm']);
@@ -121,7 +128,8 @@ Route::post('/checkout', [CheckoutController::class, 'processCheckout']);
 
 Route::delete('/product/{id}', [ProductController::class, 'destroy'])->name('products.destroy');
 
-Route::PUT('/admin/{id}', [ProductController::class, 'apdet'])->name('products.apdet');
+Route::put('/admin/product/{id}', [ProductController::class, 'apdet'])->name('products.apdet');
+
 
 
 
