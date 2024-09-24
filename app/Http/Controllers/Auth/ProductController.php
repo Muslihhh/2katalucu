@@ -97,6 +97,7 @@ class ProductController extends Controller
 
     // Temukan produk berdasarkan ID
     $product = Product::findOrFail($id);
+
     // Update data produk
     $product->name = $request->input('name');
     $product->price = $request->input('price');
