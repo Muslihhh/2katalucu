@@ -10,18 +10,12 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TokoController;
 use App\Http\Controllers\MarketController;
-<<<<<<< HEAD
-=======
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\VerificationController;
 use Illuminate\Http\Request;
->>>>>>> a6b6c14eb6fbfdee8fa6f08352a168fea0134c97
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CheckoutController;
-use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\VerificationController;
-use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\ProductController; // Pastikan namespace sesuai
 
 
@@ -30,10 +24,7 @@ Route::get('/home', function () {
     return view('home', ['title' => 'Home']);
 });
 
-<<<<<<< HEAD
-// Route Admin
-Route::get('/admin', [MarketController::class, 'index']);
-Route::post('/admin', [MarketController::class, 'store']); // Hanya satu set route admin
+// Route Admin// Hanya satu set route admin
 
 // Route Produk
 Route::get('/produk', function () {
@@ -41,13 +32,11 @@ Route::get('/produk', function () {
 });
 
 // Route Auth
-=======
 // Route::get('/posts', function () {
 //     return view('posts', ['title' => 'Blog', 'posts'=>post::filter(request(['search', 'tipe', 'author']))->latest()->paginate(15)->withQueryString()]);
     
 // });
 
->>>>>>> e820c8ff5f60e2f7aba0deef5694651b35cf188e
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [LoginController::class, 'login']);
 Route::post('/logout', function () {
@@ -99,12 +88,10 @@ Route::post('/checkout/process', [CheckoutController::class, 'process'])->name('
 // Route Send WhatsApp
 Route::get('/send-whatsapp', [VerificationController::class, 'sendWhatsAppLink'])->name('sendWhatsAppLink');
 
-<<<<<<< HEAD
 // Route Order Success
 Route::get('/order-success', function () {
     return view('order-success', ['title' => 'Pesanan Berhasil']);
 })->name('order.success');
-=======
 Route::get('/categories', [CategoryController::class, 'index']);
 Route::get('/categories/{category}', [CategoryController::class, 'show']);
 
@@ -135,4 +122,3 @@ Route::put('/admin/product/{id}', [ProductController::class, 'apdet'])->name('pr
 
 
 
->>>>>>> e820c8ff5f60e2f7aba0deef5694651b35cf188e
