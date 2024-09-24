@@ -10,18 +10,12 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TokoController;
 use App\Http\Controllers\MarketController;
-<<<<<<< HEAD
-=======
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\VerificationController;
 use Illuminate\Http\Request;
->>>>>>> a6b6c14eb6fbfdee8fa6f08352a168fea0134c97
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CheckoutController;
-use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\VerificationController;
-use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\ProductController; // Pastikan namespace sesuai
 
 
@@ -31,8 +25,8 @@ Route::get('/home', function () {
 });
 
 // Route Admin
-Route::get('/admin', [MarketController::class, 'index']);
-Route::post('/admin', [MarketController::class, 'store']); // Hanya satu set route admin
+Route::get('/admin', [TokoController::class, 'index']);
+Route::post('/admin', [TokoController::class, 'store']); // Hanya satu set route admin
 
 // Route Produk
 Route::get('/produk', function () {
