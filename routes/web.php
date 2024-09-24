@@ -5,17 +5,16 @@ use App\Models\Post;
 use App\Models\Tipe;
 use App\Models\User;
 use Illuminate\Support\Arr;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MarketController;
-use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\Auth\RegisterController;
-use App\Http\Controllers\VerificationController;
-use Illuminate\Http\Request;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CheckoutController;
-use App\Http\Controllers\Auth\ProductController; // Pastikan namespace sesuai
-use App\Models\admin;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\ProductController;
+use App\Http\Controllers\VerificationController;
+use App\Http\Controllers\Auth\RegisterController;
 
 
 // Route Home
@@ -23,7 +22,6 @@ Route::get('/home', function () {
     return view('home', ['title' => 'Home']);
 });
 
-<<<<<<< HEAD
 // Route Admin
 Route::get('/admin', [MarketController::class, 'index']);
 Route::post('/admin', [MarketController::class, 'store']); // Hanya satu set route admin
@@ -34,13 +32,6 @@ Route::get('/produk', function () {
 });
 
 // Route Auth
-=======
-// Route::get('/posts', function () {
-//     return view('posts', ['title' => 'Blog', 'posts'=>post::filter(request(['search', 'tipe', 'author']))->latest()->paginate(15)->withQueryString()]);
-    
-// });
-
->>>>>>> e820c8ff5f60e2f7aba0deef5694651b35cf188e
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [LoginController::class, 'login']);
 Route::post('/logout', function () {
@@ -77,6 +68,9 @@ Route::post('/add-to-cart', function (Request $request) {
     return redirect()->route('checkout.show');
 })->name('add-to-cart');
 
+Route::get('/products', [ProductController::class, 'index'])->name('products.index');
+Route::get('/product/{id}', [TokoController::class, 'show'])->name('products.show');
+
 
 
 Route::get('/categories/{category}', [CategoryController::class, 'show'])->name('categories.show');
@@ -92,39 +86,7 @@ Route::post('/checkout/process', [CheckoutController::class, 'process'])->name('
 // Route Send WhatsApp
 Route::get('/send-whatsapp', [VerificationController::class, 'sendWhatsAppLink'])->name('sendWhatsAppLink');
 
-<<<<<<< HEAD
 // Route Order Success
 Route::get('/order-success', function () {
     return view('order-success', ['title' => 'Pesanan Berhasil']);
 })->name('order.success');
-=======
-Route::get('/categories', [CategoryController::class, 'index']);
-Route::get('/categories/{category}', [CategoryController::class, 'show']);
-
-
-
-// Menampilkan form untuk menambah produk
-Route::get('/admin', [ProductController::class, 'create'])->name('products.create');
-Route::get('/admin', [ProductController::class, 'index2'])->name('admin');
-
-// Menyimpan data produk yang di-post dari form
-Route::post('/admin', [ProductController::class, 'store'])->name('products.store');
-
-
-
-
-Route::get('/home', [ProductController::class, 'index'])->name('home');
-
-Route::get('/product/{id}', [ProductController::class, 'show'])->name('products.show');
-
-
-Route::get('/checkout', [CheckoutController::class, 'showChekoutForm']);
-Route::post('/checkout', [CheckoutController::class, 'processCheckout']);
-
-Route::delete('/product/{id}', [ProductController::class, 'destroy'])->name('products.destroy');
-
-Route::PUT('/admin/{id}', [ProductController::class, 'apdet'])->name('products.apdet');
-
-
-
->>>>>>> e820c8ff5f60e2f7aba0deef5694651b35cf188e
