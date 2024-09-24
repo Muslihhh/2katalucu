@@ -23,7 +23,6 @@ Route::get('/home', function () {
     return view('home', ['title' => 'Home']);
 });
 
-<<<<<<< HEAD
 // Route Admin
 Route::get('/admin', [MarketController::class, 'index']);
 Route::post('/admin', [MarketController::class, 'store']); // Hanya satu set route admin
@@ -34,13 +33,11 @@ Route::get('/produk', function () {
 });
 
 // Route Auth
-=======
 // Route::get('/posts', function () {
 //     return view('posts', ['title' => 'Blog', 'posts'=>post::filter(request(['search', 'tipe', 'author']))->latest()->paginate(15)->withQueryString()]);
     
 // });
 
->>>>>>> e820c8ff5f60e2f7aba0deef5694651b35cf188e
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [LoginController::class, 'login']);
 Route::post('/logout', function () {
@@ -56,8 +53,11 @@ Route::get('/author/{user:name}', function (User $user) {
 });
 
 // Route Categories
-Route::get('/categories', [CategoryController::class, 'index'])->name('categories.index');
-Route::get('/categories/{category}', [CategoryController::class, 'show'])->name('categories.show');
+Route::get('/categories', [CategoryController::class, 'index']);
+
+Route::get('/categories/{id}', [CategoryController::class, 'show'])->name('categories.show');
+
+Route::get('/categories/{category}', [CategoryController::class, 'showcategory'])->name('categories.show');
 
 // Route Cart
 Route::post('/add-to-cart', function (Request $request) {
@@ -92,12 +92,10 @@ Route::post('/checkout/process', [CheckoutController::class, 'process'])->name('
 // Route Send WhatsApp
 Route::get('/send-whatsapp', [VerificationController::class, 'sendWhatsAppLink'])->name('sendWhatsAppLink');
 
-<<<<<<< HEAD
 // Route Order Success
 Route::get('/order-success', function () {
     return view('order-success', ['title' => 'Pesanan Berhasil']);
 })->name('order.success');
-=======
 Route::get('/categories', [CategoryController::class, 'index']);
 Route::get('/categories/{category}', [CategoryController::class, 'show']);
 
@@ -127,4 +125,3 @@ Route::PUT('/admin/{id}', [ProductController::class, 'apdet'])->name('products.a
 
 
 
->>>>>>> e820c8ff5f60e2f7aba0deef5694651b35cf188e
