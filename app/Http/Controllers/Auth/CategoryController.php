@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Auth\Controllers;
 
 use App\Models\Product;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class CategoryController extends Controller
 {
@@ -44,4 +45,11 @@ class CategoryController extends Controller
             'category' => $category        // Mengirim data kategori
         ]);
     }
+    public function showProductsByCategory(Category $category)
+    {
+        $products = $category->products; // Ambil produk berdasarkan kategori
+    
+        return view('home', compact('products', 'category')); // Kirim data produk dan kategori ke view home
+    }
+    
 }
