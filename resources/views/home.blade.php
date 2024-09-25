@@ -2,10 +2,11 @@
     <x-slot:title>{{ $title }}</x-slot:title>
     
     <x-slider></x-slider>
-    <section>
+    <section class="bg-gray-50 py-8 antialiased dark:bg-gray-900 md:py-16">
         @if(isset($products) && count($products) > 0)
             <div class="grid gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
                 @foreach($products as $product)
+               
                     <div class="mx-auto max-w-screen-xl px-4 2xl:px-0">
                       <div class="mb-4 flex items-center justify-between gap-4 md:mb-8">
                         <h2 class="text-xl font-semibold text-gray-900 dark:text-white sm:text-2xl"></h2>
