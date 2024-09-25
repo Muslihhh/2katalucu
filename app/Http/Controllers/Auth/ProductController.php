@@ -53,16 +53,20 @@ class ProductController extends Controller
     
         return redirect()->route('admin')->with('success', 'Produk berhasil ditambahkan');
     }
-            public function index2() {  
-                $products = Product::orderBy('name', 'asc')->get();  // Get all products from the database
-                $categories = Category::all();  // Get all categories from the database
-
-                return view('admin', [
-                    'title' => 'admin',  // Ensure title is defined here
-                    'products' => $products,  // Pass the products to the view
-                    'categories' => $categories,
-                ]);
-            }
+    public function index2() {  
+        $categories = Category::all();
+        if (request('search')) {
+            $products = Product::where('name', 'LIKE', '%'.request('search').'%')->get();
+        } else {
+            $products = Product::orderBy('name', 'asc')->get();  // Get all products from the database
+             // Get all categories from the database
+        }
+        return view('admin', [
+            'title' => 'admin',  // Ensure title is defined here
+            'products' => $products,  // Pass the products to the view
+            'categories' => $categories,  // Pass the categories to the view
+        ]);
+    }
     
     
     public function destroy($id) {

@@ -112,15 +112,15 @@ Route::post('/admin', [ProductController::class, 'store'])->name('products.store
 
 Route::get('/home', [TokoController::class, 'index'])->name('home');
 
-Route::get('/product/{id}', [TokoController::class, 'show'])->name('products.show');
+Route::get('/products/{id}', [TokoController::class, 'show'])->name('products.show');
 
 
 Route::get('/checkout', [CheckoutController::class, 'showChekoutForm']);
 Route::post('/checkout', [CheckoutController::class, 'processCheckout']);
 
-Route::delete('/product/{id}', [ProductController::class, 'destroy'])->name('products.destroy');
+Route::delete('/products/{id}', [ProductController::class, 'destroy'])->name('products.destroy');
 
-Route::put('/admin/product/{id}', [ProductController::class, 'apdet'])->name('products.apdet');
+Route::put('/admin/{id}', [ProductController::class, 'apdet'])->name('products.apdet');
 
 
 
