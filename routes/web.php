@@ -6,16 +6,16 @@ use App\Models\Tipe;
 use App\Models\User;
 use App\Models\admin;
 use Illuminate\Support\Arr;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TokoController;
 use App\Http\Controllers\MarketController;
-use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\Auth\RegisterController;
-use App\Http\Controllers\VerificationController;
-use Illuminate\Http\Request;
-use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\VerificationController;
+use App\Http\Auth\Controllers\CategoryController;
+use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\ProductController; // Pastikan namespace sesuai
 
 
@@ -52,11 +52,11 @@ Route::get('/author/{user:name}', function (User $user) {
 });
 
 // Route Categories
-Route::get('/categories', [CategoryController::class, 'index']);
 
-Route::get('/categories/{id}', [CategoryController::class, 'showcategory'])->name('categories.show');
-
-Route::get('/categories/{category}', [CategoryController::class, 'showcategory'])->name('categories.show');
+// Route::get('/categories', function () {
+//     return view('home'); // Misalnya, view 'home' menampilkan komponen kategori
+// });
+Route::get('/categories/{category}', [CategoryController::class, 'showProductsByCategory'])->name('categories.show');
 
 // Route Cart
 Route::post('/add-to-cart', function (Request $request) {

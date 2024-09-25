@@ -1,30 +1,32 @@
 <?php
 
-namespace App\Http\Controllers;
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
-use App\Models\Category;
-
-class CategoryController extends Controller
+return new class extends Migration
 {
-    public function index()
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
     {
-        // Logika untuk menampilkan semua kategori
-        $categories = Category::all();
-        return view('categories.index', compact('categories'));
-
         Schema::create('categories', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->text('description')->nullable();
             $table->timestamps();
         });
-        
     }
 
-    public function show(Category $category)
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
     {
-        // Logika untuk menampilkan detail kategori tertentu
-        return view('categories.show', compact('category'));
+        Schema::dropIfExists('categories');
     }
-}
-?>
+};

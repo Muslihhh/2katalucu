@@ -123,4 +123,10 @@ class ProductController extends Controller
     return redirect()->route('admin')->with('success', 'Produk berhasil diperbarui');
 }
 
+
+public function show(Category $category)
+{
+    // Tampilkan detail kategori tertentu
+    return view('categories.show', compact('category'));
+}
 }

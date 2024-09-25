@@ -2,11 +2,22 @@
     <x-slot:title>{{ $title }}</x-slot:title>
     
     <x-slider></x-slider>
-  
-  <!-- Tampilkan nama kategori -->
-  @if (isset($category))
-      <h1>{{ $category->name }}</h1>
-  @endif
+    <section>
+        @if(isset($products) && count($products) > 0)
+            <div class="grid gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+                @foreach($products as $product)
+                    <div class="product-item">
+                        <h3>{{ $product->name }}</h3>
+                        <p>{{ $product->description }}</p>
+                        <p>Price: {{ $product->price }}</p>
+                    </div>
+                @endforeach
+            </div>
+        @else
+            <p>Tidak ada produk untuk kategori ini.</p>
+        @endif
+    </section>
+    
   
     <div class="bg-white">
         <div class="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
