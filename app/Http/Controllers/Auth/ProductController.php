@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers\Auth;
 
 use App\Models\Product;
@@ -15,10 +16,10 @@ class ProductController extends Controller
     {
         $categories = Category::all();  // Ambil semua kategori dari database
         return view('admin', compact('categories'));  // Kirim variabel $categories ke view
-        
-        
+
+
     }
-    
+
 
     // Menyimpan data produk ke database
     public function store(Request $request)
@@ -31,35 +32,36 @@ class ProductController extends Controller
             'category_id' => 'required|exists:categories,id',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
-    
+
         // Buat instance produk baru
         $product = new Product();
         $product->name = $request->input('name');
         $product->price = $request->input('price');
         $product->description = $request->input('description');
         $product->category_id = $request->input('category_id');
-    
+
         // Cek jika ada file gambar yang di-upload
         if ($request->hasFile('image')) {
             $image = $request->file('image');
             $imagePath = $image->store('images', 'public'); // Simpan gambar di storage/app/public/images
-            
+
             // Simpan path relatif terhadap storage di database
             $product->image = $imagePath;
         }
-    
+
         // Simpan produk ke database
         $product->save();
-    
+
         return redirect()->route('admin')->with('success', 'Produk berhasil ditambahkan');
     }
-    public function index2() {  
+    public function index2()
+    {
         $categories = Category::all();
         if (request('search')) {
-            $products = Product::where('name', 'LIKE', '%'.request('search').'%')->get();
+            $products = Product::where('name', 'LIKE', '%' . request('search') . '%')->get();
         } else {
             $products = Product::orderBy('name', 'asc')->get();  // Get all products from the database
-             // Get all categories from the database
+            // Get all categories from the database
         }
         return view('admin', [
             'title' => 'admin',  // Ensure title is defined here
@@ -67,12 +69,13 @@ class ProductController extends Controller
             'categories' => $categories,  // Pass the categories to the view
         ]);
     }
-    
-    
-    public function destroy($id) {
+
+
+    public function destroy($id)
+    {
         $product = Product::findOrFail($id);
         $product->delete();
-    
+
         return redirect()->route('admin')->with('success', 'Product deleted successfully');
     }
 
@@ -86,51 +89,51 @@ class ProductController extends Controller
         // Jika pengguna tidak login atau bukan admin
         return false;
     }
-    
+
 
     public function apdet(Request $request, $id)
-{
-    // Validasi input
-    $request->validate([
-        'name' => 'required|string|max:255',
-        'price' => 'required|numeric',
-        'description' => 'required|string',
-        'category_id' => 'required|exists:categories,id',
-        'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-    ]);
+    {
+        // Validasi input
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'price' => 'required|numeric',
+            'description' => 'required|string',
+            'category_id' => 'required|exists:categories,id',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
 
-    // Temukan produk berdasarkan ID
-    $product = Product::findOrFail($id);
+        // Temukan produk berdasarkan ID
+        $product = Product::findOrFail($id);
 
-    // Update data produk
-    $product->name = $request->input('name');
-    $product->price = $request->input('price');
-    $product->description = $request->input('description');
-    $product->category_id = $request->input('category_id');
+        // Update data produk
+        $product->name = $request->input('name');
+        $product->price = $request->input('price');
+        $product->description = $request->input('description');
+        $product->category_id = $request->input('category_id');
 
-    // Cek jika ada file gambar yang di-upload
-    if ($request->hasFile('image')) {
-        // Hapus gambar lama jika ada
-        if ($product->image) {
-            Storage::disk('public')->delete($product->image);
+        // Cek jika ada file gambar yang di-upload
+        if ($request->hasFile('image')) {
+            // Hapus gambar lama jika ada
+            if ($product->image) {
+                Storage::disk('public')->delete($product->image);
+            }
+            // Simpan gambar baru
+            $image = $request->file('image');
+            $imagePath = $image->store('images', 'public');
+            $product->image = $imagePath;
         }
-        // Simpan gambar baru
-        $image = $request->file('image');
-        $imagePath = $image->store('images', 'public');
-        $product->image = $imagePath;
+
+        // Simpan perubahan produk ke database
+        $product->save();
+
+        // Redirect dengan pesan sukses
+        return redirect()->route('admin')->with('success', 'Produk berhasil diperbarui');
     }
 
-    // Simpan perubahan produk ke database
-    $product->save();
 
-    // Redirect dengan pesan sukses
-    return redirect()->route('admin')->with('success', 'Produk berhasil diperbarui');
-}
-
-
-public function show(Category $category)
-{
-    // Tampilkan detail kategori tertentu
-    return view('categories.show', compact('category'));
-}
+    public function show(Category $category)
+    {
+        // Tampilkan detail kategori tertentu
+        return view('categories.show', compact('category'));
+    }
 }
