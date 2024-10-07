@@ -14,7 +14,7 @@ use App\Http\Controllers\MarketController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\VerificationController;
-use App\Http\Auth\Controllers\CategoryController;
+use App\Http\Controllers\Auth\CategoryController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\ProductController; // Pastikan namespace sesuai
 
@@ -56,7 +56,11 @@ Route::get('/author/{user:name}', function (User $user) {
 // Route::get('/categories', function () {
 //     return view('home'); // Misalnya, view 'home' menampilkan komponen kategori
 // });
-Route::get('/categories/{category}', [CategoryController::class, 'showProductsByCategory'])->name('categories.show');
+
+Route::get('/home', [CategoryController::class, 'index']);
+
+Route::get('/home/category/{id}', [CategoryController::class, 'showcategory'])->name('home.filter');
+
 
 // Route Cart
 Route::post('/add-to-cart', function (Request $request) {
