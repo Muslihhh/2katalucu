@@ -57,11 +57,12 @@ class ProductController extends Controller
 }
     public function index2()
     {
+        $max_product = 5;
         $categories = Category::all();
         if (request('search')) {
-            $products = Product::where('name', 'LIKE', '%' . request('search') . '%')->get();
+            $products = Product::where('name', 'LIKE', '%' . request('search') . '%')->paginate($max_product);
         } else {
-            $products = Product::orderBy('name', 'asc')->get();  // Get all products from the database
+            $products = Product::orderBy('name', 'asc')->paginate($max_product);  // Get all products from the database
             // Get all categories from the database
         }
         return view('admin', [

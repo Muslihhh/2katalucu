@@ -7,11 +7,9 @@
                 class="flex flex-col md:flex-row md:items-center md:justify-between space-y-3 md:space-y-0 md:space-x-4 p-4">
                 <div class="flex-1 flex items-center space-x-2">
                     <h5>
-                        <span class="text-gray-500">All Products:</span>
+                        <span class="text-gray-500">Hi, Admin!</span>
                         <span class="dark:text-white"></span>
                     </h5>
-                    <h5 class="text-gray-500 dark:text-gray-400 ml-1">1-100</h5>
-
                 </div>
 
             </div>
@@ -87,16 +85,11 @@
             </div>
             <div class="mb-4">
                 <span class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Product Images</span>
-                <div class="grid grid-cols-3 gap-4 mb-4">
+                <div class="block mb-2">
                     {{-- <div class="relative p-2 bg-gray-100 rounded-lg sm:w-36 sm:h-36 dark:bg-gray-700"> --}}
-                    <img id="productImage" class="product-image relative p-2" src="#" alt="Image Preview"
+                    <img id="productImage" class="product-image relative" src="#" alt="Image Preview"
                         style="display: none; width: 100px; height: 100px;">
-                    {{-- <button type="button" class="absolute text-red-600 dark:text-red-500 hover:text-red-500 dark:hover:text-red-400 bottom-1 left-1">
-                    <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd" />
-                    </svg>
-                    <span class="sr-only">Remove image</span>
-                </button> --}}
+                  
                 </div>
                 {{-- </div> --}}
                 <div class="flex items-center justify-center w-full">
@@ -128,7 +121,6 @@
                     const output = document.getElementById('productImage');
             
                     // Reset background image dan sembunyikan preview
-                    output.style.backgroundImage = '';
                     output.style.display = 'none';
             
                     // Jika tidak ada file yang dipilih, keluar dari fungsi
@@ -139,7 +131,7 @@
                     // Preview gambar
                     const reader = new FileReader();
                     reader.onload = function() {
-                        output.style.backgroundImage = 'url(' + reader.result + ')';
+                       
                         output.style.display = 'block';
                     };
                     reader.readAsDataURL(fileInput.files[0]);
@@ -681,7 +673,20 @@
                                                 </svg>
                                                 Edit
                                             </button>
+                                            <script>
+                                                function openDrawer() {
+                                                    const form = document.getElementById('drawer-update-product');
+                                                    // Hapus class yang membuat form tersembunyi
+                                                    form.classList.remove('-translate-x-full');
+                                                    form.action = url;
+                                                }
 
+                                                function closeDrawer() {
+                                                    const form = document.getElementById('drawer-update-product');
+                                                    // Tambahkan class untuk menutup form
+                                                    form.classList.add('-translate-x-full');
+                                                }
+                                            </script>
                                             <!-- edit -->
                                             <form id="drawer-update-product"
                                                 action="{{ route('products.apdet', ['id' => $product->id]) }}"
@@ -738,13 +743,13 @@
                                                                 <div
                                                                     class="relative p-2 bg-gray-100 rounded-lg sm:w-36 sm:h-36 dark:bg-gray-700">
                                                                     <img src="{{ asset('storage/' . $product->image) }}"
-                                                                        alt="imac image">
+                                                                        alt="">
                                                                     {{-- <button type="button" class="absolute text-red-600 dark:text-red-500 hover:text-red-500 dark:hover:text-red-400 bottom-1 left-1">
-                            <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd" />
-                            </svg>
-                            <span class="sr-only">Remove image</span>
-                        </button> --}}
+                                                                    <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                                                        <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd" />
+                                                                    </svg>
+                                                                    <span class="sr-only">Remove image</span>
+                                                                </button> --}}
                                                                 </div>
 
                                                             </div>
@@ -840,20 +845,7 @@
                                                     </button>
                                                 </div>
                                             </form>
-                                            <script>
-                                                function openDrawer() {
-                                                    const form = document.getElementById('drawer-update-product');
-                                                    // Hapus class yang membuat form tersembunyi
-                                                    form.classList.remove('-translate-x-full');
-                                                    form.action = url;
-                                                }
-
-                                                function closeDrawer() {
-                                                    const form = document.getElementById('drawer-update-product');
-                                                    // Tambahkan class untuk menutup form
-                                                    form.classList.add('-translate-x-full');
-                                                }
-                                            </script>
+                                            
                                             <button type="button" data-drawer-target="drawer-read-product-advanced"
                                                 aria-controls="drawer-read-product-advanced"
                                                 class="py-2 px-3 flex items-center text-sm font-medium text-gray-900 focus:outline-none focus:ring-2 focus:ring-gray-600 bg-white rounded-lg border border-gray-200 hover:bg-gray-100"
@@ -966,8 +958,8 @@
                                                                     d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                                                             </svg>
                                                             <!-- Di modal delete -->
-                                                            <p>Apakah Anda yakin ingin menghapus produk <strong
-                                                                    id="product-name"></strong>?</p>
+                                                            <p>Apakah Anda yakin ingin menghapus produk <br>
+                                                                <strong id="product-name"></strong>?</p>
                                                             <form id="delete-form" method="POST">
                                                                 @csrf
                                                                 @method('DELETE')
@@ -996,6 +988,7 @@
                         @endforeach
                     </tbody>
                 </table>
+                {{ $products->links() }}
             </div>
             <nav class="flex flex-col md:flex-row items-start md:items-center space-y-3 md:space-y-0 p-4"
                 aria-label="Table navigation">
