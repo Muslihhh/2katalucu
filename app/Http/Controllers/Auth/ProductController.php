@@ -73,13 +73,33 @@ class ProductController extends Controller
     }
 
 
-    public function destroy($id)
-    {
-        $product = Product::findOrFail($id);
-        $product->delete();
+    // In your ProductController.php
 
-        return redirect()->route('admin')->with('success', 'Product deleted successfully');
+public function destroy($id)
+{
+    $product = Product::find($id);
+    $image_path = storage_path('app/public/' . $product->image);
+
+    if (file_exists($image_path)) {
+        unlink($image_path);
     }
+
+    $product->delete();
+
+    return redirect()->route('index2');
+}
+
+
+// public function destroy($id)
+// {
+//     $product = Product::find($id);
+
+//     Storage::delete('public/' . $product->image);
+
+//     $product->delete();
+
+//     return redirect()->route('products.index');
+// }
 
     public function checkAdmin()
     {
