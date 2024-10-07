@@ -48,6 +48,154 @@
                         </svg>
                         Add product
                     </button>
+                    <form action="{{ route('products.store') }}" method="POST" enctype="multipart/form-data" id="createProductModal"
+    class="fixed top-0 left-0 z-40 w-full h-screen max-w-3xl p-4 overflow-y-auto transition-transform -translate-x-full bg-white dark:bg-gray-800"
+    tabindex="-1" aria-labelledby="createProductModal-label" aria-hidden="true">
+    @csrf
+    <h5 id="drawer-label"
+        class="inline-flex items-center mb-6 text-sm font-semibold text-gray-500 uppercase dark:text-gray-400">New
+        Product</h5>
+    <button type="button" data-drawer-dismiss="createProductModal" aria-controls="createProductModal"
+        class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 absolute top-2.5 right-2.5 inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white">
+        <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewbox="0 0 20 20"
+            xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd"
+                d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                clip-rule="evenodd" />
+        </svg>
+        <span class="sr-only">Close menu</span>
+    </button>
+    <div class="grid gap-4 sm:grid-cols-3 sm:gap-6 ">
+        <div class="space-y-4 sm:col-span-2 sm:space-y-6">
+            <div>
+                <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Product
+                    Name</label>
+                <input type="text" name="name" id="name" required
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                    value="" placeholder="Type product name" required="">
+            </div>
+            <div>
+                <label for="description"
+                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Description</label>
+                <div class="w-full border border-gray-200 rounded-lg bg-gray-50 dark:bg-gray-700 dark:border-gray-600">
+                    <div class="px-4 py-3 bg-white rounded-b-lg dark:bg-gray-800">
+                        <textarea name="description" id="description" required rows="8"
+                            class="block w-full px-0 text-sm text-gray-800 bg-white border-0 dark:bg-gray-800 focus:ring-0 dark:text-white dark:placeholder-gray-400"
+                            placeholder="Write product description here" required=""></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="mb-4">
+                <span class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Product Images</span>
+                <div class="grid grid-cols-3 gap-4 mb-4">
+                    {{-- <div class="relative p-2 bg-gray-100 rounded-lg sm:w-36 sm:h-36 dark:bg-gray-700"> --}}
+                    <img id="productImage" class="product-image relative p-2" src="#" alt="Image Preview"
+                        style="display: none; width: 100px; height: 100px;">
+                    {{-- <button type="button" class="absolute text-red-600 dark:text-red-500 hover:text-red-500 dark:hover:text-red-400 bottom-1 left-1">
+                    <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd" />
+                    </svg>
+                    <span class="sr-only">Remove image</span>
+                </button> --}}
+                </div>
+                {{-- </div> --}}
+                <div class="flex items-center justify-center w-full">
+                    <label for="image"
+                        class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
+                        <div class="flex flex-col items-center justify-center pt-5 pb-6">
+                            <svg aria-hidden="true" class="w-10 h-10 mb-3 text-gray-400" fill="none"
+                                stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+                            </svg>
+                            <p class="mb-2 text-sm text-gray-500 dark:text-gray-400">
+                                <span class="font-semibold">Click to upload</span>
+                                or drag and drop
+                            </p>
+                            <p class="text-xs text-gray-500 dark:text-gray-400">SVG, PNG, JPG or GIF (MAX. 800x400px)
+                            </p>
+                        </div>
+                        <input type="file" name="image" id="image" accept="image/*" class="hidden"
+                            onchange="previewImage(event)">
+                    </label>
+                </div>
+            </div>
+
+            <script>
+                // Event listener untuk preview gambar
+                document.getElementById('image').addEventListener('change', function(event) {
+                    const fileInput = event.target;
+                    const output = document.getElementById('productImage');
+            
+                    // Reset background image dan sembunyikan preview
+                    output.style.backgroundImage = '';
+                    output.style.display = 'none';
+            
+                    // Jika tidak ada file yang dipilih, keluar dari fungsi
+                    if (!fileInput.files.length) {
+                        return;
+                    }
+            
+                    // Preview gambar
+                    const reader = new FileReader();
+                    reader.onload = function() {
+                        output.style.backgroundImage = 'url(' + reader.result + ')';
+                        output.style.display = 'block';
+                    };
+                    reader.readAsDataURL(fileInput.files[0]);
+                });
+            
+                // Untuk reset form jika diperlukan
+                document.getElementById('createProductModal').addEventListener('submit', function(event) {
+                    const imageInput = document.getElementById('image');
+                    if (imageInput.files.length === 0) {
+                        alert('Please select an image');
+                        event.preventDefault();  // Mencegah form terkirim tanpa gambar
+                    }
+                });
+            </script>
+            
+                
+
+            {{-- <div class="relative">
+                <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                    <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd" />
+                    </svg>
+                </div>
+                <input datepicker="" id="datepicker" type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 datepicker-input" value="" placeholder="Select date">
+            </div> --}}
+        </div>
+        <div class="space-y-4 sm:space-y-6">
+            <div>
+                <label for="price"
+                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Price</label>
+                <input type="number" name="price" id="price" step="0.01" required
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                    value="" placeholder="Product price" required="">
+            </div>
+            <div><label for="category"
+                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Category</label>
+                <select name="category_id" id="category_id" required
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                    @if ($categories->isEmpty())
+                        <option value="">No categories available</option>
+                    @else
+                        @foreach ($categories as $category)
+                            <option value="{{ $category->id }}">{{ $category->name }}</option>
+                        @endforeach
+                    @endif
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="grid grid-cols-2 gap-4 mt-6 sm:w-1/2">
+        <button type="submit"
+            class="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Add
+            product</button>
+            
+    </div>
+</form>
                     <button id="filterDropdownButton" data-dropdown-toggle="filterDropdown"
                         class="w-full md:w-auto flex items-center justify-center py-2 px-4 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-primary-700 focus:z-10 focus:ring-2 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
                         type="button">
@@ -673,6 +821,8 @@
 
                                                     </div>
                                                 </div>
+
+                                                
                                                 <div class="grid grid-cols-2 gap-4 mt-6 sm:w-1/2">
                                                     <button type="submit"
                                                         class="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Update
@@ -855,139 +1005,7 @@
     </div>
 </section>
 <!-- End block -->
-<form action="{{ route('products.store') }}" method="POST" enctype="multipart/form-data" id="createProductModal"
-    class="fixed top-0 left-0 z-40 w-full h-screen max-w-3xl p-4 overflow-y-auto transition-transform -translate-x-full bg-white dark:bg-gray-800"
-    tabindex="-1" aria-labelledby="createProductModal-label" aria-hidden="true">
-    @csrf
-    <h5 id="drawer-label"
-        class="inline-flex items-center mb-6 text-sm font-semibold text-gray-500 uppercase dark:text-gray-400">New
-        Product</h5>
-    <button type="button" data-drawer-dismiss="createProductModal" aria-controls="createProductModal"
-        class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 absolute top-2.5 right-2.5 inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white">
-        <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewbox="0 0 20 20"
-            xmlns="http://www.w3.org/2000/svg">
-            <path fill-rule="evenodd"
-                d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                clip-rule="evenodd" />
-        </svg>
-        <span class="sr-only">Close menu</span>
-    </button>
-    <div class="grid gap-4 sm:grid-cols-3 sm:gap-6 ">
-        <div class="space-y-4 sm:col-span-2 sm:space-y-6">
-            <div>
-                <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Product
-                    Name</label>
-                <input type="text" name="name" id="name" required
-                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                    value="" placeholder="Type product name" required="">
-            </div>
-            <div>
-                <label for="description"
-                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Description</label>
-                <div class="w-full border border-gray-200 rounded-lg bg-gray-50 dark:bg-gray-700 dark:border-gray-600">
-                    <div class="px-4 py-3 bg-white rounded-b-lg dark:bg-gray-800">
-                        <textarea name="description" id="description" required rows="8"
-                            class="block w-full px-0 text-sm text-gray-800 bg-white border-0 dark:bg-gray-800 focus:ring-0 dark:text-white dark:placeholder-gray-400"
-                            placeholder="Write product description here" required=""></textarea>
-                    </div>
-                </div>
-            </div>
-            <div class="mb-4">
-                <span class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Product Images</span>
-                <div class="grid grid-cols-3 gap-4 mb-4">
-                    {{-- <div class="relative p-2 bg-gray-100 rounded-lg sm:w-36 sm:h-36 dark:bg-gray-700"> --}}
-                    <img id="productImage" class="product-image relative p-2" src="#" alt="Image Preview"
-                        style="display: none; width: 100px; height: 100px;">
-                    {{-- <button type="button" class="absolute text-red-600 dark:text-red-500 hover:text-red-500 dark:hover:text-red-400 bottom-1 left-1">
-                    <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd" />
-                    </svg>
-                    <span class="sr-only">Remove image</span>
-                </button> --}}
-                </div>
-                {{-- </div> --}}
-                <div class="flex items-center justify-center w-full">
-                    <label for="image"
-                        class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
-                        <div class="flex flex-col items-center justify-center pt-5 pb-6">
-                            <svg aria-hidden="true" class="w-10 h-10 mb-3 text-gray-400" fill="none"
-                                stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
-                            </svg>
-                            <p class="mb-2 text-sm text-gray-500 dark:text-gray-400">
-                                <span class="font-semibold">Click to upload</span>
-                                or drag and drop
-                            </p>
-                            <p class="text-xs text-gray-500 dark:text-gray-400">SVG, PNG, JPG or GIF (MAX. 800x400px)
-                            </p>
-                        </div>
-                        <input type="file" name="image" id="image" accept="image/*" class="hidden"
-                            onchange="previewImage(event)">
-                    </label>
-                </div>
-            </div>
 
-            <script>
-                document.getElementById('createProductModal').addEventListener('submit', function(event) {
-    const imageInput = document.getElementById('image');
-    console.log(imageInput.files); // Log input file untuk memeriksa apakah file ditangkap
-});
-
-
-                function previewImage(event) {
-                    const reader = new FileReader();
-                    reader.onload = function() {
-                        const output = document.getElementById('productImage');
-                        output.src = reader.result;
-                        output.style.display = 'block'; // Menampilkan gambar setelah diunggah
-                    };
-                    reader.readAsDataURL(event.target.files[0]);
-                }
-
-                // document.getElementById('createProductModal').reset();
-            </script>
-
-
-
-            {{-- <div class="relative">
-                <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                    <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd" />
-                    </svg>
-                </div>
-                <input datepicker="" id="datepicker" type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 datepicker-input" value="" placeholder="Select date">
-            </div> --}}
-        </div>
-        <div class="space-y-4 sm:space-y-6">
-            <div>
-                <label for="price"
-                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Price</label>
-                <input type="number" name="price" id="price" step="0.01" required
-                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                    value="" placeholder="Product price" required="">
-            </div>
-            <div><label for="category"
-                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Category</label>
-                <select name="category_id" id="category_id" required
-                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-                    @if ($categories->isEmpty())
-                        <option value="">No categories available</option>
-                    @else
-                        @foreach ($categories as $category)
-                            <option value="{{ $category->id }}">{{ $category->name }}</option>
-                        @endforeach
-                    @endif
-                </select>
-            </div>
-        </div>
-    </div>
-    <div class="grid grid-cols-2 gap-4 mt-6 sm:w-1/2">
-        <button type="submit"
-            class="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Add
-            product</button>
-    </div>
-</form>
 
 
 

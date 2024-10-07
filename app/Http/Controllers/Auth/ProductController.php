@@ -34,26 +34,27 @@ class ProductController extends Controller
         ]);
 
         // Buat instance produk baru
-        $product = new Product();
-        $product->name = $request->input('name');
-        $product->price = $request->input('price');
-        $product->description = $request->input('description');
-        $product->category_id = $request->input('category_id');
+            // Buat instance produk baru
+    $product = new Product();
+    $product->name = $request->input('name');
+    $product->price = $request->input('price');
+    $product->description = $request->input('description');
+    $product->category_id = $request->input('category_id');
 
-        // Cek jika ada file gambar yang di-upload
-        if ($request->hasFile('image')) {
-            $image = $request->file('image');
-            $imagePath = $image->store('images', 'public'); // Simpan gambar di storage/app/public/images
+    // Cek jika ada file gambar yang di-upload
+    if ($request->hasFile('image')) {
+        $image = $request->file('image');
+        $imagePath = $image->store('images', 'public'); // Simpan gambar di storage/app/public/images
 
-            // Simpan path relatif terhadap storage di database
-            $product->image = $imagePath;
-        }
-
-        // Simpan produk ke database
-        $product->save();
-
-        return redirect()->route('admin')->with('success', 'Produk berhasil ditambahkan');
+        // Simpan path relatif terhadap storage di database
+       $product->image = $imagePath;
     }
+
+    // Simpan produk ke database
+    $product->save();
+
+    return redirect()->route('admin')->with('success', 'Produk berhasil ditambahkan');
+}
     public function index2()
     {
         $categories = Category::all();
