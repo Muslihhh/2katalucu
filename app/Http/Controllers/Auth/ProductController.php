@@ -57,11 +57,12 @@ class ProductController extends Controller
 }
     public function index2()
     {
+        $max_product = 5;
         $categories = Category::all();
         if (request('search')) {
-            $products = Product::where('name', 'LIKE', '%' . request('search') . '%')->get();
+            $products = Product::where('name', 'LIKE', '%' . request('search') . '%')->paginate($max_product);
         } else {
-            $products = Product::orderBy('name', 'asc')->get();  // Get all products from the database
+            $products = Product::orderBy('name', 'asc')->paginate($max_product);  // Get all products from the database
             // Get all categories from the database
         }
         return view('admin', [
@@ -72,13 +73,33 @@ class ProductController extends Controller
     }
 
 
-    public function destroy($id)
-    {
-        $product = Product::findOrFail($id);
-        $product->delete();
+    // In your ProductController.php
 
-        return redirect()->route('admin')->with('success', 'Product deleted successfully');
+public function destroy($id)
+{
+    $product = Product::find($id);
+    $image_path = storage_path('app/public/' . $product->image);
+
+    if (file_exists($image_path)) {
+        unlink($image_path);
     }
+
+    $product->delete();
+
+    return redirect()->route('index2');
+}
+
+
+// public function destroy($id)
+// {
+//     $product = Product::find($id);
+
+//     Storage::delete('public/' . $product->image);
+
+//     $product->delete();
+
+//     return redirect()->route('products.index');
+// }
 
     public function checkAdmin()
     {
