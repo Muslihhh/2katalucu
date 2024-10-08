@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 class TokoController extends Controller
@@ -18,6 +19,7 @@ class TokoController extends Controller
 
     public function index()
     {
+        $categories = Category::all();
         if (request('search')) {
             $products = Product::where('name', 'LIKE', '%'.request('search').'%')->get();
         } else {
@@ -26,7 +28,8 @@ class TokoController extends Controller
 
         return view('home', [
             'title' => 'Home',
-            'products' => $products
+            'products' => $products,
+            'categories' => $categories,
         ]);
     }
 }

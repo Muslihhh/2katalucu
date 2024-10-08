@@ -58,7 +58,6 @@ Route::get('/author/{user:name}', function (User $user) {
 // });
 
 Route::get('/home', [CategoryController::class, 'index']);
-
 Route::get('/home/category/{id}', [CategoryController::class, 'showcategory'])->name('home.filter');
 
 

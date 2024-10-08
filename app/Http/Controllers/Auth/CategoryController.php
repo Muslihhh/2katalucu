@@ -9,28 +9,28 @@ use App\Http\Controllers\Controller;
 
 class CategoryController extends Controller
 {
-    public function show()
-    {
-        $cart = session()->get('cart', []); // Ambil data keranjang dari session
-        return view('checkout', ['cart' => $cart]);
-    }
+    // public function show()
+    // {
+    //     $cart = session()->get('cart', []); // Ambil data keranjang dari session
+    //     return view('checkout', ['cart' => $cart]);
+    // }
 
     
  // Menampilkan semua kategori dan produk (metode index tetap sama)
- public function index()
-{
-    // Ambil semua kategori dan produk
-    $categories = Category::all();
-    $products = Product::all();
+//  public function index()
+// {
+//     // Ambil semua kategori dan produk
+//     $categories = Category::all();
+//     $products = Product::all();
     
 
-    // Mengembalikan view 'home' dengan data kategori dan produk
-    return view('home', [
-        'categories' => $categories,
-        'products' => $products,
-        'title' => 'Home',
-    ]);
-}
+//     // Mengembalikan view 'home' dengan data kategori dan produk
+//     return view('home', [
+//         'categories' => $categories,
+//         'products' => $products,
+//         'title' => 'Home',
+//     ]);
+// }
 
 
  // Menampilkan produk berdasarkan kategori yang dipilih
