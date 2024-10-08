@@ -30,4 +30,3 @@ class CheckoutController extends Controller
         return redirect()->route('order.success')->with('status', 'Checkout berhasil diproses!');
     }
 }
-?>

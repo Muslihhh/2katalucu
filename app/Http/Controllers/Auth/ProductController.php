@@ -5,6 +5,7 @@ use App\Models\Product;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use App\Models\Category;  // Pastikan Category model di-import
 
 class ProductController extends Controller
@@ -52,19 +53,6 @@ class ProductController extends Controller
     
         return redirect()->route('admin')->with('success', 'Produk berhasil ditambahkan');
     }
-    public function index()
-    {
-        if (request('search')) {
-            $products = Product::where('name', 'LIKE', '%'.request('search').'%')->get();
-        } else {
-            $products = Product::all();
-        }
-
-        return view('home', [
-            'title' => 'Home',
-            'products' => $products
-        ]);
-    }
             public function index2() {  
                 $products = Product::orderBy('name', 'asc')->get();  // Get all products from the database
                 $categories = Category::all();  // Get all categories from the database
@@ -76,15 +64,6 @@ class ProductController extends Controller
                 ]);
             }
     
-    
-    public function show($id)
-    {
-        $product = Product::findOrFail($id);  // Mengambil produk berdasarkan ID
-        return view('produk', [       // Pastikan nama view sesuai dengan file blade
-            'title' => $product->name,    // Mengirim title berdasarkan nama produk
-            'product' => $product     // Mengirim data produk ke view
-        ]);
-    }
     
     public function destroy($id) {
         $product = Product::findOrFail($id);
@@ -106,9 +85,7 @@ class ProductController extends Controller
     
 
     public function apdet(Request $request, $id)
-    
- {
-
+{
     // Validasi input
     $request->validate([
         'name' => 'required|string|max:255',
@@ -128,15 +105,21 @@ class ProductController extends Controller
 
     // Cek jika ada file gambar yang di-upload
     if ($request->hasFile('image')) {
+        // Hapus gambar lama jika ada
+        if ($product->image) {
+            Storage::disk('public')->delete($product->image);
+        }
+        // Simpan gambar baru
         $image = $request->file('image');
         $imagePath = $image->store('images', 'public');
         $product->image = $imagePath;
     }
-    // Simpan perubahan produk ke database
-    $product->save();  // Pastikan ini dipanggil
 
+    // Simpan perubahan produk ke database
+    $product->save();
+
+    // Redirect dengan pesan sukses
     return redirect()->route('admin')->with('success', 'Produk berhasil diperbarui');
- }
- 
+}
 
 }
