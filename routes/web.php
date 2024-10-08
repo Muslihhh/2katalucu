@@ -11,10 +11,17 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TokoController;
 use App\Http\Controllers\MarketController;
+<<<<<<< HEAD
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\VerificationController;
+=======
+use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\VerificationController;
+use App\Http\Controllers\Auth\CategoryController;
+>>>>>>> e13099d95327091e5015c50d8d848bbc6926be58
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\ProductController; // Pastikan namespace sesuai
 
@@ -54,11 +61,15 @@ Route::get('/author/{user:name}', function (User $user) {
 });
 
 // Route Categories
-Route::get('/categories', [CategoryController::class, 'index']);
 
-Route::get('/categories/{id}', [CategoryController::class, 'showcategory'])->name('categories.show');
+// Route::get('/categories', function () {
+//     return view('home'); // Misalnya, view 'home' menampilkan komponen kategori
+// });
 
-Route::get('/categories/{category}', [CategoryController::class, 'showcategory'])->name('categories.show');
+Route::get('/home', [CategoryController::class, 'index']);
+
+Route::get('/home/category/{id}', [CategoryController::class, 'showcategory'])->name('home.filter');
+
 
 // Route Cart
 Route::post('/add-to-cart', function (Request $request) {
@@ -117,15 +128,15 @@ Route::post('/admin', [ProductController::class, 'store'])->name('products.store
 
 Route::get('/home', [TokoController::class, 'index'])->name('home');
 
-Route::get('/product/{id}', [TokoController::class, 'show'])->name('products.show');
+Route::get('/products/{id}', [TokoController::class, 'show'])->name('products.show');
 
 
 Route::get('/checkout', [CheckoutController::class, 'showChekoutForm']);
 Route::post('/checkout', [CheckoutController::class, 'processCheckout']);
 
-Route::delete('/product/{id}', [ProductController::class, 'destroy'])->name('products.destroy');
+Route::delete('/products/{id}', [ProductController::class, 'destroy'])->name('products.destroy');
 
-Route::put('/admin/product/{id}', [ProductController::class, 'apdet'])->name('products.apdet');
+Route::put('/admin/{id}', [ProductController::class, 'apdet'])->name('products.apdet');
 
 
 
