@@ -11,17 +11,10 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TokoController;
 use App\Http\Controllers\MarketController;
-<<<<<<< HEAD
-use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\CheckoutController;
-use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\VerificationController;
-=======
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\VerificationController;
 use App\Http\Controllers\Auth\CategoryController;
->>>>>>> e13099d95327091e5015c50d8d848bbc6926be58
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\ProductController; // Pastikan namespace sesuai
 
@@ -135,7 +128,7 @@ Route::post('/checkout', [CheckoutController::class, 'processCheckout']);
 
 Route::delete('/products/{id}', [ProductController::class, 'destroy'])->name('products.destroy');
 
-Route::put('/admin/{id}', [ProductController::class, 'apdet'])->name('products.apdet');
+Route::put('/products/{id}', [ProductController::class, 'apdet'])->name('products.apdet');
 
 
 
