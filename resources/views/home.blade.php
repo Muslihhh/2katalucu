@@ -1,11 +1,13 @@
-<x-layout>
-  <x-slot:title>{{ $title }}</x-slot:title>
-  
-  <x-slider></x-slider>
-  
+<x-layout :categories="$categories">
+    
+
+ {{-- <x-navbar :homeRoute="route('home')" :categories="$categories" /> --}}
+    <x-slot:title>{{ $title }}</x-slot:title>
+    <x-slider></x-slider>
+
   <section class="bg-gray-50 py-8 antialiased dark:bg-gray-900 md:py-16">
 
-      @if(isset($categories) && count($categories) > 0)
+      {{-- @if(isset($categories) && count($categories) > 0)
           <div class="mx-auto max-w-screen-xl px-4 2xl:px-0">
               <div class="mb-4 flex items-center justify-between gap-4 md:mb-8">
                   <h2 class="text-xl font-semibold text-gray-900 dark:text-white sm:text-2xl">Kategori</h2>
@@ -23,7 +25,7 @@
           </div>
       @else
           <p>Tidak ada kategori tersedia.</p>
-      @endif
+      @endif --}}
 
       @if(isset($products) && count($products) > 0)
           <div class="bg-white">

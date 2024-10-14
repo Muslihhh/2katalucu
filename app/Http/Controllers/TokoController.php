@@ -32,4 +32,20 @@ class TokoController extends Controller
             'categories' => $categories,
         ]);
     }
+    public function filter()
+    {
+        // Ambil semua kategori dari database
+        $categories = Category::with('products')->get(); // Mengambil kategori beserta relasi produk
+    
+        // Ambil semua produk dari database (jika diperlukan)
+        $products = Product::all();
+    
+        // Kembalikan view home dengan data yang diperlukan
+        return view('home', [
+            'title' => 'Home', // Judul untuk halaman
+            'products' => $products, // Mengirim data produk ke view
+            'categories' => $categories, // Mengirim data kategori ke view
+        ]);
+    }
+    
 }

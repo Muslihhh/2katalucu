@@ -1,5 +1,4 @@
 <?php
-
 namespace App\View\Components;
 
 use Closure;
@@ -8,12 +7,16 @@ use Illuminate\View\Component;
 
 class Layout extends Component
 {
+    public $categories;
+
     /**
      * Create a new component instance.
+     *
+     * @param  array  $categories
      */
-    public function __construct()
+    public function __construct($categories = [])
     {
-        //
+        $this->categories = $categories;
     }
 
     /**
@@ -24,3 +27,4 @@ class Layout extends Component
         return view('components.layout');
     }
 }
+
