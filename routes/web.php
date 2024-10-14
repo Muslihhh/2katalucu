@@ -129,7 +129,7 @@ Route::post('/checkout', [CheckoutController::class, 'processCheckout']);
 
 Route::delete('/products/{id}', [ProductController::class, 'destroy'])->name('products.destroy');
 
-Route::put('/admin/{id}', [ProductController::class, 'apdet'])->name('products.apdet');
+Route::put('/products/{id}', [ProductController::class, 'apdet'])->name('products.apdet');
 
 
 

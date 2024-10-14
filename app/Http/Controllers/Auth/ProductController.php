@@ -86,7 +86,7 @@ public function destroy($id)
 
     $product->delete();
 
-    return redirect()->route('index2');
+    return redirect()->route('admin');
 }
 
 
@@ -113,44 +113,46 @@ public function destroy($id)
     }
 
 
-    public function apdet(Request $request, $id)
-    {
-        // Validasi input
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'price' => 'required|numeric',
-            'description' => 'required|string',
-            'category_id' => 'required|exists:categories,id',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-        ]);
+    public function apdet(Request $request, string $id)
+{
+    // Validasi input
+    $request->validate([
+        'name' => 'required|string|max:255',
+        'price' => 'required|numeric',
+        'description' => 'required|string',
+        'category_id' => 'required|exists:categories,id',
+        'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+    ]);
 
-        // Temukan produk berdasarkan ID
-        $product = Product::findOrFail($id);
+    // Temukan produk berdasarkan ID
+    $product = Product::find($id);
 
-        // Update data produk
-        $product->name = $request->input('name');
-        $product->price = $request->input('price');
-        $product->description = $request->input('description');
-        $product->category_id = $request->input('category_id');
+    // Update data produk secara manual
+    $product->name = $request->input('name');
+    $product->price = $request->input('price');
+    $product->description = $request->input('description');
+    $product->category_id = $request->input('category_id');
 
-        // Cek jika ada file gambar yang di-upload
-        if ($request->hasFile('image')) {
-            // Hapus gambar lama jika ada
-            if ($product->image) {
-                Storage::disk('public')->delete($product->image);
-            }
-            // Simpan gambar baru
-            $image = $request->file('image');
-            $imagePath = $image->store('images', 'public');
-            $product->image = $imagePath;
+    // Cek jika ada file gambar yang di-upload
+    if ($request->hasFile('image')) {
+        // Hapus gambar lama jika ada
+        if ($product->image) {
+            Storage::disk('public')->delete($product->image);
         }
 
-        // Simpan perubahan produk ke database
-        $product->save();
-
-        // Redirect dengan pesan sukses
-        return redirect()->route('admin')->with('success', 'Produk berhasil diperbarui');
+        // Simpan gambar baru
+        $image = $request->file('image');
+        $imagePath = $image->store('images', 'public');
+        $product->image = $imagePath;
     }
+
+    // Simpan perubahan produk ke database
+    $product->save();
+
+    // Redirect dengan pesan sukses
+    return redirect()->route('admin')->with('success', 'Produk berhasil diperbarui');
+}
+
 
 
     public function show(Category $category)
