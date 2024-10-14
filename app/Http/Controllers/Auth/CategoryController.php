@@ -51,4 +51,10 @@ class CategoryController extends Controller
          'selectedCategory' => $category // Untuk menandai kategori yang sedang dipilih
      ]);
  }
+ public function index()
+{
+    $categories = Category::all();  // Ambil semua kategori
+    return view('home', compact('categories'));  // Pastikan 'home' adalah view yang menggunakan layout
+}
+
 }
