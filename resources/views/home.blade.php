@@ -7,8 +7,6 @@
 
   <section class="bg-gray-50 py-8 antialiased dark:bg-gray-900 md:py-16">
 
-<<<<<<< HEAD
-=======
       {{-- @if(isset($categories) && count($categories) > 0)
           <div class="mx-auto max-w-screen-xl px-4 2xl:px-0">
               <div class="mb-4 flex items-center justify-between gap-4 md:mb-8">
@@ -28,7 +26,6 @@
       @else
           <p>Tidak ada kategori tersedia.</p>
       @endif --}}
->>>>>>> ed01dbd24a0b17ba9802cdc0bff7adc76f803dd8
 
       @if(isset($products) && count($products) > 0)
           <div class="bg-white">

@@ -40,7 +40,6 @@ public function show(Product $product)
             'categories' => $categories,
         ]);
     }
-<<<<<<< HEAD
     public function store(Request $request, Product $product)
     {
         // Validate the comment data
@@ -74,22 +73,4 @@ public function show(Product $product)
 
     //     return view('produk', compact('comments'));
     // }
-=======
-    public function filter()
-    {
-        // Ambil semua kategori dari database
-        $categories = Category::with('products')->get(); // Mengambil kategori beserta relasi produk
-    
-        // Ambil semua produk dari database (jika diperlukan)
-        $products = Product::all();
-    
-        // Kembalikan view home dengan data yang diperlukan
-        return view('home', [
-            'title' => 'Home', // Judul untuk halaman
-            'products' => $products, // Mengirim data produk ke view
-            'categories' => $categories, // Mengirim data kategori ke view
-        ]);
-    }
-    
->>>>>>> ed01dbd24a0b17ba9802cdc0bff7adc76f803dd8
 }

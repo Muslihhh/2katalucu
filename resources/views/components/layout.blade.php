@@ -28,16 +28,10 @@
 -->
 <div class="min-h-full">
   <x-header></x-header>
-<<<<<<< HEAD
-    <x-navbar></x-navbar>
-    <main>
-      <div class="mx-auto max-w-full px-12 py-6 sm:px-6 lg:px-12">
-=======
   {{-- :categoriesRoute="route('home.filter')" --}}
   <x-navbar :homeRoute="route('home')" :categories="$categories" :products="$products" />
 <main>
       <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
->>>>>>> ed01dbd24a0b17ba9802cdc0bff7adc76f803dd8
         {{ $slot }}
       </div>
     </main>
