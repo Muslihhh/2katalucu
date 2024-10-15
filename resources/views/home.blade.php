@@ -1,10 +1,34 @@
-<x-layout>
-  <x-slot:title>{{ $title }}</x-slot:title>
-  
-  <x-slider></x-slider>
-  
+<x-layout :categories="$categories" :products="$products">
+
+
+ {{-- <x-navbar :homeRoute="route('home')" :categories="$categories" /> --}}
+    <x-slot:title>{{ $title }}</x-slot:title>
+    <x-slider></x-slider>
+
   <section class="bg-gray-50 py-8 antialiased dark:bg-gray-900 md:py-16">
 
+<<<<<<< HEAD
+=======
+      {{-- @if(isset($categories) && count($categories) > 0)
+          <div class="mx-auto max-w-screen-xl px-4 2xl:px-0">
+              <div class="mb-4 flex items-center justify-between gap-4 md:mb-8">
+                  <h2 class="text-xl font-semibold text-gray-900 dark:text-white sm:text-2xl">Kategori</h2>
+              </div>
+              <div class="grid gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+                  @foreach($categories as $category)
+                      <a href="{{ route('home.filter', $category->id) }}" 
+                         class="flex items-center rounded-lg border border-gray-200 bg-white px-4 py-2 hover:bg-gray-50 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700 
+                         {{ isset($selectedCategory) && $selectedCategory->id == $category->id ? 'bg-gray-200' : '' }}">
+                          <i class="fas fa-tag mr-2"></i>
+                          <span class="text-sm font-medium text-gray-900 dark:text-white">{{ $category->name }}</span>
+                      </a>
+                  @endforeach
+              </div>
+          </div>
+      @else
+          <p>Tidak ada kategori tersedia.</p>
+      @endif --}}
+>>>>>>> ed01dbd24a0b17ba9802cdc0bff7adc76f803dd8
 
       @if(isset($products) && count($products) > 0)
           <div class="bg-white">

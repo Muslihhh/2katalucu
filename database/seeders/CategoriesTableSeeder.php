@@ -9,8 +9,19 @@ class CategoriesTableSeeder extends Seeder
 {
     public function run()
     {
-        Category::create(['name' => 'Elektronik']);
-        Category::create(['name' => 'Pakaian']);
-        Category::create(['name' => 'Makanan']);
+        Category::create([
+            'name' => 'Elektronik',
+            'daerah' => 'Jakarta',  // Daerah yang sesuai
+        ]);
+
+        Category::create([
+            'name' => 'Pakaian',
+            'daerah' => 'Yogyakarta',
+        ]);
+
+        Category::create([
+            'name' => 'Makanan',
+            'daerah' => 'Surabaya',
+        ]);
     }
 }

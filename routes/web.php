@@ -60,8 +60,9 @@ Route::get('/author/{user:name}', function (User $user) {
 //     return view('home'); // Misalnya, view 'home' menampilkan komponen kategori
 // });
 
-Route::get('/home', [CategoryController::class, 'index']);
+Route::get('/home', [TokoController::class, 'index']);
 Route::get('/home/category/{id}', [CategoryController::class, 'showcategory'])->name('home.filter');
+Route::get('/home', [CategoryController::class, 'index'])->name('home');
 
 
 // Route Cart
@@ -87,7 +88,7 @@ Route::get('/product/{id}', [TokoController::class, 'show'])->name('products.sho
 
 
 
-Route::get('/categories/{category}', [CategoryController::class, 'show'])->name('categories.show');
+// Route::get('/categories/{category}', [CategoryController::class, 'show'])->name('categories.show');
 
 // Route Checkout
 Route::middleware('auth')->group(function () {

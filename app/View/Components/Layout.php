@@ -1,5 +1,4 @@
 <?php
-
 namespace App\View\Components;
 
 use Closure;
@@ -8,12 +7,19 @@ use Illuminate\View\Component;
 
 class Layout extends Component
 {
+    public $categories;
+    public $products; // Tambahkan properti untuk produk
+
     /**
      * Create a new component instance.
+     *
+     * @param  array  $categories
+     * @param  array  $products
      */
-    public function __construct()
+    public function __construct($categories = [], $products = []) // Tambahkan parameter produk
     {
-        //
+        $this->categories = $categories;
+        $this->products = $products; // Simpan produk
     }
 
     /**

@@ -1,5 +1,4 @@
 <?php
-
 namespace App\View\Components;
 
 use Closure;
@@ -8,17 +7,17 @@ use Illuminate\View\Component;
 
 class Navbar extends Component
 {
-    /**
-     * Create a new component instance.
-     */
-    public function __construct()
+    public $homeRoute;
+    public $categories;
+    public $products;
+
+    public function __construct($homeRoute, $categories = [], $products = [])
     {
-        //
+        $this->homeRoute = $homeRoute;
+        $this->categories = $categories;
+        $this->products = $products;
     }
 
-    /**
-     * Get the view / contents that represent the component.
-     */
     public function render(): View|Closure|string
     {
         return view('components.navbar');

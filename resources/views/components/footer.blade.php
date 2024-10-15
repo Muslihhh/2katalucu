@@ -31,7 +31,14 @@
                     <ul class="text-gray-200 dark:text-gray-400">
                         <li class="mb-4">
                             <p>Senin – Jumat | 09.00 – 17.00 WIB</p>
-                            <button class=" mt-5 mx-auto fa fa-whatsapp w-3/4 hover:scale-110 h-14 bg-green-500 hover:bg-green-600 text-white py-3 rounded-md"> Hubungi Kami</button>
+                            <div class="flex justify-center mt-5">
+                                <a href="https://wa.me/089667879476" 
+                                   class="fa fa-whatsapp text-white bg-green-600 hover:bg-green-700 font-bold py-4 px-6 rounded-md text-center hover:scale-110 transition-transform duration-300 w-64">
+                                    Hubungi Kami
+                                </a>
+                            </div>
+                            
+                            
                         </li>
                     </ul>
                 </div>
