@@ -21,6 +21,7 @@ return new class extends Migration
              ->references('id')->on('categories')
              ->onDelete('cascade');
              $table->string('image')->nullable();  // Tambahkan kolom image
+             $table->string('daerah');
              $table->timestamps();
          });
      }
