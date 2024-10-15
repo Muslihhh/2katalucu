@@ -23,7 +23,7 @@
 <div class="min-h-full">
   <x-header></x-header>
   {{-- :categoriesRoute="route('home.filter')" --}}
-<x-navbar :homeRoute="route('home')" :categories="$categories" />
+  <x-navbar :homeRoute="route('home')" :categories="$categories" :products="$products" />
 <main>
       <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
         {{ $slot }}
