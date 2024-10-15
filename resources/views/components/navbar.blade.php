@@ -39,142 +39,65 @@
                     <a href="#" class="flex items-center text-sm font-medium text-primary-600 dark:text-primary-500 hover:underline">Clear all</a>
                 </div>
             </div>
-                <!-- Category -->
-                @props(['categories' => []])
-
-                    <div>
-                        <div id="accordion-flush-category" data-accordion="collapse"
-                            data-active-classes="text-black dark:text-white"
-                            data-inactive-classes="text-gray-500 dark:text-gray-400">
-                            <h2 id="category-heading">
-                                <button type="button"
-                                    class="flex items-center justify-between w-full py-2 px-1.5 text-sm font-medium text-left text-gray-500 border-b border-gray-200 dark:border-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-700"
-                                    data-accordion-target="#category-body" aria-expanded="false"
-                                    aria-controls="category-body">
-                                    <span>Category</span>
-                                    <svg aria-hidden="true" class="w-5 h-5 shrink-0" fill="currentColor"
-                                        viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                        <path fill-rule="evenodd" clip-rule="evenodd"
-                                            d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" />
-                                    </svg>
-                                </button>
-                            </h2>
-
-                            <div id="category-body" class="hidden" aria-labelledby="category-heading">
-                                <div class="py-2 font-light border-b border-gray-200 dark:border-gray-600">
-                                    <ul class="space-y-2">
-                                        @foreach ($categories as $category)
-                                            <li class="flex items-center">
-                                                <input id="category_{{ $category->id }}" type="checkbox"
-                                                    value="{{ $category->id }}"
-                                                    class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
-                                                <label for="category_{{ $category->id }}"
-                                                    class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100">
-                                                    <a href="{{ route('home.filter', $category->id) }}"
-                                                        class="hover:underline">{{ $category->name }}</a>
-                                                    ({{ $category->products->count() }})
-                                                </label>
-                                            </li>
-                                        @endforeach
-                                        <li>
-                                            <a href="{{ route('home') }}"
-                                                class="flex items-center text-sm font-medium text-primary-600 dark:text-primary-500 hover:underline">View
-                                                all</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Price -->
-                    <div>
-                        <div id="accordion-flush-price" data-accordion="collapse"
-                            data-active-classes="text-black dark:text-white"
-                            data-inactive-classes="text-gray-500 dark:text-gray-400">
-                            <h2 id="price-heading">
-                                <button type="button"
-                                    class="flex items-center justify-between w-full py-2 px-1.5 text-sm font-medium text-left text-gray-500 border-b border-gray-200 dark:border-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-700"
-                                    data-accordion-target="#price-body" aria-expanded="false"
-                                    aria-controls="price-body">
-                                    <span>Price</span>
-                                    <svg aria-hidden="true" class="w-5 h-5 shrink-0" fill="currentColor"
-                                        viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                        <path fill-rule="evenodd" clip-rule="evenodd"
-                                            d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" />
-                                    </svg>
-                                </button>
-                            </h2>
-
-                            <div id="price-body" class="hidden" aria-labelledby="price-heading">
-                                <div
-                                    class="flex items-center py-2 space-x-3 font-light border-b border-gray-200 dark:border-gray-600">
-                                    <select id="price-from"
-                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-                                        <option disabled="" selected="">From</option>
-                                        @foreach ($products as $product)
-                                            <option>{{ $product->price }}</option>
-                                        @endforeach
-                                    </select>
-                                    <select id="price-to"
-                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-                                        <option disabled="" selected="">To</option>
-                                        @foreach ($products as $product)
-                                            <option>{{ $product->price }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Daerah -->
-                    <div>
-                        <div id="accordion-flush-daerah" data-accordion="collapse"
-                            data-active-classes="text-black dark:text-white"
-                            data-inactive-classes="text-gray-500 dark:text-gray-400">
-                            <h2 id="daerah-heading">
-                                <button type="button"
-                                    class="flex items-center justify-between w-full py-2 px-1.5 text-sm font-medium text-left text-gray-500 border-b border-gray-200 dark:border-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-700"
-                                    data-accordion-target="#daerah-body" aria-expanded="false"
-                                    aria-controls="daerah-body">
-                                    <span>Daerah</span>
-                                    <svg aria-hidden="true" class="w-5 h-5 shrink-0" fill="currentColor"
-                                        viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                        <path fill-rule="evenodd" clip-rule="evenodd"
-                                            d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" />
-                                    </svg>
-                                </button>
-                            </h2>
-
-                            <div id="daerah-body" class="hidden" aria-labelledby="daerah-heading">
-                                <div class="py-2 font-light border-b border-gray-200 dark:border-gray-600">
-                                    <ul class="space-y-2">
-                                        @foreach ($categories as $category)
-                                            <li class="flex items-center">
-                                                <input id="daerah_{{ $category->id }}" type="checkbox"
-                                                    value="{{ $category->id }}"
-                                                    class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
-                                                <label for="daerah_{{ $category->id }}"
-                                                    class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100">
-                                                    <a href="{{ route('home.filter', $category->id) }}"
-                                                        class="hover:underline">{{ $category->daerah }}</a>
-                                                    ({{ $category->products->count() }})
-                                                </label>
-                                            </li>
-                                        @endforeach
-                                        <li>
-                                            <a href="{{ route('home') }}"
-                                                class="flex items-center text-sm font-medium text-primary-600 dark:text-primary-500 hover:underline">View
-                                                all</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-              
+            <div id="accordion-flush" data-accordion="collapse" data-active-classes="text-black dark:text-white" data-inactive-classes="text-gray-500 dark:text-gray-400">
+              <!-- Category -->
+              <h2 id="category-heading">
+                  <button type="button" class="flex items-center justify-between w-full py-2 px-1.5 text-sm font-medium text-left text-gray-500 border-b border-gray-200 dark:border-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-700" data-accordion-target="#category-body" aria-expanded="true" aria-controls="category-body">
+                      <span>Category</span>
+                      <svg aria-hidden="true" data-accordion-icon="" class="w-5 h-5 rotate-180 shrink-0" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                          <path fill-rule="evenodd" clip-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" />
+                      </svg>
+                  </button>
+              </h2>
+              <div id="category-body" class="hidden" aria-labelledby="category-heading">
+                  <div class="py-2 font-light border-b border-gray-200 dark:border-gray-600">
+                    @if(isset($categories) && count($categories) > 0)
+                    <ul>
+                        @foreach($categories as $category)
+                            <li>
+                                <a href="{{ route('home.filter', $category->id) }}" class="block py-2 px-4 hover:bg-gray-100">
+                                    {{ $category->name }}
+                                </a>
+                            </li>
+                        @endforeach
+                    </ul>
+                @else
+                    <p>Tidak ada kategori tersedia.</p>
+                @endif
+                  </div>
+              </div>
+              <!-- Price -->
+              <h2 id="price-heading">
+                  <button type="button" class="flex items-center justify-between w-full py-2 px-1.5 text-sm font-medium text-left text-gray-500 border-b border-gray-200 dark:border-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-700" data-accordion-target="#price-body" aria-expanded="true" aria-controls="price-body">
+                      <span>Harga</span>
+                      <svg aria-hidden="true" data-accordion-icon="" class="w-5 h-5 rotate-180 shrink-0" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                          <path fill-rule="evenodd" clip-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" />
+                      </svg>
+                  </button>
+              </h2>
+              <div id="price-body" class="hidden" aria-labelledby="price-heading">
+                  <div class="flex items-center py-2 space-x-3 font-light border-b border-gray-200 dark:border-gray-600"><select id="price-from" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"><option disabled="" selected="">From</option><option>$500</option><option>$2500</option><option>$5000</option></select><select id="price-to" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"><option disabled="" selected="">To</option><option>$500</option><option>$2500</option><option>$5000</option></select></div>
+              </div>
+              <!-- Worldwide Shipping -->
+              <h2 id="worldwide-shipping-heading">
+                  <button type="button" class="flex items-center justify-between w-full py-2 px-1.5 text-sm font-medium text-left text-gray-500 border-b border-gray-200 dark:border-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-700" data-accordion-target="#worldwide-shipping-body" aria-expanded="true" aria-controls="worldwide-shipping-body">
+                      <span>Daerah</span>
+                      <svg aria-hidden="true" data-accordion-icon="" class="w-5 h-5 rotate-180 shrink-0" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                          <path fill-rule="evenodd" clip-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" />
+                      </svg>
+                  </button>
+              </h2>
+              <div id="worldwide-shipping-body" class="hidden" aria-labelledby="worldwide-shipping-heading">
+                  <div class="py-2 font-light border-b border-gray-200 dark:border-gray-600">
+                      <ul class="space-y-2">
+                          <li class="flex items-center">
+                              <input id="apple" type="checkbox" value="" class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
+                              <label for="apple" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100">Bantul ()</label>
+                          </li>
+                          <a href="#" class="flex items-center text-sm font-medium text-primary-600 dark:text-primary-500 hover:underline">View all</a>
+                      </ul>
+                  </div>
+              </div>
               <!-- Rating -->
               <h2 id="rating-heading">
                   <button type="button" class="flex items-center justify-between w-full py-2 px-1.5 text-sm font-medium text-left text-gray-500 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-700" data-accordion-target="#rating-body" aria-expanded="true" aria-controls="rating-body">
