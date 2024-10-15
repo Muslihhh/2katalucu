@@ -12,7 +12,7 @@
             <!-- Slides -->
             <div class="relative overflow-hidden rounded-lg">
                 <?php
-                $images = ['https://awsimages.detik.net.id/community/media/visual/2023/05/11/nissan-skyline-gt-r-bekas-paul-walker.jpeg?w=1200', 'https://awsimages.detik.net.id/community/media/visual/2023/05/11/nissan-skyline-gt-r-bekas-paul-walker.jpeg?w=1200', 'https://awsimages.detik.net.id/community/media/visual/2023/05/11/nissan-skyline-gt-r-bekas-paul-walker.jpeg?w=1200'];
+                $images = ['bn1.jpg','bn2.jpg', 'bn3.jpg'];
                 foreach ($images as $index => $image) {
                     echo '<div class="slide ' . ($index === 0 ? 'block' : 'hidden') . '">';
                     echo '<img src="' . $image . '" class="w-full lg:h-96 sm:h-60">';

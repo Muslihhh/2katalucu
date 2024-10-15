@@ -11,13 +11,14 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TokoController;
 use App\Http\Controllers\MarketController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\VerificationController;
 use App\Http\Controllers\Auth\CategoryController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\ProductController; // Pastikan namespace sesuai
-
+use App\Models\Product;
 
 // Route Home
 Route::get('/home', function () {
@@ -115,12 +116,14 @@ Route::get('/admin', [ProductController::class, 'index2'])->name('admin');
 // Menyimpan data produk yang di-post dari form
 Route::post('/admin', [ProductController::class, 'store'])->name('products.store');
 
+// Route untuk menampilkan detail produk
+Route::get('/admin/{product}/rate', [ProductController::class, 'rate'])->name('admin.products.rate');
 
 
 
 Route::get('/home', [TokoController::class, 'index'])->name('home');
 
-Route::get('/products/{id}', [TokoController::class, 'show'])->name('products.show');
+Route::get('/products/{product}', [TokoController::class, 'show'])->name('products.show');
 
 
 Route::get('/checkout', [CheckoutController::class, 'showChekoutForm']);
@@ -130,6 +133,6 @@ Route::delete('/products/{id}', [ProductController::class, 'destroy'])->name('pr
 
 Route::put('/products/{id}', [ProductController::class, 'apdet'])->name('products.apdet');
 
-
-
-
+Route::post('/products/{product}', [TokoController::class, 'store'])
+    ->middleware('auth')
+    ->name('comments.store');

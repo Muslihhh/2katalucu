@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Auth;
 
+use Illuminate\Support\Facades\Log;
 use App\Models\Product;
+use App\Models\ProductImage;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -23,71 +25,109 @@ class ProductController extends Controller
 
     // Menyimpan data produk ke database
     public function store(Request $request)
-    {
-        // Validasi input
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'price' => 'required|numeric',
-            'description' => 'required|string',
-            'category_id' => 'required|exists:categories,id',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-        ]);
+{
+    // Validasi input
+    $request->validate([
+        'name' => 'required|string|max:255',
+        'price' => 'required|numeric',
+        'description' => 'required|string',
+        'category_id' => 'required|exists:categories,id',
+        'images' => 'required',  // Multiple images required
+        'images.*' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+    ]);
 
-        // Buat instance produk baru
-            // Buat instance produk baru
+    // Buat instance produk baru
     $product = new Product();
     $product->name = $request->input('name');
     $product->price = $request->input('price');
     $product->description = $request->input('description');
     $product->category_id = $request->input('category_id');
+    $product->save();  // Simpan produk dulu untuk mendapatkan ID
 
     // Cek jika ada file gambar yang di-upload
-    if ($request->hasFile('image')) {
-        $image = $request->file('image');
-        $imagePath = $image->store('images', 'public'); // Simpan gambar di storage/app/public/images
+    if ($request->hasFile('images')) {
+        foreach ($request->file('images') as $image) {
+            // Simpan setiap gambar ke storage
+            $imagePath = $image->store('images', 'public');  // Simpan gambar di storage
 
-        // Simpan path relatif terhadap storage di database
-       $product->image = $imagePath;
+            // Simpan path gambar di tabel terpisah
+            ProductImage::create([
+                'product_id' => $product->id,
+                'image_path' => $imagePath,
+            ]);
+        }
     }
-
-    // Simpan produk ke database
-    $product->save();
 
     return redirect()->route('admin')->with('success', 'Produk berhasil ditambahkan');
 }
-    public function index2()
-    {
-        $max_product = 5;
-        $categories = Category::all();
-        if (request('search')) {
-            $products = Product::where('name', 'LIKE', '%' . request('search') . '%')->paginate($max_product);
-        } else {
-            $products = Product::orderBy('name', 'asc')->paginate($max_product);  // Get all products from the database
-            // Get all categories from the database
-        }
-        return view('admin', [
-            'title' => 'admin',  // Ensure title is defined here
-            'products' => $products,  // Pass the products to the view
-            'categories' => $categories,  // Pass the categories to the view
-        ]);
+
+
+public function index2()
+{
+    $max_product = 5;
+    $categories = Category::all();
+    
+    // Ambil produk beserta komentar mereka
+    $products = Product::with('comments') // Eager load comments
+        ->when(request('search'), function ($query) {
+            return $query->where('name', 'LIKE', '%' . request('search') . '%');
+        })
+        ->orderBy('name', 'asc')
+        ->paginate($max_product);
+
+    // Hitung rata-rata rating untuk setiap produk
+    foreach ($products as $product) {
+        // Hitung rata-rata rating
+        $product->averageRating = $product->comments->avg('rating') ?? 0;
     }
+
+    return view('admin', [
+        'title' => 'admin',
+        'products' => $products,
+        'categories' => $categories,
+    ]);
+}
+
+
+
+public function rate(Product $product)
+{
+    $comments = $product->comments()->latest()->get();
+    
+    // Hitung rata-rata rating
+    $averageRating = $comments->avg('rating') ?? 0; // Jika tidak ada komentar, set ke 0
+    
+    return view('admin', compact('product', 'comments', 'averageRating'));
+}
+
 
 
     // In your ProductController.php
 
-public function destroy($id)
-{
-    $product = Product::find($id);
-    $image_path = storage_path('app/public/' . $product->image);
-
-    if (file_exists($image_path)) {
-        unlink($image_path);
+    public function destroy($id)
+    {
+        $product = Product::find($id);
+    
+        // Cek jika produk ada
+        if (!$product) {
+            return redirect()->route('admin')->with('error', 'Produk tidak ditemukan');
+        }
+    
+        // Hapus semua gambar terkait di storage
+        foreach ($product->images as $image) {
+            Storage::disk('public')->delete($image->image_path);  // Hapus gambar di storage
+        }
+    
+        // Hapus gambar dari database
+        ProductImage::where('product_id', $product->id)->delete();
+    
+        // Hapus produk dari database
+        $product->delete();
+    
+        return redirect()->route('admin')->with('success', 'Produk dan gambar berhasil dihapus');
     }
+    
 
-    $product->delete();
-
-    return redirect()->route('admin');
-}
 
 
 // public function destroy($id)

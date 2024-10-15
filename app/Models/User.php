@@ -54,6 +54,7 @@ class User extends Authenticatable
 {
     // Memastikan pengguna login
     if (Auth::check()) {
+        $user = Auth::user();
         // Cek apakah role pengguna adalah admin
         return Auth::user()->role === 'admin';
     }

@@ -1,10 +1,10 @@
 <nav x-data="{ isOpen: false }" class="bg-purple-800 sticky top-0 z-50 py-4">
-    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <div class="mx-auto max-w-full px-4 sm:px-6 lg:px-8">
       <div class="flex h-16 items-center justify-between">
         <div class="flex items-center">
           <div class="flex-shrink-0">
           <a href="/home" class="flex content-center gap-2">
-            <img class="w-9 h-9" src="DJ.png" alt="Your Company">
+            <img class="w-9 h-9" src="{{ asset('DJ.png') }}" alt="Your Company">
             <h1 class=" self-end lg:block sm: hidden lg:text-2xl font-medium text-gray-900">Store</h1>
           </a>
           </div>
@@ -51,13 +51,19 @@
               </h2>
               <div id="category-body" class="hidden" aria-labelledby="category-heading">
                   <div class="py-2 font-light border-b border-gray-200 dark:border-gray-600">
-                      <ul class="space-y-2">
-                          <li class="flex items-center">
-                              <input id="apple" type="checkbox" value="" class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
-                              <label for="apple" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100">Pakaian ()</label>
-                          </li>
-                          <a href="#" class="flex items-center text-sm font-medium text-primary-600 dark:text-primary-500 hover:underline">View all</a>
-                      </ul>
+                    @if(isset($categories) && count($categories) > 0)
+                    <ul>
+                        @foreach($categories as $category)
+                            <li>
+                                <a href="{{ route('home.filter', $category->id) }}" class="block py-2 px-4 hover:bg-gray-100">
+                                    {{ $category->name }}
+                                </a>
+                            </li>
+                        @endforeach
+                    </ul>
+                @else
+                    <p>Tidak ada kategori tersedia.</p>
+                @endif
                   </div>
               </div>
               <!-- Price -->
