@@ -1,6 +1,7 @@
 <x-layout>
+    
       <div class="bg-white lg:flex sm:content-center w-full border rounded-md p-5 gap-5">
-        <div class="lg:w-1/2 sm:w-full p-5">
+        <div class="lg:w-1/2 sm:w-full p-5 bg-gray-100">
             <style>
                 .swiper-container.gallery-top {
     width: 100%;
@@ -47,7 +48,7 @@
     height: 100%;
     object-fit: contain;
     padding: 5px;
-    border: 1px solid transparent; /* Default tanpa border */
+    border: 3px solid transparent; /* Default tanpa border */
     border-radius: 5px;
     transition: border 0.3s ease; /* Transisi untuk efek halus */
 }
@@ -112,8 +113,8 @@ var galleryTop = new Swiper('.gallery-top', {
                 
         <div class="lg:w-1/2 sm:w-full">
             <div class="h-1/2">
-                <h1 class=" text-3xl font-bold border-b border-black ">Nama Produk</h1>
-                <h2 class=" text-2xl py-5 ">${{ $product->price }}</h2>
+                <h1 class=" text-3xl font-bold border-b border-black ">{{ $product->name }}</h1>
+                <h2 class=" text-2xl py-5 ">Rp.{{ $product->price }}</h2>
                 <div class="flex items-center">
                     @if($averageRating > 0)
                         <div class="rating">

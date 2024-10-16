@@ -21,10 +21,13 @@ use App\Http\Controllers\Auth\ProductController; // Pastikan namespace sesuai
 use App\Models\Product;
 
 // Route Home
+
 Route::get('/home', function () {
     return view('home', ['title' => 'Home']);
 });
-
+Route::get('/contact', function () {
+    return view('contact', ['title' => 'contact']);
+});
 // Route Admin
 // Hanya satu set route admin
 // Route Admin// Hanya satu set route admin

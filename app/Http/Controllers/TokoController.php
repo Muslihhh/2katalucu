@@ -34,11 +34,13 @@ public function show(Product $product)
             $products = Product::all();
         }
 
+        $latestProducts = Product::where('created_at', '>=', now()->subDays(7))->get();
+
         return view('home', [
             'title' => 'Home',
             'products' => $products,
             'categories' => $categories,
-        ]);
+        ], compact('latestProducts'));
     }
     public function store(Request $request, Product $product)
     {
