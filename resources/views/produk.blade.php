@@ -39,15 +39,23 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
 }
 
 .gallery-thumbs .swiper-slide img {
     width: 100%;
     height: 100%;
-    object-fit: contain; /* Agar gambar thumbnail sesuai proporsi */
+    object-fit: contain;
     padding: 5px;
-    border: 1px solid
+    border: 1px solid transparent; /* Default tanpa border */
+    border-radius: 5px;
+    transition: border 0.3s ease; /* Transisi untuk efek halus */
 }
+
+.gallery-thumbs .swiper-slide-thumb-active img {
+    border-color: blue; /* Warna border untuk gambar aktif */
+}
+
 
 
             </style>
@@ -107,13 +115,18 @@ var galleryTop = new Swiper('.gallery-top', {
                 <h1 class=" text-3xl font-bold border-b border-black ">Nama Produk</h1>
                 <h2 class=" text-2xl py-5 ">${{ $product->price }}</h2>
                 <div class="flex items-center">
-                    <div class="rating">
-                        @for ($i = 1; $i <= 5; $i++)
-                            <i class="fas fa-star {{ $i <= $averageRating ? 'text-yellow-400' : 'text-gray-500' }}"></i>
-                        @endfor
-                    </div>
-                    <span class="ml-2">({{ number_format($averageRating, 1) }} stars)</span>
-                </div>                
+                    @if($averageRating > 0)
+                        <div class="rating">
+                            @for ($i = 1; $i <= 5; $i++)
+                                <i class="fas fa-star {{ $i <= $averageRating ? 'text-yellow-400' : 'text-gray-500' }}"></i>
+                            @endfor
+                        </div>
+                        <span class="ml-2">({{ number_format($averageRating, 1) }} stars)</span>
+                    @else
+                        <span class="ml-2 text-gray-500">Belum ada review</span>
+                    @endif
+                </div>
+                                
                 <h3 class=" underline-offset-4 underline">Detail</h3>
                 <p>Stok : {{ $product->stock ?? 'N/A' }}</p>
                 <a href="http://"><p class="">Kategori : {{ $product->category->name ?? 'N/A' }}</p> </a>
@@ -130,7 +143,7 @@ var galleryTop = new Swiper('.gallery-top', {
         </div>
       </div>
       <div class="mt-20 border-t pt-10 border-black">
-        <h2 class="text-2xl font-bold">Comments</h2>
+        <h2 class="text-2xl font-bold">Ulasan</h2>
     
         @auth
             <form class=" mt-5" action="{{ route('comments.store', $product) }}" method="POST">
@@ -179,19 +192,19 @@ var galleryTop = new Swiper('.gallery-top', {
                     });
                 </script>
                 <textarea name="comment" class="w-full h-24 p-2 border border-gray-400 rounded-md"></textarea>                  
-                <button type="submit" class=" mb-8 bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-md">Add Comment</button>
+                <button type="submit" class=" mb-8 bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-md">Tambahkan Ulasan</button>
             </form>
             @else
-    <p>You need to login to leave a comment. <a href="{{ route('login') }}">Login</a> or <a href="{{ route('registrasi') }}">Register</a></p>
+    <p>Anda Perlu <a href="{{ route('login') }}" class=" hover:underline">Login</a> atau <a href="{{ route('registrasi') }}" class=" hover:underline">Register</a> untuk menambahkan Ulasan</p>
         @endauth
-        <div class="comment-count">
-            {{ $comments->count() }} {{ Str::plural('comment', $comments->count()) }}
+        <div class="comment-count mt-4">
+            {{ $comments->count() }} {{ Str::plural('Ulasan', $comments->count()) }}
         </div>
         @foreach ($comments as $comment)
             <!-- Display each comment -->
             <div class="grid bg-gray-50 border-b py-10 px-6 border-black items-center w-full text-sm text-gray-900 dark:text-white">
                 <div class="flex mb-2">
-                <img class="mr-4 w-12 h-12 rounded-full" src="https://flowbite.com/docs/images/people/profile-picture-2.jpg" alt="Jese Leos">
+                <img class="mr-4 w-12 h-12 rounded-full" src="{{ asset('user.png') }}" alt="{{ $comment->user->name }}">
                 <div class="content-start">
                     <p class="text-xl font-bold text-gray-900 dark:text-white">{{ $comment->user->name }}</p>
                     <p class="text-gray-600">{{ $comment->created_at->diffForHumans() }}</p>

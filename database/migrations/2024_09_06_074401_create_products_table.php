@@ -13,8 +13,6 @@ return new class extends Migration
      {
          Schema::create('products', function (Blueprint $table) {
              $table->id();
-             $table->foreignId('category_id')->references('id')->on('categories')
-             ->onDelete('cascade');
              $table->string('name');
              $table->decimal('price', 8, 2);
              $table->text('description');
@@ -23,7 +21,6 @@ return new class extends Migration
              ->references('id')->on('categories')
              ->onDelete('cascade');
              $table->string('image')->nullable();  // Tambahkan kolom image
-             $table->string('daerah');
              $table->timestamps();
          });
      }
