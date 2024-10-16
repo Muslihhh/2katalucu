@@ -665,7 +665,7 @@
                                 </td>
                                 <th scope="row"
                                     class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                    <div class="items-center mr-3">
+                                    <div class="items-center flex gap-5 mr-3">
                                         @if ($product->images->isNotEmpty())
                                             <div class="product-thumbnail">
                                                 <img src="{{ asset('storage/' . $product->images->first()->image_path) }}"
@@ -674,6 +674,7 @@
                                         @else
                                             <p>No image available</p>
                                         @endif
+                                       <h1> {{ $product->name }}</h1>
                                     </div>
                                 </th>
                                 <td class="px-4 py-3">
@@ -693,7 +694,6 @@
                                                 <i
                                                     class="fas fa-star {{ $i <= $product->averageRating ? 'text-yellow-400' : 'text-gray-500' }}"></i>
                                             @endfor
-
                                         </div>
                                         <span class="ml-1">({{ number_format($product->averageRating, 1) }} stars)</span>
                                     </div>
@@ -1032,23 +1032,3 @@
     </div>
 </section>
 <!-- End block -->
-
-
-
-
-
-
-
-<!-- Delete -->
-<<<<<<< HEAD
-
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/datepicker.min.js"></script>
-=======
-<<<<<<< HEAD
-
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/datepicker.min.js"></script>
-=======
->>>>>>> ef1158a44146218c6dc11842953192e81324c71c
->>>>>>> 44e67679437aed76d6c0b099e159cf3413e67818
