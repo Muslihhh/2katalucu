@@ -329,16 +329,21 @@
             @endauth
         </div>
     
-        <div class=" text-gray-200 hover:underline font-semibold">
+        <div class=" text-gray-200 font-semibold">
             @if (Auth::check())
         <!-- Jika user sudah login -->
         <form method="POST" action="{{ route('logout') }}">
             @csrf
-            <button type="submit" class="btn btn-danger">Logout</button>
+            <button type="submit" class="btn btn-danger px-3 py-2 bg-white border-2 text-purple-700 border-white rounded-lg">Keluar</button>
         </form>
     @else
         <!-- Jika user belum login -->
-        <a href="{{ route('login') }}" class="btn btn-primary">Login</a>
+        <a href="{{ route('login') }}" class="btn btn-primary mr-6">
+            <button class=" px-3 py-2 bg-transparent border-2 border-white rounded-lg">Masuk</button>
+        </a>
+        <a href="{{ route('registrasi') }}" class="btn btn-primary">
+            <button class=" px-3 py-2 bg-white border-2 text-purple-700 border-white rounded-lg">Daftar</button>
+        </a>
     @endif
     
         </div>

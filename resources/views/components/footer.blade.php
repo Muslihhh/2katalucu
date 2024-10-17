@@ -18,9 +18,9 @@
     </div>
 </footer> --}}
 <footer class="p-4 bg-purple-800 sm:p-6 dark:bg-gray-800">
-    <div class="mx-auto max-w-screen-xl">
+    <div class=" mx-5 max-w-screen-full">
 
-            <div class="grid lg:grid-cols-4 gap-8 sm:gap-6 md:grid-cols-4 ">
+            <div class="grid lg:grid-cols-4 gap-12 sm:gap-6 md:grid-cols-4 ">
                 <div class="mb-6 content-start">
                     <h2 class="mb-4 text-sm font-semibold text-white uppercase dark:text-white">Customer Service</h2>
                     <img src="https://cdn-icons-png.freepik.com/256/2706/2706962.png?semt=ais_hybrid" class="h-32" alt="" />
@@ -31,7 +31,7 @@
                     <ul class="text-gray-200 dark:text-gray-400">
                         <li class="mb-4">
                             <p>Senin – Jumat | 09.00 – 17.00 WIB</p>
-                            <div class="flex justify-center mt-5">
+                            <div class=" mt-5">
                                 <a href="https://wa.me/089667879476" 
                                    class="fa fa-whatsapp text-white bg-green-600 hover:bg-green-700 font-bold py-4 px-6 rounded-md text-center hover:scale-110 transition-transform duration-300 w-64">
                                     Hubungi Kami

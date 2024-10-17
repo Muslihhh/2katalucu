@@ -689,13 +689,7 @@
 
                                 <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                     <div class="flex items-center">
-                                        <div class="rating">
-                                            @for ($i = 1; $i <= 5; $i++)
-                                                <i
-                                                    class="fas fa-star {{ $i <= $product->averageRating ? 'text-yellow-400' : 'text-gray-500' }}"></i>
-                                            @endfor
-                                        </div>
-                                        <span class="ml-1">({{ number_format($product->averageRating, 1) }} stars)</span>
+                                        <span class="ml-1">({{ number_format($product->averageRating, 1) }} <i class=" fa fa-star text-yellow-400"></i>)</span>
                                     </div>
                                 </td>
                                 <td

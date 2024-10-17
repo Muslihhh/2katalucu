@@ -118,14 +118,9 @@ var galleryTop = new Swiper('.gallery-top', {
                 <h2 class=" text-2xl py-5 ">Rp.{{ $product->price }}</h2>
                 <div class="flex items-center">
                     @if($averageRating > 0)
-                        <div class="rating">
-                            @for ($i = 1; $i <= 5; $i++)
-                                <i class="fas fa-star {{ $i <= $averageRating ? 'text-yellow-400' : 'text-gray-500' }}"></i>
-                            @endfor
-                        </div>
-                        <span class="ml-2">({{ number_format($averageRating, 1) }} stars)</span>
+                        <span >({{ number_format($averageRating, 1) }} <i class=" fa fa-star text-yellow-400"></i>)</span>
                     @else
-                        <span class="ml-2 text-gray-500">Belum ada review</span>
+                        <span class=" text-gray-500">Belum ada review</span>
                     @endif
                 </div>
                                 

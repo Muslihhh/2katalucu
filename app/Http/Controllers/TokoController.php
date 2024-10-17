@@ -25,23 +25,39 @@ public function show(Product $product)
 }
 
 
-    public function index()
-    {
-        $categories = Category::all();
-        if (request('search')) {
-            $products = Product::where('name', 'LIKE', '%'.request('search').'%')->get();
-        } else {
-            $products = Product::all();
-        }
+public function index()
+{
+    $categories = Category::all();
 
-        $latestProducts = Product::where('created_at', '>=', now()->subDays(7))->get();
+    // Default query untuk mengambil semua produk
+    $query = Product::query();
 
-        return view('home', [
-            'title' => 'Home',
-            'products' => $products,
-            'categories' => $categories,
-        ], compact('latestProducts'));
+    // Filter berdasarkan search jika ada
+    if (request('search')) {
+        $query->where('name', 'LIKE', '%' . request('search') . '%');
     }
+
+    // Filter berdasarkan opsi sorting (abjad/waktu)
+    if (request('sort') == 'az') {
+        $query->orderBy('name', 'asc'); // Urutkan berdasarkan abjad A-Z
+    } elseif (request('sort') == 'za') {
+        $query->orderBy('name', 'desc'); // Urutkan berdasarkan abjad Z-A
+    } elseif (request('sort') == 'terbaru') {
+        $query->orderBy('created_at', 'desc'); // Urutkan berdasarkan produk terbaru
+    } elseif (request('sort') == 'terlama') {
+        $query->orderBy('created_at', 'asc'); // Urutkan berdasarkan produk tertua
+    }
+
+    // Ambil hasil query yang telah difilter
+    $products = $query->get();
+
+    return view('home', [
+        'title' => 'Home',
+        'products' => $products,
+        'categories' => $categories,
+    ]);
+}
+
     public function store(Request $request, Product $product)
     {
         // Validate the comment data
