@@ -112,8 +112,8 @@ var galleryTop = new Swiper('.gallery-top', {
 
         </script>
                 
-        <div class="lg:w-1/2 sm:w-full">
-            <div class="h-1/2">
+        <div class="lg:w-1/2 sm:w-full grid content-between">
+            <div class="h-auto">
                 <h1 class=" text-3xl font-bold border-b border-black ">{{ $product->name }}</h1>
                 <h2 class=" text-2xl py-5 ">Rp.{{ $product->price }}</h2>
                 <div class="flex items-center">
@@ -127,9 +127,10 @@ var galleryTop = new Swiper('.gallery-top', {
                 <h3 class=" underline-offset-4 underline">Detail</h3>
                 <p>Stok : {{ $product->stock ?? 'N/A' }}</p>
                 <a href="http://"><p class="">Kategori : {{ $product->category->name ?? 'N/A' }}</p> </a>
-                <p class=" over">Deskripsi : {{ $product->description }}</p>
+                <p>Deskripsi : </p>
+                <p class=" text-wrap">{{ $product->description }}</p>
             </div>
-            <div class="flex gap-5 h-1/2 items-end ">
+            <div class="flex gap-5 h-auto">
               <a href="http://" class="w-1/2">
                 <button class=" fa fa-shopping-cart w-full h-14 transition duration-150 ease-in-out hover:scale-110 bg-green-500 hover:bg-green-600 text-white font-bold py-3 rounded-md"> Add to Cart</button>
               </a>  
