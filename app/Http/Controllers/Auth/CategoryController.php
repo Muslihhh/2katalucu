@@ -41,12 +41,17 @@ class CategoryController extends Controller
 
      // Mengambil produk berdasarkan kategori tersebut
      $products = Product::where('category_id', $id)->get();
+     $latestProducts = Product::where('category_id', $id)
+                              ->orderBy('created_at', 'desc')
+                              ->take(4)
+                              ->get();
 
 
      // Mengembalikan view 'home' dengan data produk dan kategori yang dipilih
      return view('home', [
          'title' => $category->name,     // Nama kategori sebagai title
          'products' => $products,        // Produk yang difilter berdasarkan kategori
+         'latestProducts' => $latestProducts, // Produk terbaru di kategori tersebut
          'categories' => Category::all(), // Mengirim semua kategori agar tombol kategori tetap muncul
          'selectedCategory' => $category // Untuk menandai kategori yang sedang dipilih
      ]);

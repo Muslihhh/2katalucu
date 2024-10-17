@@ -92,12 +92,12 @@
                                 <div class="mb-4">
                                     <span class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Product
                                         Images</span>
-                                    <div id="imagePreviewContainer"
+                                    {{-- <div id="imagePreviewContainer"
                                         style="display: flex; flex-wrap: wrap; margin-top: 10px;">
                                         <!-- Gambar yang ditambahkan akan ditampilkan di sini -->
-                                    </div>
+                                    </div> --}}
                                     {{-- </div> --}}
-                                    <div class="flex items-center justify-center w-full">
+                                    <div class=" grid items-center justify-start w-full">
                                         <label for="images">Upload Images:</label>
                                         <input type="file" name="images[]" id="images" multiple accept="image/*">
                                     </div>

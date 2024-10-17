@@ -32,6 +32,7 @@
 .gallery-thumbs {
     height: 100px; /* Tentukan tinggi thumbnail */
     margin-top: 1rem;
+    overflow: hidden;
 }
 
 .gallery-thumbs .swiper-slide {
@@ -137,9 +138,10 @@ var galleryTop = new Swiper('.gallery-top', {
               <a href="http://" class="w-1/2">
                 <button class=" fa fa-shopping-cart w-full h-14 transition duration-150 ease-in-out hover:scale-110 bg-green-500 hover:bg-green-600 text-white font-bold py-3 rounded-md"> Add to Cart</button>
               </a>  
-              <a href="{{ route('sendWhatsAppLink') }}" class="w-1/2">
+              <!-- Di halaman produk -->
+                <a href="{{ route('order.form', ['product' => $product->id]) }}" class="btn-order w-1/2">
                 <button class=" fa fa-whatsapp w-full  h-14 transition duration-150 ease-in-out hover:scale-110 bg-green-500 hover:bg-green-600 text-white font-bold py-3 rounded-md "> Order</button>
-              </a>
+               </a>
             </div>
         </div>
       </div>

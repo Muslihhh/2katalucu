@@ -28,6 +28,7 @@ Route::get('/home', function () {
 Route::get('/contact', function () {
     return view('contact', ['title' => 'contact']);
 });
+
 // Route Admin
 // Hanya satu set route admin
 // Route Admin// Hanya satu set route admin
@@ -140,3 +141,7 @@ Route::put('/products/{id}', [ProductController::class, 'apdet'])->name('product
 Route::post('/products/{product}', [TokoController::class, 'store'])
     ->middleware('auth')
     ->name('comments.store');
+
+
+Route::post('/order-submit', [VerificationController::class, 'submitOrder'])->name('order.submit');
+Route::get('/order-form/{product}', [VerificationController::class, 'showOrderForm'])->name('order.form');

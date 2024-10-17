@@ -12,12 +12,13 @@
             <!-- Slides -->
             <div class="relative overflow-hidden rounded-lg">
                 <?php
-                $images = ['bn1.jpg','bn2.jpg', 'bn3.jpg'];
-                foreach ($images as $index => $image) {
-                    echo '<div class="slide ' . ($index === 0 ? 'block' : 'hidden') . '">';
-                    echo '<img src="' . $image . '" class="w-full lg:h-96 sm:h-60">';
-                    echo '</div>';
-                }
+                $images = ['bn1.jpg', 'bn2.jpg', 'bn3.jpg'];
+foreach ($images as $index => $image) {
+    echo '<div class="slide ' . ($index === 0 ? 'block' : 'hidden') . '">';
+    echo '<img src="' . asset('images/' . $image) . '" class="w-full lg:h-96 sm:h-60">';
+    echo '</div>';
+}
+
                 ?>
             </div>
             <!-- Indicators -->

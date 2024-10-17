@@ -5,7 +5,7 @@
     <x-slot:title>{{ $title }}</x-slot:title>
     <x-slider></x-slider>
 
-  <section class="bg-gray-50 py-8 antialiased dark:bg-gray-900 md:py-16">
+  <section >
 
       {{-- @if(isset($categories) && count($categories) > 0)
           <div class="mx-auto max-w-screen-xl px-4 2xl:px-0">
@@ -28,12 +28,12 @@
       @endif --}}
 
       @if(isset($products) && count($products) > 0)
-          <div class="bg-white">
-              <div class="mx-4 max-w-full px-2 py-6 sm:px-6 sm:py-6 lg:max-w-7xl lg:px-6">
+          <div class="bg-white grid justify-center">
+              <div class=" max-w-full px-2 py-6 sm:px-6 sm:py-6 lg:max-w-7xl lg:px-6">
                 <h2 class="text-2xl font-bold mb-6">Produk Terbaru</h2>
                   <div class="grid grid-cols-2 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
                       @foreach ($latestProducts as $product)
-                          <a href="{{ route('products.show', $product->id) }}" class="group relative block overflow-hidden shadow-md">
+                          <a href="{{ route('products.show', $product->id) }}" class="group relative block hover:border-2 hover:border-blue-500  overflow-hidden shadow-md">
                               <button class="absolute end-4 hover:scale-105 top-4 z-10 rounded-full bg-white p-1.5 text-gray-900 transition hover:text-gray-900/75">
                                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4">
                                       <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"/>
@@ -63,11 +63,11 @@
                       @endforeach
                   </div>
               </div>
-              <div class="mx-4 max-w-full px-2 py-6 sm:px-6 sm:py-6 lg:max-w-7xl lg:px-6">
+              <div class=" max-w-full px-2 py-6 sm:px-6 sm:py-6 lg:max-w-7xl lg:px-6">
                 <h2 class="text-2xl font-bold mb-6">Semua Produk</h2>
                   <div class="grid grid-cols-2 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
                       @foreach ($products as $product)
-                          <a href="{{ route('products.show', $product->id) }}" class="group relative block overflow-hidden shadow-md">
+                          <a href="{{ route('products.show', $product->id) }}" class="group relative block hover:border-2 hover:border-blue-500 overflow-hidden shadow-md">
                               <button class="absolute end-4 hover:scale-105 top-4 z-10 rounded-full bg-white p-1.5 text-gray-900 transition hover:text-gray-900/75">
                                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4">
                                       <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"/>
