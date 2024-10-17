@@ -28,7 +28,7 @@
       @endif --}}
 
         @if (isset($products) && count($products) > 0)
-            <div class="bg-white grid justify-center">
+            <div class="bg-gray-50 justify-center">
                 {{-- <div class=" max-w-full px-2 py-6 sm:px-6 sm:py-6 lg:max-w-7xl lg:px-6">
                  <h2 class="text-2xl font-bold mb-6">Produk Terbaru</h2>
                   <div class="grid grid-cols-2 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
@@ -63,7 +63,7 @@
                       @endforeach
                   </div>
               </div> --}}
-                <div class=" max-w-full px-2 py-6 sm:px-6 sm:py-6 lg:max-w-7xl lg:px-6">
+                <div class=" max-w-full px-2 py-6 sm:px-6 sm:py-6 lg:max-w-full lg:px-6">
                     <h2 class="text-2xl font-bold mb-6">Rekomendasi</h2>
                     <!-- Filter Form -->
                     <form class=" mb-5" action="{{ route('home') }}" method="GET">
@@ -80,7 +80,7 @@
                     </form>
 
                     <div
-                        class="grid grid-cols-2 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
+                        class="grid grid-cols-2 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 xl:gap-x-8">
 
                         @foreach ($products as $product)
                             <a href="{{ route('products.show', $product->id) }}"
