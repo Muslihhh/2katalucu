@@ -64,7 +64,7 @@
                   </div>
               </div> --}}
                 <div class=" max-w-full px-2 py-6 sm:px-6 sm:py-6 lg:max-w-full lg:px-6">
-                    <h2 class="text-2xl font-bold mb-6">Rekomendasi</h2>
+                    <h2 class="text-2xl font-bold mb-6">Untuk Anda</h2>
                     <!-- Filter Form -->
                     <form class=" mb-5" action="{{ route('home') }}" method="GET">
                         <label for="sort">Urutkan Dengan :</label>

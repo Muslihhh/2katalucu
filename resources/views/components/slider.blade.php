@@ -12,7 +12,7 @@
             <!-- Slides -->
             <div class="relative overflow-hidden rounded-lg">
                 <?php
-                $images = ['bn1.jpg', 'bn2.jpg', 'bn3.jpg'];
+                $images = ['Banner1.png', 'Banner2.png', 'Banner3.png'];
 foreach ($images as $index => $image) {
     echo '<div class="slide ' . ($index === 0 ? 'block' : 'hidden') . '">';
     echo '<img src="' . asset('images/' . $image) . '" class="w-full lg:h-96 sm:h-60">';
@@ -30,8 +30,8 @@ foreach ($images as $index => $image) {
                 ?>
             </div>
             <!-- Navigation Buttons -->
-            <button id="prev" class=" fas fa-angle-left absolute left-0 top-1/2 transform -translate-y-1/2 bg-gray-800 text-white px-4 py-2 rounded-l-lg"></button>
-            <button id="next" class="fas fa-angle-right absolute right-0 top-1/2 transform -translate-y-1/2 bg-gray-800 text-white px-4 py-2 rounded-r-lg"></button>
+            <button id="prev" class=" fas fa-angle-left absolute left-0 top-1/2 transform -translate-y-1/2 text-4xl text-white px-4 py-2 rounded-l-lg"></button>
+            <button id="next" class="fas fa-angle-right absolute right-0 top-1/2 transform -translate-y-1/2 text-4xl text-white px-4 py-2 rounded-r-lg"></button>
         </div>
     </div>
     <script>

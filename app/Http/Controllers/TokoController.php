@@ -31,7 +31,7 @@ public function index()
 
     // Default query untuk mengambil semua produk
     $query = Product::query();
-
+    
     // Filter berdasarkan search jika ada
     if (request('search')) {
         $query->where('name', 'LIKE', '%' . request('search') . '%');
