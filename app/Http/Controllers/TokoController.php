@@ -30,8 +30,8 @@ public function index()
     $categories = Category::all();
 
     // Default query untuk mengambil semua produk
-    $query = Product::query();
-    
+    $query = Product::with('comments');
+
     // Filter berdasarkan search jika ada
     if (request('search')) {
         $query->where('name', 'LIKE', '%' . request('search') . '%');

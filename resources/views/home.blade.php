@@ -64,7 +64,7 @@
                   </div>
               </div> --}}
                 <div class=" max-w-full px-2 py-6 sm:px-6 sm:py-6 lg:max-w-full lg:px-6">
-                    <h2 class="text-2xl font-bold mb-6">Untuk Anda</h2>
+                    <h2 class="text-4xl font-bold mb-6 text-purple-900">Untuk Anda</h2>
                     <!-- Filter Form -->
                     <form class=" mb-5" action="{{ route('home') }}" method="GET">
                         <label for="sort">Urutkan Dengan :</label>
@@ -110,6 +110,17 @@
                                     <h3 class="mt-4 text-lg font-medium text-gray-900">{{ $product->name }}</h3>
                                     <p class="mt-1.5 text-sm text-gray-700">Rp.{{ number_format($product->price, 2) }}
                                     </p>
+                                    @php
+                                        $averageRating = $product->comments->avg('rating') ?? 0; // Hitung rata-rata rating dari komentar
+                                    @endphp
+
+                                    <!-- Tampilkan rating rata-rata -->
+                                    @if ($averageRating > 0)
+                                        <span>({{ number_format($averageRating, 1) }} <i
+                                                class=" fa fa-star text-yellow-400"></i>)</span>
+                                    @else
+                                        <span class=" text-gray-500">Belum ada review</span>
+                                    @endif
                                     <form class="mt-4">
                                         <button
                                             class="block w-full rounded bg-blue-500 p-4 text-sm font-medium transition hover:scale-105">
