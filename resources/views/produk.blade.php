@@ -197,7 +197,7 @@ var galleryTop = new Swiper('.gallery-top', {
     <p>Anda Perlu <a href="{{ route('login') }}" class=" hover:underline">Login</a> atau <a href="{{ route('registrasi') }}" class=" hover:underline">Register</a> untuk menambahkan Ulasan</p>
         @endauth
         <div class="comment-count mt-4">
-            {{ $comments->count() }} {{ Str::plural('Ulasan', $comments->count()) }}
+            {{ $comments->count() }} {{ Str::plural('Review', $comments->count()) }}
         </div>
         @foreach ($comments as $comment)
             <!-- Display each comment -->
