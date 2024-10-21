@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Product;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use App\Models\Daerah;
 
 class TokoController extends Controller
 {
@@ -28,6 +29,8 @@ public function show(Product $product)
 public function index()
 {
     $categories = Category::all();
+    $daerah = Daerah::all();
+    
 
     // Default query untuk mengambil semua produk
     $query = Product::with('comments');
@@ -55,6 +58,7 @@ public function index()
         'title' => 'Home',
         'products' => $products,
         'categories' => $categories,
+        'daerah' => $daerah,
     ]);
 }
 
@@ -91,4 +95,5 @@ public function index()
 
     //     return view('produk', compact('comments'));
     // }
+
 }

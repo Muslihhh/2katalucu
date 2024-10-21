@@ -11,17 +11,14 @@ class CategoriesTableSeeder extends Seeder
     {
         Category::create([
             'name' => 'Elektronik',
-            'daerah' => 'Jakarta',  // Daerah yang sesuai
         ]);
 
         Category::create([
             'name' => 'Pakaian',
-            'daerah' => 'Yogyakarta',
         ]);
-
+        
         Category::create([
             'name' => 'Makanan',
-            'daerah' => 'Surabaya',
         ]);
     }
 }

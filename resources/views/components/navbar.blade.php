@@ -129,53 +129,52 @@
                         </div>
                     </div>
 
-                    <!-- Daerah -->
-                    <div>
-                        <div id="accordion-flush-daerah" data-accordion="collapse"
-                            data-active-classes="text-black dark:text-white"
-                            data-inactive-classes="text-gray-500 dark:text-gray-400">
-                            <h2 id="daerah-heading">
-                                <button type="button"
-                                    class="flex items-center justify-between w-full py-2 px-1.5 text-sm font-medium text-left text-gray-500 border-b border-gray-200 dark:border-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-700"
-                                    data-accordion-target="#daerah-body" aria-expanded="false"
-                                    aria-controls="daerah-body">
-                                    <span>Daerah</span>
-                                    <svg aria-hidden="true" class="w-5 h-5 shrink-0" fill="currentColor"
-                                        viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                        <path fill-rule="evenodd" clip-rule="evenodd"
-                                            d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" />
-                                    </svg>
-                                </button>
-                            </h2>
+            <!-- Daerah -->
+<div>
+    <div id="accordion-flush-daerah" data-accordion="collapse"
+        data-active-classes="text-black dark:text-white"
+        data-inactive-classes="text-gray-500 dark:text-gray-400">
+        <h2 id="daerah-heading">
+            <button type="button"
+                class="flex items-center justify-between w-full py-2 px-1.5 text-sm font-medium text-left text-gray-500 border-b border-gray-200 dark:border-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-700"
+                data-accordion-target="#daerah-body" aria-expanded="false"
+                aria-controls="daerah-body">
+                <span>Daerah</span>
+                <svg aria-hidden="true" class="w-5 h-5 shrink-0" fill="currentColor"
+                    viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" clip-rule="evenodd"
+                        d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" />
+                </svg>
+            </button>
+        </h2>
 
-                            <div id="daerah-body" class="hidden" aria-labelledby="daerah-heading">
-                                <div class="py-2 font-light border-b border-gray-200 dark:border-gray-600">
-                                    <ul class="space-y-2">
-                                        @foreach ($categories as $category)
-                                            <li class="flex items-center">
-                                                <input id="daerah_{{ $category->id }}" type="checkbox"
-                                                    value="{{ $category->id }}"
-                                                    class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
-                                                <label for="daerah_{{ $category->id }}"
-                                                    class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100">
-                                                    <a href="{{ route('home.filter', $category->id) }}"
-                                                        class="hover:underline">{{ $category->daerah }}</a>
-                                                    ({{ $category->products->count() }})
-                                                </label>
-                                            </li>
-                                        @endforeach
-                                        <li>
-                                            <a href="{{ route('home') }}"
-                                                class="flex items-center text-sm font-medium text-primary-600 dark:text-primary-500 hover:underline">View
-                                                all</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+        <div id="daerah-body" class="hidden" aria-labelledby="daerah-heading">
+            <div class="py-2 font-light border-b border-gray-200 dark:border-gray-600">
+                <ul class="space-y-2">
+                    @foreach ($daerah as $d)
+                        <li class="flex items-center">
+                            <input id="daerah_{{ $d->id }}" type="checkbox"
+                                value="{{ $d->id }}"
+                                class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
+                            <label for="daerah_{{ $d->id }}"
+                                class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100">
+                                <a href="{{ route('home.filter', $d->id) }}"
+                                    class="hover:underline">{{ $d->nama_daerah }}</a>
+                                ({{ $d->categories ? $d->categories->count() : 0 }})
+                            </label>
+                        </li>
+                    @endforeach
+                    <li>
+                        <a href="{{ route('home') }}"
+                            class="flex items-center text-sm font-medium text-primary-600 dark:text-primary-500 hover:underline">View
+                            all</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
 
-              
               <!-- Rating -->
               <h2 id="rating-heading">
                   <button type="button" class="flex items-center justify-between w-full py-2 px-1.5 text-sm font-medium text-left text-gray-500 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-700" data-accordion-target="#rating-body" aria-expanded="true" aria-controls="rating-body">

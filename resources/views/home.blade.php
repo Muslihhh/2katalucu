@@ -1,7 +1,7 @@
-<x-layout :categories="$categories" :products="$products">
+<x-layout :categories="$categories" :products="$products" :daerah="$daerah">
 
+    {{-- <x-navbar :homeRoute="route('home')" :categories="$categories" :products="$products" :daerah="$daerah" /> --}}
 
-    {{-- <x-navbar :homeRoute="route('home')" :categories="$categories" /> --}}
     <x-slot:title>{{ $title }}</x-slot:title>
     <x-slider></x-slider>
 

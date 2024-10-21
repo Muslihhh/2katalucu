@@ -28,8 +28,7 @@
 -->
 <div class="min-h-full">
   <x-header></x-header>
-  {{-- :categoriesRoute="route('home.filter')" --}}
-  <x-navbar :homeRoute="route('home')" :categories="$categories" :products="$products" />
+  <x-navbar :homeRoute="route('home')" :categories="$categories" :products="$products" :daerah="$daerah" />
 <main>
       <div class="mx-auto max-w-full px-4 py-6 sm:px-6 lg:px-8">
         {{ $slot }}

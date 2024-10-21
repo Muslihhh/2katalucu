@@ -9,21 +9,31 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-     public function up(): void
-     {
-         Schema::create('products', function (Blueprint $table) {
-             $table->id();
-             $table->string('name');
-             $table->decimal('price', 8, 2);
-             $table->text('description');
-             $table->unsignedBigInteger('category_id');
-             $table->foreign('category_id')
-             ->references('id')->on('categories')
-             ->onDelete('cascade');
-              // Tambahkan kolom image
-             $table->timestamps();
-         });
-     }
+    public function up(): void
+{
+    Schema::create('products', function (Blueprint $table) {
+        $table->id();
+        $table->string('name');
+        $table->decimal('price', 8, 2);
+        $table->text('description');
+        
+        // Foreign key untuk kategori
+        $table->unsignedBigInteger('category_id');
+        $table->foreign('category_id')
+            ->references('id')->on('categories')
+            ->onDelete('cascade');
+        
+        // Foreign key untuk daerah
+        $table->unsignedBigInteger('daerah_id')->nullable();
+        $table->foreign('daerah_id')
+            ->references('id')->on('daerah')
+            ->onDelete('cascade');
+
+        // Kolom image (jika ingin menambahkan di masa depan)
+        $table->timestamps();
+    });
+}
+
      
      public function down(): void
      {
