@@ -100,9 +100,9 @@
                                             class="h-64 w-full object-cover transition duration-500 hover:scale-125 sm:h-72">
                                     </div>
                                 @else
-                                    <p>No image available</p>
+                                    <p>Gambar tidak tersedia</p>
                                 @endif
-                                <div class="relative border border-gray-100 bg-white p-6">
+                                <div class="relative bg-white p-6">
                                     @if ($product->created_at >= now()->subDays(1))
                                         <span class="whitespace-nowrap bg-yellow-300 px-3 py-1.5 text-xs font-medium">
                                             New </span>
