@@ -212,6 +212,19 @@
                                         @endif
                                     </select>
                                 </div>
+                                <div><label for="daerah"
+                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Dearah</label>
+                                    <select name="daerah_id" id="daerah_id" required
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                                        @if ($daerah->isEmpty())
+                                            <option value="">No daerah available</option>
+                                        @else
+                                            @foreach ($daerah as $d)
+                                                <option value="{{ $d->id }}">{{ $d->nama_daerah }}</option>
+                                            @endforeach
+                                        @endif
+                                    </select>
+                                </div>
                             </div>
                         </div>
                         <div class="grid grid-cols-2 gap-4 mt-6 sm:w-1/2">
@@ -646,6 +659,7 @@
                             </th>
                             <th scope="col" class="p-4">Product</th>
                             <th scope="col" class="p-4">Category</th>
+                            <th scope="col" class="p-4">Daerah</th>
                             <th scope="col" class="p-4">Harga</th>
                             <th scope="col" class="p-4">Rating</th>
                             <th scope="col" class="p-4 text-center">Aksi</th>
@@ -681,6 +695,12 @@
                                     <span
                                         class="bg-primary-100 text-primary-800 text-xs font-medium px-2 py-0.5 rounded dark:bg-primary-900 dark:text-primary-300">{{ $product->category->name ?? 'N/A' }}</span>
                                 </td>
+                                
+                                <td class="px-4 py-3">
+                                    <span
+                                        class="bg-primary-100 text-primary-800 text-xs font-medium px-2 py-0.5 rounded dark:bg-primary-900 dark:text-primary-300">{{ $product->daerah->nama_daerah ?? 'N/A' }}</span>
+                                </td>
+
                                 <td class="px-4 py-3">
                                     <span
                                         class="bg-primary-100 text-primary-800 text-xs font-medium px-2 py-0.5 rounded dark:bg-primary-900 dark:text-primary-300">{{ $product->price }}</span>
@@ -849,6 +869,22 @@
                                                                     <option value="{{ $category->id }}"
                                                                         {{ $product->category_id == $category->id ? 'selected' : '' }}>
                                                                         {{ $category->name }}</option>
+                                                                @endforeach
+                                                            @endif
+                                                        </select>
+                                                    </div>
+                                                    <div><label for="daerah"
+                                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Daerah</label>
+                                                        <select name="daerah_id" id="daerah_id" required
+                                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                                                            @if ($daerah->isEmpty())
+                                                                <option value="">No daerah available
+                                                                </option>
+                                                            @else
+                                                                @foreach ($daerah as $d)
+                                                                    <option value="{{ $d->id }}"
+                                                                        {{ $product->daerah_id == $d->id ? 'selected' : '' }}>
+                                                                        {{ $d->nama_daerah }}</option>
                                                                 @endforeach
                                                             @endif
                                                         </select>

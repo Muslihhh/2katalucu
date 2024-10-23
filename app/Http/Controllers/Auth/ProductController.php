@@ -10,6 +10,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Category;  // Pastikan Category model di-import
+use App\Models\Daerah;
 
 class ProductController extends Controller
 {
@@ -17,7 +18,8 @@ class ProductController extends Controller
     public function create()
     {
         $categories = Category::all();  // Ambil semua kategori dari database
-        return view('admin', compact('categories'));  // Kirim variabel $categories ke view
+        $daerah = Daerah::all();  // Ambil semua kategori dari database
+        return view('admin', compact('categories','daerah'));  // Kirim variabel $categories ke view
 
 
     }
@@ -32,6 +34,7 @@ class ProductController extends Controller
         'price' => 'required|numeric',
         'description' => 'required|string',
         'category_id' => 'required|exists:categories,id',
+        'daerah_id' => 'required|exists:daerah,id',
         'images' => 'required',  // Multiple images required
         'images.*' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
     ]);
@@ -42,6 +45,7 @@ class ProductController extends Controller
     $product->price = $request->input('price');
     $product->description = $request->input('description');
     $product->category_id = $request->input('category_id');
+    $product->daerah_id = $request->input('daerah_id');
     $product->save();  // Simpan produk dulu untuk mendapatkan ID
 
     // Cek jika ada file gambar yang di-upload
@@ -66,7 +70,7 @@ public function index2()
 {
     $max_product = 5;
     $categories = Category::all();
-    
+    $daerah = Daerah::all();
     // Ambil produk beserta komentar mereka
     $products = Product::with('comments') // Eager load comments
         ->when(request('search'), function ($query) {
@@ -85,6 +89,7 @@ public function index2()
         'title' => 'admin',
         'products' => $products,
         'categories' => $categories,
+        'daerah' => $daerah,
     ]);
 }
 
@@ -161,6 +166,7 @@ public function rate(Product $product)
         'price' => 'required|numeric',
         'description' => 'required|string',
         'category_id' => 'required|exists:categories,id',
+        'daerah_id' => 'required|exists:daerah,id',
         'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
     ]);
 
@@ -172,6 +178,7 @@ public function rate(Product $product)
     $product->price = $request->input('price');
     $product->description = $request->input('description');
     $product->category_id = $request->input('category_id');
+    $product->daerah_id = $request->input('daerah_id');
 
     // Cek jika ada file gambar yang di-upload
     if ($request->hasFile('image')) {
