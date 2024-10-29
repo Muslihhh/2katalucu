@@ -112,7 +112,7 @@
                                         </p>
                                     </div>
                                         
-                                        <p class="discounted-price text-green-500">
+                                        <p class="discounted-price text-blue-700">
                                             Rp.{{ number_format($product->final_price, 2) }}
                                         </p>
                                     @else
