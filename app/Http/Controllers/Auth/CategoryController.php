@@ -69,4 +69,27 @@ class CategoryController extends Controller
     return view('home', compact('categories','dearah'));  // Pastikan 'home' adalah view yang menggunakan layout
 }
 
+public function filterByPrice(Request $request)
+{
+    $priceFrom = $request->input('price_from');
+    $priceTo = $request->input('price_to');
+
+    $products = Product::when($priceFrom, function ($query, $priceFrom) {
+        return $query->where('price', '>=', $priceFrom);
+    })->when($priceTo, function ($query, $priceTo) {
+        return $query->where('price', '<=', $priceTo);
+    })->get();
+
+    // Mengambil semua data daerah
+    $daerah = Daerah::all();
+
+    return view('home', [
+        'products' => $products,
+        'categories' => Category::all(),
+        'daerah' => $daerah, // Menambahkan data daerah ke view
+        'title' => 'Filtered Products',
+    ]);
+}
+
+
 }

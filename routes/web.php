@@ -64,9 +64,12 @@ Route::get('/author/{user:name}', function (User $user) {
 //     return view('home'); // Misalnya, view 'home' menampilkan komponen kategori
 // });
 
+
 Route::get('/home', [TokoController::class, 'index']);
 Route::get('/home/category/{id}', [CategoryController::class, 'showcategory'])->name('home.filter');
 Route::get('/home', [CategoryController::class, 'index'])->name('home');
+
+Route::get('/home/price-filter', [CategoryController::class, 'filterByPrice'])->name('home.price-filter');
 
 
 // Route Cart
