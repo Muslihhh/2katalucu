@@ -151,7 +151,7 @@
                                 class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100">
                                 <a href="{{ route('home.filter', $d->id) }}"
                                     class="hover:underline">{{ $d->nama_daerah }}</a>
-                                ({{ $d->categories ? $d->categories->count() : 0 }})
+                                    ({{ $d->products->count() }})
                             </label>
                         </li>
                     @endforeach

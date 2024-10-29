@@ -75,9 +75,9 @@ public function filterByPrice(Request $request)
     $priceTo = $request->input('price_to');
 
     $products = Product::when($priceFrom, function ($query, $priceFrom) {
-        return $query->where('price', '>=', $priceFrom);
+        return $query->whereRaw('(price - (price * discount / 100)) >= ?', [$priceFrom]);
     })->when($priceTo, function ($query, $priceTo) {
-        return $query->where('price', '<=', $priceTo);
+        return $query->whereRaw('(price - (price * discount / 100)) <= ?', [$priceTo]);
     })->get();
 
     // Mengambil semua data daerah
