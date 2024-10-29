@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Product extends Model
 {
-    protected $fillable = ['name', 'stock', 'price', 'description', 'category_id', 'image', 'daerah_id'];
+    protected $fillable = ['name', 'stock', 'price', 'discount', 'description', 'category_id', 'image', 'daerah_id'];
 
     // Relasi produk ke kategori (many-to-one)
     public function category(): BelongsTo
@@ -33,4 +33,20 @@ class Product extends Model
     {
         return $this->hasMany(ProductImage::class);
     }
+
+    public function getFinalPriceAttribute()
+{
+    if ($this->discount > 0) {
+        return $this->price - ($this->price * $this->discount / 100);
+    }
+    return $this->price;
+}
+public function getDiscountPercentageAttribute()
+{
+    $discount = rtrim(rtrim(number_format($this->discount, 2), '0'), '.');
+    return $this->discount > 0 ? $discount . '%' : null;
+}
+
+
+
 }

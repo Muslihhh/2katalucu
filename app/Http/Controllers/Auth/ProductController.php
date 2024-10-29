@@ -32,6 +32,7 @@ class ProductController extends Controller
     $request->validate([
         'name' => 'required|string|max:255',
         'price' => 'required|numeric',
+        'discount' => 'nullable|numeric|min:0|max:100',
         'description' => 'required|string',
         'category_id' => 'required|exists:categories,id',
         'daerah_id' => 'required|exists:daerah,id',
@@ -43,6 +44,7 @@ class ProductController extends Controller
     $product = new Product();
     $product->name = $request->input('name');
     $product->price = $request->input('price');
+    $product->discount = $request->input('discount');
     $product->description = $request->input('description');
     $product->category_id = $request->input('category_id');
     $product->daerah_id = $request->input('daerah_id');

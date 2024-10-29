@@ -115,16 +115,34 @@ var galleryTop = new Swiper('.gallery-top', {
         <div class="lg:w-1/2 sm:w-full grid content-between">
             <div class="h-auto">
                 <h1 class=" text-3xl font-bold border-b border-black ">{{ $product->name }}</h1>
-                <h2 class=" text-2xl py-5 ">Rp.{{ $product->price }}</h2>
+                <div class="flex gap-2 items-center mt-4">
+                    @if ($product->discount > 0)
+                                        <p class="original-price text-gray-500 line-through">
+                                            Rp.{{ number_format($product->price, 2) }}
+                                        </p>
+                                        <p class="discount-percentage text-red-500">
+                                            {{ $product->discount_percentage }}
+                                        </p>
+                                        <p class="discounted-price text-2xl text-blue-500">
+                                            Rp.{{ number_format($product->final_price, 2) }}
+                                        </p>
+                                    @else
+                                        <p class="price">Rp.{{ number_format($product->price, 2) }}</p>
+                                    @endif
+                </div>
+                
                 <div class="flex items-center">
                     @if($averageRating > 0)
-                        <span >({{ number_format($averageRating, 1) }} <i class=" fa fa-star text-yellow-400"></i>)</span>
+                        <span >({{ number_format($averageRating, 1) }} <i class=" fa fa-star text-yellow-400"></i>) {{ $comments->count() }} {{ Str::plural('Review', $comments->count()) }}</span> 
+                        {{-- <div class="comment-count mt-4">
+                            {{ $comments->count() }} {{ Str::plural('Review', $comments->count()) }}
+                        </div> --}}
                     @else
                         <span class=" text-gray-500">Belum ada review</span>
                     @endif
                 </div>
                                 
-                <h3 class=" underline-offset-4 underline">Detail</h3>
+                <h3 class=" underline-offset-4 underline mt-8">Detail</h3>
                 <p>Stok : {{ $product->stock ?? 'N/A' }}</p>
                 <a href="http://"><p class="">Kategori : {{ $product->category->name ?? 'N/A' }}</p> </a>
                 <p>Deskripsi : </p>

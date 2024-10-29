@@ -80,19 +80,16 @@
                     </form>
 
                     <div
-                        class="grid grid-cols-2 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 xl:gap-x-8">
+                        class="grid grid-cols-2 gap-x-6 gap-y-10 sm:grid-cols-3 lg:grid-cols-3 xl:grid-cols-5 xl:gap-x-8">
 
                         @foreach ($products as $product)
                             <a href="{{ route('products.show', $product->id) }}"
                                 class="group relative block hover:border-2 hover:border-blue-500 overflow-hidden shadow-md">
-                                <button
-                                    class="absolute end-4 hover:scale-105 top-4 z-10 rounded-full bg-white p-1.5 text-gray-900 transition hover:text-gray-900/75">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                        stroke-width="1.5" stroke="currentColor" class="size-4">
-                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                            d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
-                                    </svg>
-                                </button>
+                                @if ($product->created_at >= now()->subDays(1))
+                                        <span class="whitespace-nowrap bg-yellow-300 px-3 py-2 text-xs font-medium z-10 absolute">
+                                            Baru </span>
+                                @endif
+                                    
                                 @if ($product->images->isNotEmpty())
                                     <div class="product-thumbnail">
                                         <img src="{{ asset('storage/' . $product->images->first()->image_path) }}"
@@ -102,14 +99,25 @@
                                 @else
                                     <p>Gambar tidak tersedia</p>
                                 @endif
-                                <div class="relative bg-white p-6">
-                                    @if ($product->created_at >= now()->subDays(1))
-                                        <span class="whitespace-nowrap bg-yellow-300 px-3 py-1.5 text-xs font-medium">
-                                            New </span>
+                                <div class="relative bg-white px-4 pb-4">
+                                    
+                                    <h3 class=" text-xl font-medium text-gray-900">{{ $product->name }}</h3>
+                                    @if ($product->discount > 0)
+                                    <div class="flex gap-1">
+                                        <p class="original-price text-gray-500 line-through">
+                                            Rp.{{ number_format($product->price, 2) }}
+                                        </p>
+                                        <p class="discount-percentage text-red-500">
+                                           -{{ $product->discount_percentage }}
+                                        </p>
+                                    </div>
+                                        
+                                        <p class="discounted-price text-green-500">
+                                            Rp.{{ number_format($product->final_price, 2) }}
+                                        </p>
+                                    @else
+                                        <p class="price">Rp.{{ number_format($product->price, 2) }}</p>
                                     @endif
-                                    <h3 class="mt-4 text-lg font-medium text-gray-900">{{ $product->name }}</h3>
-                                    <p class="mt-1.5 text-sm text-gray-700">Rp.{{ number_format($product->price, 2) }}
-                                    </p>
                                     @php
                                         $averageRating = $product->comments->avg('rating') ?? 0; // Hitung rata-rata rating dari komentar
                                     @endphp

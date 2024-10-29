@@ -15,6 +15,7 @@ return new class extends Migration
         $table->id();
         $table->string('name');
         $table->decimal('price', 8, 2);
+        $table->decimal('discount', 5, 2)->default(0);
         $table->text('description');
         
         // Foreign key untuk kategori
