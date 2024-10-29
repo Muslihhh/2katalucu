@@ -88,46 +88,37 @@
                         </div>
                     </div>
 
-                    <!-- Price -->
-                    <div>
-                        <div id="accordion-flush-price" data-accordion="collapse"
-                            data-active-classes="text-black dark:text-white"
-                            data-inactive-classes="text-gray-500 dark:text-gray-400">
-                            <h2 id="price-heading">
-                                <button type="button"
-                                    class="flex items-center justify-between w-full py-2 px-1.5 text-sm font-medium text-left text-gray-500 border-b border-gray-200 dark:border-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-700"
-                                    data-accordion-target="#price-body" aria-expanded="false"
-                                    aria-controls="price-body">
-                                    <span>Price</span>
-                                    <svg aria-hidden="true" class="w-5 h-5 shrink-0" fill="currentColor"
-                                        viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                        <path fill-rule="evenodd" clip-rule="evenodd"
-                                            d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" />
-                                    </svg>
-                                </button>
-                            </h2>
+                   <!-- Price -->
+<div>
+    <div id="accordion-flush-price" data-accordion="collapse" data-active-classes="text-black dark:text-white"
+        data-inactive-classes="text-gray-500 dark:text-gray-400">
+        <h2 id="price-heading">
+            <button type="button"
+                class="flex items-center justify-between w-full py-2 px-1.5 text-sm font-medium text-left text-gray-500 border-b border-gray-200 dark:border-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-700"
+                data-accordion-target="#price-body" aria-expanded="false" aria-controls="price-body">
+                <span>Price</span>
+                <svg aria-hidden="true" class="w-5 h-5 shrink-0" fill="currentColor" viewBox="0 0 20 20"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" clip-rule="evenodd"
+                        d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" />
+                </svg>
+            </button>
+        </h2>
 
-                            <div id="price-body" class="hidden" aria-labelledby="price-heading">
-                                <div
-                                    class="flex items-center py-2 space-x-3 font-light border-b border-gray-200 dark:border-gray-600">
-                                    <select id="price-from"
-                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-                                        <option disabled="" selected="">From</option>
-                                        @foreach ($products as $product)
-                                            <option>{{ $product->price }}</option>
-                                        @endforeach
-                                    </select>
-                                    <select id="price-to"
-                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-                                        <option disabled="" selected="">To</option>
-                                        @foreach ($products as $product)
-                                            <option>{{ $product->price }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+        <div id="price-body" class="hidden" aria-labelledby="price-heading">
+            <div class="flex items-center py-2 space-x-3 font-light border-b border-gray-200 dark:border-gray-600">
+                <form action="{{ route('home.price-filter') }}" method="GET" class="flex w-full space-x-3">
+                                    <input type="number" name="price_from" id="price-from" placeholder="From"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                    <input type="number" name="price_to" id="price-to" placeholder="To"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                    <button type="submit"
+                        class="px-4 py-2 text-white bg-primary-500 rounded-lg hover:bg-primary-600 focus:ring-primary-500 dark:bg-primary-700 dark:hover:bg-primary-600">Apply</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 
             <!-- Daerah -->
 <div>
