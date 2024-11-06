@@ -8,7 +8,7 @@
 </head>
 <body class="bg-gray-100">
     <div class="container mx-auto py-8">
-        <div id="slider" class="relative w-full mx-auto">
+        <div id="slider" class="relative w-full mx-auto ">
             <!-- Slides -->
             <div class="relative overflow-hidden rounded-lg">
                 <?php

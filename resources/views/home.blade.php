@@ -129,7 +129,8 @@
                                     @else
                                         <span class=" text-gray-500">Belum ada review</span>
                                     @endif
-                                    <form class="mt-4">
+                                    <form action="{{ route('cart.add', $product->id) }}" method="POST">
+                                        @csrf
                                         <button
                                             class="block w-full rounded bg-blue-500 p-4 text-sm font-medium transition hover:scale-105">
                                             Add to Cart
@@ -141,8 +142,23 @@
                     </div>
                 </div>
             </div>
-        @else
-            <p>Tidak ada produk</p>
+            
+        @else 
+        <div class=" w-full flex justify-center items-center">
+            <p class=" text-3xl">Tidak ada produk</p>
+        </div>  
         @endif
+        <a href="{{ route('cart.show') }}">
+            <div class="promo-banner fixed bottom-10 right-2 transform bg-blue-500 text-white py-2 px-4 rounded-lg shadow-lg z-50">
+                <img src="{{ asset('cart.png') }}" alt="Cart Icon" class="w-8 h-8">
+                @if($cartCount > 0)
+                    <span class="absolute top-0 right-0 inline-flex items-center justify-center px-2 py-1 text-xs font-bold text-red-100 bg-red-600 rounded-full">
+                        {{ $cartCount }}
+                    </span>
+                @endif
+            </div>
+        </a>
+        
     </section>
+    
 </x-layout>

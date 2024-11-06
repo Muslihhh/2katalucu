@@ -166,6 +166,7 @@ public function rate(Product $product)
     $request->validate([
         'name' => 'required|string|max:255',
         'price' => 'required|numeric',
+        'discount' => 'nullable|numeric|min:0|max:100',
         'description' => 'required|string',
         'category_id' => 'required|exists:categories,id',
         'daerah_id' => 'required|exists:daerah,id',
@@ -178,21 +179,23 @@ public function rate(Product $product)
     // Update data produk secara manual
     $product->name = $request->input('name');
     $product->price = $request->input('price');
+    $product->discount = $request->input('discount');
     $product->description = $request->input('description');
     $product->category_id = $request->input('category_id');
     $product->daerah_id = $request->input('daerah_id');
 
     // Cek jika ada file gambar yang di-upload
-    if ($request->hasFile('image')) {
-        // Hapus gambar lama jika ada
-        if ($product->image) {
-            Storage::disk('public')->delete($product->image);
-        }
+    if ($request->hasFile('images')) {
+        foreach ($request->file('images') as $image) {
+            // Simpan setiap gambar ke storage
+            $imagePath = $image->store('images', 'public');  // Simpan gambar di storage
 
-        // Simpan gambar baru
-        $image = $request->file('image');
-        $imagePath = $image->store('images', 'public');
-        $product->image = $imagePath;
+            // Simpan path gambar di tabel terpisah
+            ProductImage::create([
+                'product_id' => $product->id,
+                'image_path' => $imagePath,
+            ]);
+        }
     }
 
     // Simpan perubahan produk ke database
@@ -209,4 +212,42 @@ public function rate(Product $product)
         // Tampilkan detail kategori tertentu
         return view('categories.show', compact('category'));
     }
+
+
+    public function deleteImage($imageId)
+{
+    $image = ProductImage::findOrFail($imageId);
+    Storage::disk('public')->delete($image->image_path); // Hapus dari storage
+    $image->delete(); // Hapus dari database
+    
+    return response()->json(['success' => true]);
+}
+
+public function bulkDelete(Request $request)
+{
+    $selectedProductIds = $request->input('selected_products');
+
+    // Pastikan ada produk yang dipilih
+    if (!$selectedProductIds || !is_array($selectedProductIds)) {
+        return redirect()->route('admin')->with('error', 'Tidak ada produk yang dipilih.');
+    }
+
+    foreach ($selectedProductIds as $id) {
+        $product = Product::find($id);
+        if ($product) {
+            // Hapus semua gambar terkait di storage
+            foreach ($product->images as $image) {
+                Storage::disk('public')->delete($image->image_path);  // Hapus gambar dari storage
+            }
+
+            // Hapus gambar dari database
+            ProductImage::where('product_id', $product->id)->delete();
+
+            // Hapus produk dari database
+            $product->delete();
+        }
+    }
+
+    return redirect()->route('admin')->with('success', 'Produk dan gambar yang dipilih berhasil dihapus.');
+}
 }

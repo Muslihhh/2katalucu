@@ -28,13 +28,15 @@
 -->
 <div class="min-h-full">
   <x-header></x-header>
-  <x-navbar :homeRoute="route('home')" :categories="$categories" :products="$products" :daerah="$daerah" />
+  <x-navbar :homeRoute="route('home')" :categories="$categories" :products="$products" :daerah="$daerah"  />
 <main>
       <div class="mx-auto max-w-full px-4 py-6 sm:px-6 lg:px-8">
         {{ $slot }}
       </div>
+      
     </main>
-    <x-footer></x-footer>
+    
   </div>
+  <x-footer></x-footer>
 </body>
 </html>

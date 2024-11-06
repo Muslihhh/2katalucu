@@ -5,10 +5,12 @@ use App\Models\Post;
 use App\Models\Tipe;
 use App\Models\User;
 use App\Models\admin;
+use App\Models\Product;
 use Illuminate\Support\Arr;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\TokoController;
 use App\Http\Controllers\MarketController;
 use App\Http\Controllers\CommentController;
@@ -18,7 +20,6 @@ use App\Http\Controllers\VerificationController;
 use App\Http\Controllers\Auth\CategoryController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\ProductController; // Pastikan namespace sesuai
-use App\Models\Product;
 
 // Route Home
 
@@ -123,6 +124,9 @@ Route::get('/admin', [ProductController::class, 'index2'])->name('admin');
 
 // Menyimpan data produk yang di-post dari form
 Route::post('/admin', [ProductController::class, 'store'])->name('products.store');
+Route::delete('/products/images/{image}', [ProductController::class, 'deleteImage'])->name('products.images.delete');
+Route::delete('/products/bulk-delete', [ProductController::class, 'bulkDelete'])->name('products.bulkDelete');
+
 
 // Route untuk menampilkan detail produk
 Route::get('/admin/{product}/rate', [ProductController::class, 'rate'])->name('admin.products.rate');
@@ -148,3 +152,13 @@ Route::post('/products/{product}', [TokoController::class, 'store'])
 
 Route::post('/order-submit', [VerificationController::class, 'submitOrder'])->name('order.submit');
 Route::get('/order-form/{product}', [VerificationController::class, 'showOrderForm'])->name('order.form');
+
+
+Route::middleware('auth')->group(function () {
+    Route::get('/cart', [CartController::class, 'viewCart'])->name('cart.show');
+    Route::post('/cart/update/{cartItemId}', [CartController::class, 'updateCart'])->name('cart.update');
+    Route::post('/cart/add/{cartItemId}', [CartController::class, 'addToCart'])->name('cart.add');
+    Route::post('/cart/remove/{cartItemId}', [CartController::class, 'removeFromCart'])->name('cart.remove');
+    Route::post('/cart/clear', [CartController::class, 'clearCart'])->name('cart.clear');
+});
+

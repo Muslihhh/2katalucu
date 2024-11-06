@@ -28,7 +28,7 @@
                                 </svg>
                             </div>
                             <input value="{{ request('search') }}" type="search" id="search" name="search"
-                                placeholder="Search for products" required=""
+                                placeholder="Search for products" 
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-l-lg focus:ring-primary-500 focus:border-primary-500 block w-full pl-10 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
                         </div>
                         <button type="submit"
@@ -45,7 +45,7 @@
                             <path clip-rule="evenodd" fill-rule="evenodd"
                                 d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" />
                         </svg>
-                        Add product
+                        Tambah Produk
                     </button>
                     <form action="{{ route('products.store') }}" method="POST" enctype="multipart/form-data"
                         id="createProductModal"
@@ -236,8 +236,8 @@
                         </div>
                         <div class="grid grid-cols-2 gap-4 mt-6 sm:w-1/2">
                             <button type="submit"
-                                class="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Add
-                                product</button>
+                                class="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Tambah Produk 
+                            </button>
 
                         </div>
                     </form>
@@ -654,6 +654,49 @@
             </div>
 
             <div class="overflow-x-auto">
+                <form id="bulkDeleteForm" method="POST" action="{{ route('products.bulkDelete') }}">
+                    @csrf
+                    @method('DELETE')
+                    <button id="deleteButton" type="submit" class="mt-4 px-4 py-2 bg-red-500 text-white rounded" 
+            onclick="return confirm('Apakah Anda yakin ingin menghapus produk yang dipilih?')" style="display: none;">
+        Hapus Produk Terpilih
+    </button>
+</form>
+<script>
+    <script>
+function toggleAllCheckboxes(source) {
+    const checkboxes = document.querySelectorAll('input[name="selected_products[]"]');
+    checkboxes.forEach(checkbox => {
+        checkbox.checked = source.checked;
+    });
+
+    // Panggil fungsi untuk menampilkan atau menyembunyikan tombol hapus
+    toggleDeleteButton();
+}
+
+function toggleDeleteButton() {
+    const checkboxes = document.querySelectorAll('input[name="selected_products[]"]:checked');
+    const deleteButton = document.getElementById('deleteButton');
+    deleteButton.style.display = checkboxes.length > 0 ? 'inline-block' : 'none';
+}
+
+// Jika ingin memanfaatkan tombol hapus dengan validasi sebelum penghapusan
+document.getElementById('bulkDeleteForm').addEventListener('submit', function(event) {
+    const selectedCheckboxes = document.querySelectorAll('input[name="selected_products[]"]:checked');
+
+    if (selectedCheckboxes.length === 0) {
+        event.preventDefault(); // Cegah pengiriman jika tidak ada yang dipilih
+        alert('Silakan pilih produk yang ingin dihapus.');
+    } else {
+        const confirmDelete = confirm('Apakah Anda yakin ingin menghapus produk yang dipilih?');
+        if (!confirmDelete) {
+            event.preventDefault(); // Cegah pengiriman jika pengguna batal
+        }
+    }
+});
+</script>
+
+</script>
                 <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                     <thead class="text-xs text-gray-700 uppercase bg-gray-200 dark:bg-gray-700 dark:text-gray-400">
                         <tr>
@@ -663,6 +706,18 @@
                                         class="w-4 h-4 text-primary-600 bg-gray-00 rounded border-gray-300 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                                     <label for="checkbox-all" class="sr-only">checkbox</label>
                                 </div>
+                                <script>
+                                    // Memilih semua checkbox ketika checkbox header diklik
+                                    document.getElementById('checkbox-all').addEventListener('click', function () {
+                                        const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+                                        checkboxes.forEach((checkbox) => {
+                                            if (checkbox !== this) {
+                                                checkbox.checked = this.checked;
+                                            }
+                                        });
+                                    });
+                                </script>
+                                
                             </th>
                             <th scope="col" class="p-4">Product</th>
                             <th scope="col" class="p-4">Category</th>
@@ -678,10 +733,9 @@
                             <tr class="border-b dark:border-gray-600 hover:bg-gray-100 dark:hover:bg-gray-700">
                                 <td class="p-4 w-4">
                                     <div class="flex items-center">
-                                        <input id="checkbox-table-search-1" type="checkbox"
-                                            onclick="event.stopPropagation()"
-                                            class="w-4 h-4 text-primary-600 bg-gray-100 rounded border-gray-300 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                                        <label for="checkbox-table-search-1" class="sr-only">checkbox</label>
+                                        <input name="selected_products[]" value="{{ $product->id }}" type="checkbox"
+                                               class="w-4 h-4 text-primary-600 bg-gray-100 rounded border-gray-300 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                        <label for="checkbox-table-search-{{ $product->id }}" class="sr-only">checkbox</label>
                                     </div>
                                 </td>
                                 <th scope="row"
@@ -743,6 +797,7 @@
                                         <form id="drawer-update-product-{{ $product->id }}"
                                             action="{{ route('products.apdet', ['id' => $product->id]) }}"
                                             method="POST"
+                                            enctype="multipart/form-data"
                                             class="fixed top-0 left-0 z-40 w-full h-screen max-w-3xl p-4 overflow-y-auto bg-white dark:bg-gray-800 transform -translate-x-full transition-transform"
                                             tabindex="-1" aria-labelledby="drawer-update-product-label"
                                             aria-hidden="true">
@@ -785,63 +840,47 @@
                                                             </div>
                                                         </div>
                                                     </div>
+                                                    <!-- Tampilkan Gambar Produk Saat Ini -->
                                                     <div class="mb-4">
-                                                        <span
-                                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Product
-                                                            Images</span>
-                                                        <div class="block mb-2 relative">
-                                                            <img id="productImage" class="product-image"
-                                                                src="{{ asset('storage/' . $product->image) }}"
-                                                                alt="Image Preview"
-                                                                style="display: blo; width: 100px; height: 100px;">
-                                                            <button type="button" id="deleteImage"
-                                                                class="absolute top-0.5 left-20 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1 inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white"
-                                                                style="display: none;">
-                                                                <svg aria-hidden="true" class="w-4 h-4"
-                                                                    fill="currentColor" viewBox="0 0 20 20"
-                                                                    xmlns="http://www.w3.org/2000/svg">
-                                                                    <path fill-rule="evenodd"
-                                                                        d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                                                                        clip-rule="evenodd" />
-                                                                </svg>
-                                                                <span class="sr-only">Delete image</span>
-                                                            </button>
-                                                        </div>
-
-                                                        {{-- </div> --}}
-                                                        <div class="flex items-center justify-center w-full">
-                                                            <label for="image"
-                                                                class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
-                                                                <div
-                                                                    class="flex flex-col items-center justify-center pt-5 pb-6">
-                                                                    <svg aria-hidden="true"
-                                                                        class="w-10 h-10 mb-3 text-gray-400"
-                                                                        fill="none" stroke="currentColor"
-                                                                        viewbox="0 0 24 24"
-                                                                        xmlns="http://www.w3.org/2000/svg">
-                                                                        <path stroke-linecap="round"
-                                                                            stroke-linejoin="round" stroke-width="2"
-                                                                            d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
-                                                                    </svg>
-                                                                    <p
-                                                                        class="mb-2 text-sm text-gray-500 dark:text-gray-400">
-                                                                        <span class="font-semibold">Click to
-                                                                            upload</span>
-                                                                        or drag and drop
-                                                                    </p>
-                                                                    <p
-                                                                        class="text-xs text-gray-500 dark:text-gray-400">
-                                                                        SVG, PNG, JPG or
-                                                                        GIF (MAX. 800x400px)
-                                                                    </p>
+                                                        <label class="block text-sm font-medium text-gray-900">Current Images:</label>
+                                                        <div id="currentImagesContainer" style="display: flex; flex-wrap: wrap; gap: 10px;">
+                                                            @foreach($product->images as $image)
+                                                                <div class="relative" data-image-id="{{ $image->id }}">
+                                                                    <img src="{{ asset('storage/' . $image->image_path) }}" alt="{{ $product->name }}" class="w-20 h-20 object-cover rounded">
+                                                                    <button type="button" onclick="removeImage({{ $image->id }})"
+                                                                        class="absolute top-0 right-0 bg-red-500 text-white py-1 px-2 rounded-full">X</button>
                                                                 </div>
-                                                                <input type="file" name="image" id="image"
-                                                                    accept="image/*" class="hidden"
-                                                                    onchange="previewImg(event)">
-                                                            </label>
+                                                            @endforeach
                                                         </div>
                                                     </div>
-
+                                                    
+                                                    <script>
+                                                        function removeImage(imageId) {
+                                                            fetch(`/products/images/${imageId}`, {
+                                                                method: 'DELETE',
+                                                                headers: {
+                                                                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                                                                }
+                                                            })
+                                                            .then(response => response.json())
+                                                            .then(data => {
+                                                                if (data.success) {
+                                                                    // Hapus elemen gambar dari halaman
+                                                                    const imageElement = document.querySelector(`[data-image-id="${imageId}"]`);
+                                                                    if (imageElement) {
+                                                                        imageElement.remove();
+                                                                    }
+                                                                }
+                                                            })
+                                                            .catch(error => console.error('Error:', error));
+                                                        }
+                                                    </script>
+                                                    
+                                                    <!-- Input untuk Mengunggah Gambar Baru -->
+                                                    <div class="mb-4">
+                                                        <label for="images">Upload Images:</label>
+                                                        <input type="file" name="images[]" id="images" multiple accept="image/*">
+                                                    </div>
 
 
 
@@ -862,6 +901,15 @@
                                                             step="0.01" required
                                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                                                             value="{{ $product->price }}" placeholder="Product price"
+                                                            required="">
+                                                    </div>
+                                                    <div>
+                                                        <label for="discount"
+                                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">discount</label>
+                                                        <input type="number" name="discount" id="discount"
+                                                            step="0.01" required
+                                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                                                            value="{{ $product->discount }}" placeholder="Product discount"
                                                             required="">
                                                     </div>
                                                     <div><label for="category"
@@ -900,8 +948,8 @@
                                             </div>
                                             <div class="grid grid-cols-2 gap-4 mt-6 sm:w-1/2">
                                                 <button type="submit"
-                                                    class="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Add
-                                                    product</button>
+                                                    class="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Simpan
+                                                </button>
 
                                             </div>
                                         </form>
@@ -919,7 +967,7 @@
                                                 form.classList.add('-translate-x-full');
                                             }
                                         </script>
-                                        <button type="button" data-drawer-target="drawer-read-product-advanced"
+                                        {{-- <button type="button" data-drawer-target="drawer-read-product-advanced"
                                             aria-controls="drawer-read-product-advanced"
                                             class="py-2 px-3 flex items-center text-sm font-medium text-gray-900 focus:outline-none focus:ring-2 focus:ring-gray-600 bg-white rounded-lg border border-gray-200 hover:bg-gray-100"
                                             data-name="{{ $product->name }}" data-price="{{ $product->price }}"
@@ -989,7 +1037,7 @@
                                                 drawer.classList.add('-translate-x-full');
                                                 drawer.classList.remove('translate-x-0'); // Pastikan class ini dihapus
                                             }
-                                        </script>
+                                        </script> --}}
                                         <button type="button"
                                             onclick="setDeleteAction('{{ route('products.destroy', $product->id) }}', '{{ $product->name }}')"
                                             data-modal-target="delete-modal" data-modal-toggle="delete-modal"
@@ -1059,6 +1107,7 @@
                         @endforeach
                     </tbody>
                 </table>
+                
                 {{ $products->links() }}
             </div>
             <nav class="flex flex-col md:flex-row items-start md:items-center space-y-3 md:space-y-0 p-4"

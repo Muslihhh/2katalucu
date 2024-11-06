@@ -17,7 +17,7 @@
        <a href="http://" class="fa fa-facebook text-white rounded-md bg-blue-500 size-10 text-center p-auto text-4xl"></a>
     </div>
 </footer> --}}
-<footer class="p-4 bg-purple-800 sm:p-6 dark:bg-gray-800">
+<footer class="p-4 bg-purple-800 sm:p-6 dark:bg-gray-800 mt-10">
     <div class=" mx-5 max-w-screen-full">
 
             <div class="grid lg:grid-cols-4 gap-12 sm:gap-6 md:grid-cols-4 ">

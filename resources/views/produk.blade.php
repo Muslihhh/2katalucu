@@ -122,7 +122,7 @@
                 <h1 class=" text-3xl font-bold border-b border-black ">{{ $product->name }}</h1>
                 <div class="flex gap-2 items-center mt-4">
                     @if ($product->discount > 0)
-                        <p class="original-price text-gray-500 line-through">
+                        <p class="original-price text-gray-500 text-xl line-through">
                             Rp.{{ number_format($product->price, 2) }}
                         </p>
                         <p class="discount-percentage text-red-500">
@@ -132,7 +132,7 @@
                             Rp.{{ number_format($product->final_price, 2) }}
                         </p>
                     @else
-                        <p class="price">Rp.{{ number_format($product->price, 2) }}</p>
+                        <p class="price text-2xl">Rp.{{ number_format($product->price, 2) }}</p>
                     @endif
                 </div>
 

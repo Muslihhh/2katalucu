@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cart;
+use App\Models\Daerah;
 use App\Models\Comment;
-use Illuminate\Support\Facades\Auth;
 use App\Models\Product;
 use App\Models\Category;
 use Illuminate\Http\Request;
-use App\Models\Daerah;
+use Illuminate\Support\Facades\Auth;
 
 class TokoController extends Controller
 {
@@ -53,12 +54,25 @@ public function index()
 
     // Ambil hasil query yang telah difilter
     $products = $query->get();
+    $cart = Cart::with('items.product.images')->where('user_id', Auth::id())->first();
 
+    // If cart exists, get items and total; otherwise, set defaults
+    if ($cart) {
+        $cartItems = $cart->items;
+        $total = $cartItems->sum(fn($item) => $item->price * $item->quantity);
+        $cartCount = $cartItems->sum('quantity'); // Total quantity of all items
+    } else {
+        // If no cart, set default values to avoid errors
+        $cartItems = collect(); // Empty collection for consistent handling
+        $total = 0;
+        $cartCount = 0;
+    }
     return view('home', [
         'title' => 'Home',
         'products' => $products,
         'categories' => $categories,
         'daerah' => $daerah,
+        'cartCount' => $cartCount,
     ]);
 }
 
