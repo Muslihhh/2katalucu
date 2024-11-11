@@ -149,7 +149,7 @@
         </div>  
         @endif
         <a href="{{ route('cart.show') }}">
-            <div class="promo-banner fixed bottom-10 right-2 transform bg-blue-500 text-white py-2 px-4 rounded-lg shadow-lg z-50">
+            <div class=" fixed bottom-10 right-2 transform bg-blue-500 text-white py-2 px-4 rounded-lg shadow-lg z-50">
                 <img src="{{ asset('cart.png') }}" alt="Cart Icon" class="w-8 h-8">
                 @if($cartCount > 0)
                     <span class="absolute top-0 right-0 inline-flex items-center justify-center px-2 py-1 text-xs font-bold text-red-100 bg-red-600 rounded-full">

@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Models\Cart;
+use App\Models\Daerah;
 use App\Models\Product;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Daerah;
+use Illuminate\Support\Facades\Auth;
 
 class CategoryController extends Controller
 {
@@ -49,7 +51,19 @@ class CategoryController extends Controller
 
     // Mengambil semua daerah
     $daerah = Daerah::all();
+    $cart = Cart::with('items.product.images')->where('user_id', Auth::id())->first();
 
+    // If cart exists, get items and total; otherwise, set defaults
+    if ($cart) {
+        $cartItems = $cart->items;
+        $total = $cartItems->sum(fn($item) => $item->price * $item->quantity);
+        $cartCount = $cartItems->sum('quantity'); // Total quantity of all items
+    } else {
+        // If no cart, set default values to avoid errors
+        $cartItems = collect(); // Empty collection for consistent handling
+        $total = 0;
+        $cartCount = 0;
+    }
     // Mengembalikan view 'home' dengan data produk, kategori yang dipilih, dan daerah
     return view('home', [
         'title' => $category->name,     // Nama kategori sebagai title
@@ -57,7 +71,10 @@ class CategoryController extends Controller
         'latestProducts' => $latestProducts, // Produk terbaru di kategori tersebut
         'categories' => Category::all(), // Mengirim semua kategori agar tombol kategori tetap muncul
         'daerah' => $daerah,            // Mengirim data daerah
-        'selectedCategory' => $category   // Untuk menandai kategori yang sedang dipilih
+        'selectedCategory' => $category,   // Untuk menandai kategori yang sedang dipilih
+        'cartItems' => $cartItems,
+        'total' => $total,
+        'cartCount' => $cartCount,  // Jumlah item dalam keranjang
     ]);
 }
 
@@ -82,12 +99,27 @@ public function filterByPrice(Request $request)
 
     // Mengambil semua data daerah
     $daerah = Daerah::all();
+    $cart = Cart::with('items.product.images')->where('user_id', Auth::id())->first();
 
+    // If cart exists, get items and total; otherwise, set defaults
+    if ($cart) {
+        $cartItems = $cart->items;
+        $total = $cartItems->sum(fn($item) => $item->price * $item->quantity);
+        $cartCount = $cartItems->sum('quantity'); // Total quantity of all items
+    } else {
+        // If no cart, set default values to avoid errors
+        $cartItems = collect(); // Empty collection for consistent handling
+        $total = 0;
+        $cartCount = 0;
+    }
     return view('home', [
         'products' => $products,
         'categories' => Category::all(),
         'daerah' => $daerah, // Menambahkan data daerah ke view
         'title' => 'Filtered Products',
+        'cartItems' => $cartItems,
+        'total' => $total,
+        'cartCount' => $cartCount,
     ]);
 }
 

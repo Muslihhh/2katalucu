@@ -152,6 +152,7 @@ Route::post('/products/{product}', [TokoController::class, 'store'])
 
 Route::post('/order-submit', [VerificationController::class, 'submitOrder'])->name('order.submit');
 Route::get('/order-form/{product}', [VerificationController::class, 'showOrderForm'])->name('order.form');
+Route::get('/checkout/{productId}', [VerificationController::class, 'showOrderForm'])->name('checkout.form');
 
 
 Route::middleware('auth')->group(function () {

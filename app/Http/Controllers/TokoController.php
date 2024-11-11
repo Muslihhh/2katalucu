@@ -35,7 +35,7 @@ public function index()
 
     // Default query untuk mengambil semua produk
     $query = Product::with('comments');
-
+    
     // Filter berdasarkan search jika ada
     if (request('search')) {
         $query->where('name', 'LIKE', '%' . request('search') . '%');
@@ -73,6 +73,8 @@ public function index()
         'categories' => $categories,
         'daerah' => $daerah,
         'cartCount' => $cartCount,
+        'cartItems' => $cartItems,
+        'total' => $total,
     ]);
 }
 

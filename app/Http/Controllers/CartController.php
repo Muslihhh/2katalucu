@@ -59,8 +59,10 @@ use Illuminate\Support\Facades\Auth;
     // If cart exists, get items and total; otherwise, set defaults
     if ($cart) {
         $cartItems = $cart->items;
-        $total = $cartItems->sum(fn($item) => $item->price * $item->quantity);
         $cartCount = $cartItems->sum('quantity'); // Total quantity of all items
+        $total = $cart->items->sum(function ($item) {
+            return $item->product->final_price * $item->quantity;
+            }); // Total cost of all items
     } else {
         // If no cart, set default values to avoid errors
         $cartItems = collect(); // Empty collection for consistent handling

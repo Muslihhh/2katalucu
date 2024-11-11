@@ -157,11 +157,13 @@
                 <p class=" text-wrap">{{ $product->description }}</p>
             </div>
             <div class="flex gap-5 h-auto">
-                <a href="http://" class="w-1/2">
-                    <button
+                <form action="{{ route('cart.add', $product->id) }}" method="POST" class=" w-1/2">
+                    @csrf
+                
+                    <button type="submit"
                         class=" fa fa-shopping-cart w-full h-14 transition duration-150 ease-in-out hover:scale-110 bg-green-500 hover:bg-green-600 text-white font-bold py-3 rounded-md">
                         Add to Cart</button>
-                </a>
+                </form>
                 <!-- Di halaman produk -->
                 <a href="{{ route('order.form', ['product' => $product->id]) }}" class="btn-order w-1/2">
                     <button

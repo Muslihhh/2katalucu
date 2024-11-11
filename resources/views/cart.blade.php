@@ -14,10 +14,11 @@
                     <tr>
                         <th class="px-4 py-2 text-left">Image</th>
                         <th class="px-4 py-2 text-left">Product</th>
-                        <th class="px-4 py-2 text-left">Price</th>
-                        <th class="px-4 py-2 text-left">Quantity</th>
+                        <th class="px-4 py-2 text-left">Harga</th>
+                        <th class="px-4 py-2 text-left">Jumlah</th>
                         <th class="px-4 py-2 text-left">Total</th>
-                        <th class="px-4 py-2 text-left">Action</th>
+                        <th class="px-4 py-2 text-left">Order</th>
+                        <th class="px-4 py-2 text-left">Hapus</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -27,7 +28,7 @@
                                 <img src="{{ asset('storage/' . ($item->product->images->first()->image_path ?? 'default-image.jpg')) }}" alt="{{ $item->product->name }}" class="w-16 h-16 object-cover rounded-md">
                             </td>
                             <td class="px-4 py-2">{{ $item->product->name }}</td>
-                            <td class="px-4 py-2">Rp.{{ number_format($item->price, 2) }}</td>
+                            <td>Rp.{{ number_format($item->product->final_price, 2) }}</td>
                             <td class="px-4 py-2">
                                 <form action="{{ route('cart.update', $item->id) }}" method="POST" class="flex items-center space-x-2">
                                     @csrf
@@ -35,7 +36,10 @@
                                     <button type="submit" class="btn btn-primary bg-blue-500 text-white px-4 py-2 rounded">Update</button>
                                 </form>
                             </td>
-                            <td class="px-4 py-2">Rp.{{ number_format($item->price * $item->quantity, 2) }}</td>
+                            <td>Rp.{{ number_format($item->product->final_price * $item->quantity, 2) }}</td>
+                            <td class="px-4 py-2">
+                                <a href="{{ route('checkout.form', $item->product->id) }}" class="btn btn-primary">Checkout</a>
+                            </td>
                             <td class="px-4 py-2">
                                 <form action="{{ route('cart.remove', $item->id) }}" method="POST">
                                     @csrf
