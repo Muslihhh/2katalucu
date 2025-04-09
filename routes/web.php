@@ -38,7 +38,7 @@ Route::get('/contact', function () {
 Route::get('/produk', function () {
     return view('produk', ['title' => 'Produk']);
 });
-
+    
 // Route Auth
 // Route::get('/posts', function () {
 //     return view('posts', ['title' => 'Blog', 'posts'=>post::filter(request(['search', 'tipe', 'author']))->latest()->paginate(15)->withQueryString()]);
@@ -49,7 +49,7 @@ Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [LoginController::class, 'login']);
 Route::post('/logout', function () {
     Auth::logout();
-    return redirect('/home');
+    return redirect('/home');   
 })->name('logout');
 Route::get('/registrasi', [RegisterController::class, 'showRegistrationForm'])->name('registrasi');
 Route::post('/registrasi', [RegisterController::class, 'registrasi']);
